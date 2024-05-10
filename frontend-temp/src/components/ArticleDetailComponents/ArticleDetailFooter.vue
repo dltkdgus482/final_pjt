@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ArticleListFooter</h1>
+    <h1>ArticleDetailFooter</h1>
   </div>
 </template>
 
@@ -10,6 +10,6 @@
 
 <style scoped>
 * {
-  margin-bottom: 100px;
+  margin-bottom: 70px;
 }
 </style>

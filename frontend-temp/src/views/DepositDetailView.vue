@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DepositListNavVue class="nav"/>
+    <DepositListNav class="nav"/>
     <hr>
     <div class="non-nav">
       <h1>DepositDetailPage</h1>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import DepositListNavVue from '../components/DepositListComponents/DepositListNav.vue'
+import DepositListNav from '../components/DepositListComponents/DepositListNav.vue'
 import DepositDetailHeader from '@/components/DepositDetailComponents/DepositDetailHeader.vue'
 import DepositDetailBody from '@/components/DepositDetailComponents/DepositDetailBody.vue'
 import DepositDetailFooter from '@/components/DepositDetailComponents/DepositDetailFooter.vue'

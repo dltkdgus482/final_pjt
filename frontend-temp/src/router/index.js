@@ -4,7 +4,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/main',
+      path: '/',
       name: 'MainView',
       component: () => import('../views/MainView.vue')
     },
@@ -32,6 +32,11 @@ const router = createRouter({
       path: '/deposit/:depositId',
       name: 'DepositDetailView',
       component: () => import('../views/DepositDetailView.vue')
+    },
+    {
+      path: '/article/:articleId',
+      name: 'ArticleDetailView',
+      component: () => import('../views/ArticleDetailView.vue')
     },
   ]
 })

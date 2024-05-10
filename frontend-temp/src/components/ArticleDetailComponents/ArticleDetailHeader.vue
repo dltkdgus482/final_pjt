@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ArticleListFooter</h1>
+    <h1>ArticleDetailHeader</h1>
   </div>
 </template>
 
@@ -9,7 +9,5 @@
 </script>
 
 <style scoped>
-* {
-  margin-bottom: 100px;
-}
+
 </style>
