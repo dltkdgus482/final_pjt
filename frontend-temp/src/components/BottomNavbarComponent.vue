@@ -48,7 +48,7 @@
               </g>
             </svg>
             <div>
-              주식
+              증권
             </div>
           </div>
         </Router-link>
