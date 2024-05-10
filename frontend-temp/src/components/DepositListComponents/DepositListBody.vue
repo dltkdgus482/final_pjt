@@ -5,11 +5,15 @@
         <img :src="'/assets/' + data.name + '.png'" alt="#" width="42" height="42">
         <div class="bank">
           <h3>{{ data.name }}</h3>
-          <p>누구나가입 / 누구나이용</p>
+          <p class="color">누구나가입 / 누구나이용</p>
         </div>
         <div class="option">
-          <p>최고 {{ data.max }}%</p>
-          <p>기본 {{ data.default }}%</p>
+          <p class="color">최고 
+            <span class="numcolor">{{ data.max }}%</span>  
+          </p>
+          <p>기본 
+            <span>{{ data.default }}%</span>
+          </p>
         </div>
       </RouterLink>
     </div>
@@ -49,6 +53,27 @@ const store = useCounterStore()
   margin-left: auto;
   margin-right: auto;
   max-width: 568px;
+}
+.bank {
+  margin-left: 10px;
+}
+
+.bank .color {
+  margin-top: -10px;
+  color: gray;
+}
+
+.option .color{
+  color: green;
+}
+
+.option .numcolor{
+  color: green;
+  font-size: 22px;
+  font-weight: 500;
+}
+.option {
+  margin-left: 150px;
 }
 
 </style>
