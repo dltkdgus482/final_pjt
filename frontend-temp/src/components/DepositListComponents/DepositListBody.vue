@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-for="data in dummyData" :key="data.id" class="circular-border">
-      <a href="#">
-        <img src="../assets/SB_WOORIFIN_Profile.png" alt="#" width="42" height="42">
+    <div v-for="(data, index) in store.dummyData" :key="data.id" class="circular-border">
+      <RouterLink class="router" :to="{ name: 'DepositDetailView', params: { 'depositId': index } }">
+        <img :src="'/assets/' + data.name + '.png'" alt="#" width="42" height="42">
         <div class="bank">
           <h3>{{ data.name }}</h3>
           <p>누구나가입 / 누구나이용</p>
@@ -11,19 +11,15 @@
           <p>최고 {{ data.max }}%</p>
           <p>기본 {{ data.default }}%</p>
         </div>
-      </a>
+      </RouterLink>
     </div>
   </div>
 </template>
 
 <script setup>
-const dummyData = [
-  { name: '우리은행', max: '3.90', default: '3.10' },
-  { name: '우리은행', max: '3.90', default: '3.10' },
-  { name: '우리은행', max: '3.90', default: '3.10' },
-  { name: '우리은행', max: '3.90', default: '3.10' },
-  { name: '우리은행', max: '3.90', default: '3.10' },
-]
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
 </script>
 
 <style scoped>
@@ -39,7 +35,7 @@ const dummyData = [
   justify-content: space-between;
 }
 
-a {
+.router {
   text-decoration: none;
   font-size: 17px;
   line-height: 17px;
@@ -47,6 +43,12 @@ a {
   font-weight: 500;
   display: flex;
   align-items: center;
+}
+
+* {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 568px;
 }
 
 </style>

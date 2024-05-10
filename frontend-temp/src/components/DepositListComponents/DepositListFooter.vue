@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Footer</h1>
+    <h1>DepositListFooter</h1>
   </div>
 </template>
 
@@ -9,5 +9,7 @@
 </script>
 
 <style scoped>
-
+* {
+  margin-bottom: 100px;
+}
 </style>

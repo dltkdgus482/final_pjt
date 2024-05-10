@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li>
-        <a href="#">
+        <Router-link class="router" :to="{ name: 'MainView' }">
           <div>
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <g>
@@ -17,13 +17,13 @@
               </g>
             </svg>
             <div>
-              깃허브
+              메인
             </div>
-          </div>
-        </a>
+          </div> 
+        </Router-link>
       </li>
       <li>
-        <a href="#">
+        <Router-link class="router" :to="{ name: 'DepositView' }">
           <div>
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <g>
@@ -31,13 +31,13 @@
               </g>
             </svg>
             <div>
-              디스코드
+              금융
             </div>
           </div>
-        </a>
+        </Router-link>
       </li>
       <li>
-        <a href="#">
+        <Router-link class="router" :to="{ name: 'StockView' }">
           <div>
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <g id="_Group_2">
@@ -48,13 +48,13 @@
               </g>
             </svg>
             <div>
-              애플
+              주식
             </div>
           </div>
-        </a>
+        </Router-link>
       </li>
       <li>
-        <a href="#">
+        <Router-link class="router" :to="{ name: 'ArticleView' }">
           <div>
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <g id="XMLID_184_">
@@ -62,13 +62,13 @@
               </g>
             </svg>
             <div>
-              유튜브
+              게시판
             </div>
           </div>
-        </a>
+        </Router-link>
       </li>
       <li>
-        <a href="#">
+        <Router-link class="router" :to="{ name: 'MapView' }">
           <div>
             <svg width="24" hegiht="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
               <g>
@@ -78,10 +78,10 @@
               </g>
             </svg>
             <div>
-              인스타그램
+              지도
             </div>
           </div>
-        </a>
+        </Router-link>
       </li>
     </ul>
   </div>
@@ -122,7 +122,7 @@ li {
   display: list-item;
 }
 
-a {
+.router {
   text-decoration: none;
   font-size: 11px;
   line-height: 17px;

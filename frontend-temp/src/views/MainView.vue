@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>상품 목록</p>
-    <hr>
+    <h1>Main</h1>
   </div>
 </template>
 
