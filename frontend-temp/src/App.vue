@@ -1,21 +1,16 @@
 <template>
   <div>
     <RouterView />
+    <Chatbot />
     <BottomNavbarComponent class="bottom-navbar-component"/>
   </div>
 </template>
 
 <script setup>
 import { RouterView } from 'vue-router'
-import BottomNavbarComponent from '@/components/BottomNavbarComponent.vue'
+import Chatbot from '@/components/Chatbot.vue'
+import BottomNavbarComponent from '@/components/BottomNavbar.vue'
 </script>
 
 <style scoped>
-
-.BottomNavbarComponent {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 568px;
-}
-
 </style>
