@@ -70,6 +70,7 @@ const toggleChatContainer = () => {
 #user-input input {
   flex: 1;
   outline: none;
+  width: 50%;
 }
 #user-input button {
   border: none;
@@ -78,7 +79,7 @@ const toggleChatContainer = () => {
   padding: 10px 15px;
   cursor: pointer;
   width: 20%;
-  font-size: 10px;
+  font-size: 9px;
   border-radius: 2px;
 }
 </style>
