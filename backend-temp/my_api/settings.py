@@ -35,14 +35,13 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'rest_framework.authtoken',
-    'dj_rest_auth.registration',
+    'dj_rest_auth',
     'corsheaders',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
-    'dj_rest_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,10 +62,23 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://127.0.0.1:5173',
-#     'http://localhost:5173',
-# ]
+CORS_ALLOW_CREDENTIALS = True
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:5173',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:5173',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+]
 
 ROOT_URLCONF = 'my_api.urls'
 
@@ -141,4 +153,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'accounts.User'
+CSRF_COOKIE_NAME = "X-CSRFToken"
