@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ArticleListNav class="nav"/>
+    <ArticleListNav />
     <hr>
     <div class="non-nav">
       <h1>ArticleListPage</h1>
@@ -22,14 +22,6 @@ import ArticleListFooter from "@/components/ArticleListComponents/ArticleListFoo
 </script>
 
 <style scoped>
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 36px;
-  padding: 10px 20px;
-}
 
 .non-nav {
   margin-left: auto;
