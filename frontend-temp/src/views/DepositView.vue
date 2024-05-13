@@ -35,6 +35,5 @@ import DepositListFooter from '@/components/DepositListComponents/DepositListFoo
   margin-left: auto;
   margin-right: auto;
   max-width: 568px;
-  
 }
 </style>
