@@ -1,13 +1,16 @@
 <template>
   <div>
     <div class="in">
-      <div>
+      <div class="category">
         <button>전체</button>
         <button>금융</button>
         <button>증권</button>
       </div>
       <div>
-        <select name="" id="">
+        <select name="" id="" class="dropdown">
+          <option value="">views</option>
+          <option value="">views</option>
+          <option value="">views</option>
           <option value="">views</option>
         </select>
         <RouterLink :to="{ name: 'ArticleCreateView' }" class="write-article">
@@ -82,16 +85,41 @@ const setCurrentPage = (page) => {
   min-height: 56px;
   box-sizing: border-box;
 }
+.category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+}
+.in button{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .write-article {
   text-decoration: none;
-  letter-spacing: -.3px;
+  /* letter-spacing: -0.3px; */
   text-align: center;
   color: #404048;
-  border: 1px solid #404048;
   margin-left: 6px;
-  padding: 2px 4px;
   background-color: #fff;
   font-weight: 1000;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.dropdown{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* .dropdown > option{
+  border-radius: 8px;
+} */
 </style>
