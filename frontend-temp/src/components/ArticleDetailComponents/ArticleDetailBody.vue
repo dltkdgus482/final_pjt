@@ -1,10 +1,12 @@
 <template>
   <div>
+    <p>Title: {{ article.title }}</p>
+    <p>Category: 금융</p>
+    <p>Author: {{ article.author }}</p>
+    <p>Posted at {{ article.uploadDate }}</p>
+    <hr>
     <h1>ArticleDetailBody</h1>
     <div class="article">
-      <p>Title: {{ article.title }}</p>
-      <p>Author: {{ article.author }}</p>
-      <p>Posted at {{ article.uploadDate }}</p>
       <p>Content: {{ article.content }}</p>
     </div>
     <hr>
