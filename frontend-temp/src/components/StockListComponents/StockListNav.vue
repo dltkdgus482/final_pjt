@@ -14,7 +14,7 @@
         </defs>
         <text class="cls-1" transform="translate(0 17.4)"><tspan x="0" y="0">지도</tspan></text>
       </svg> -->
-      <svg width="72" height="22" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 22">
+      <svg width="74" height="22" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 22">
         <defs>
         </defs>
         <text class="cls-2" transform="translate(0 17.5)"><tspan x="0" y="0">가상화폐</tspan></text>

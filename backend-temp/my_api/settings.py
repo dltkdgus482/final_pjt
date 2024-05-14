@@ -15,6 +15,16 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+import environ
+
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
+
+OPEN_AI_API_KEY = env('OPEN_AI_API_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -64,21 +74,15 @@ MIDDLEWARE = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:5173',
-]
-
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:5173',
 ]
 
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-]
+# CORS_ALLOW_METHODS = [
+#     'GET',
+#     'POST',
+# ]
 
 ROOT_URLCONF = 'my_api.urls'
 
