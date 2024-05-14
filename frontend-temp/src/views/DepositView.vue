@@ -1,14 +1,14 @@
 <template>
   <div>
     <DepositListNavVue />
-    <hr>
+
     <div class="non-nav">
-      <h1>DepositListPage</h1>
-      <hr>
-      <DepositListHeader />
-      <hr>
+      <DepositFilter />
+
+      <DepositSort />
+
       <DepositListBody />
-      <hr>
+
       <DepositListFooter />
     </div>
   </div>
@@ -16,7 +16,8 @@
 
 <script setup>
 import DepositListNavVue from '../components/DepositListComponents/DepositListNav.vue'
-import DepositListHeader from '@/components/DepositListComponents/DepositListHeader.vue'
+import DepositFilter from '@/components/DepositListComponents/DepositFilter.vue'
+import DepositSort from '@/components/DepositListComponents/DepositSort.vue'
 import DepositListBody from '@/components/DepositListComponents/DepositListBody.vue'
 import DepositListFooter from '@/components/DepositListComponents/DepositListFooter.vue'
 </script>

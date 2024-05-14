@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>DepositListHeader</h1>
+    <h1>DepositFilter</h1>
   </div>
 </template>
 

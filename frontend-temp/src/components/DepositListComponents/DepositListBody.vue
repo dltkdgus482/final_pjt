@@ -29,7 +29,7 @@ const store = useCounterStore()
 <style scoped>
 .circular-border {
   border-radius: 8px;
-  margin: 8px 4px;
+  margin: 10px 4px;
   background-color: #fff;
   padding: 4px 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@ const store = useCounterStore()
   font-size: 17px;
   line-height: 17px;
   color: #404048;
-  font-weight: 500;
+  /* font-weight: 500; */
   display: flex;
   align-items: center;
 }
