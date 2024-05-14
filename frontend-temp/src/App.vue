@@ -16,6 +16,6 @@ import BottomNavbarComponent from '@/components/BottomNavbar.vue'
 
   body {
     margin: 0;
-    background-color: gray;
+    background-color: #f3f5f7;
   }
 </style>
