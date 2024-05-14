@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ArticleDetailNav class="nav"/>
+    <ArticleDetailNav />
     <hr>
     <div class="non-nav">
       <h1>ArticleDetailPage</h1>
@@ -22,15 +22,6 @@ import ArticleDetailFooter from "@/components/ArticleDetailComponents/ArticleDet
 </script>
 
 <style scoped>
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 36px;
-  padding: 10px 20px;
-}
-
 .non-nav {
   margin-left: auto;
   margin-right: auto;

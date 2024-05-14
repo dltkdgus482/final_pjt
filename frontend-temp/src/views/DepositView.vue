@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DepositListNavVue class="nav"/>
+    <DepositListNavVue />
     <hr>
     <div class="non-nav">
       <h1>DepositListPage</h1>
@@ -22,14 +22,6 @@ import DepositListFooter from '@/components/DepositListComponents/DepositListFoo
 </script>
 
 <style scoped>
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 36px;
-  padding: 10px 20px;
-}
 
 .non-nav {
   margin-left: auto;
