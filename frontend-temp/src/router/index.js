@@ -38,6 +38,16 @@ const router = createRouter({
       name: 'ArticleDetailView',
       component: () => import('../views/ArticleDetailView.vue')
     },
+    {
+      path: '/article/create',
+      name: 'ArticleCreateView',
+      component: () => import('../views/ArticleCreateView.vue')
+    },
+    {
+      path: '/signup',
+      name: 'SignUpView',
+      component: () => import('../views/SignUpView.vue')
+    },
   ]
 })
 
