@@ -2,6 +2,7 @@
   <div>
     <div class="circular-border">
       <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: index } }">
+        <p>{{ index }}</p>
         <h4>Title: {{ article.title }}</h4>
         <p>Author: {{ article.author }}</p>
         <p>Posted at {{ article.uploadDate }}</p>
@@ -13,7 +14,7 @@
 <script setup>
 defineProps({
   article: Object,
-  index: Number
+  index: Number,
 })
 </script>
 

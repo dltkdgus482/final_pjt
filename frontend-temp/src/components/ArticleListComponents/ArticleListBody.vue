@@ -21,19 +21,54 @@
       </div>
     </div>
     <ArticleList 
-      v-for="(article, index) in store.dummyArticle"
+      v-for="(article, index) in paginatedData"
       :key="article.id"
       :article="article"
-      :index="index"
+      :index="index + (currentPage - 1) * itemsPerPage"
     />
+    <div class="pagination">
+      <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10">
+        이전
+      </button>
+      <button
+        v-for="page in Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)"
+        :key="page"
+        @click="setCurrentPage(page)"
+      >
+        {{ page }}
+      </button>
+      <button @click="setCurrentPage(nextPages)" v-show="currentPage <= lastPaginatedPage">
+        다음
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue'
 import ArticleList from '@/components/ArticleListComponents/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
 
+const itemsPerPage = 5
+const currentPage = ref(1)
 const store = useCounterStore()
+
+const totalPages = computed(() => Math.ceil(store.dummyArticle.length / itemsPerPage))
+const lastPaginatedPage = computed(() => Math.floor((totalPages.value - 1) / 10) * 10)
+const nextPages = computed(() => Math.ceil(currentPage.value / 10) * 10 + 1)
+
+const paginatedData = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage
+  const endIndex = currentPage.value * itemsPerPage
+  return store.dummyArticle.slice(startIndex, endIndex)
+})
+
+const startPage = computed(() => Math.floor((currentPage.value - 1) / 10) * 10 + 1)
+const endPage = computed(() => Math.min(startPage.value + 9, totalPages.value))
+
+const setCurrentPage = (page) => {
+  currentPage.value = page
+}
 </script>
 
 <style scoped>

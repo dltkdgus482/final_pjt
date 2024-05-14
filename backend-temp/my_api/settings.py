@@ -43,6 +43,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'articles',
     'accounts',
+    'deposits',
+    'savings',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
@@ -157,5 +159,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
 CSRF_COOKIE_NAME = "X-CSRFToken"
