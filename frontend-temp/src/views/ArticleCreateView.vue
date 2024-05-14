@@ -3,7 +3,9 @@
     <ArticleCreateNav />
     <div class="non-nav">
       <ArticleCreateHeader />
+      <hr>
       <ArticleCreateBody />
+      <hr>
       <ArticleCreateFooter />
     </div>
   </div>
