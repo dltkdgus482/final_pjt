@@ -269,5 +269,8 @@ export const useCounterStore = defineStore('counter', () => {
     { content: "댓글199입니다.", article: 45 },
   ])
 
+  // 주식, 가상화폐 관련 데이터
+
+
   return { dummyData, dummyArticle, dummyComment }
 })

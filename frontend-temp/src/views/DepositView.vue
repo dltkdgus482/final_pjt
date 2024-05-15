@@ -3,9 +3,9 @@
     <DepositListNavVue />
 
     <div class="non-nav">
-      <DepositFilter />
+      <DepositListFilter />
 
-      <DepositSort />
+      <DepositListSort />
 
       <DepositListBody />
 
@@ -16,8 +16,8 @@
 
 <script setup>
 import DepositListNavVue from '../components/DepositListComponents/DepositListNav.vue'
-import DepositFilter from '@/components/DepositListComponents/DepositFilter.vue'
-import DepositSort from '@/components/DepositListComponents/DepositSort.vue'
+import DepositListFilter from '@/components/DepositListComponents/DepositListFilter.vue'
+import DepositListSort from '@/components/DepositListComponents/DepositListSort.vue'
 import DepositListBody from '@/components/DepositListComponents/DepositListBody.vue'
 import DepositListFooter from '@/components/DepositListComponents/DepositListFooter.vue'
 </script>

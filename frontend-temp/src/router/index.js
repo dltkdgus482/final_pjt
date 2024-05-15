@@ -48,6 +48,11 @@ const router = createRouter({
       name: 'SignUpView',
       component: () => import('../views/SignUpView.vue')
     },
+    {
+      path: '/stock/:stockId',
+      name: 'StockDetailView',
+      component: () => import('../views/StockDetailView.vue')
+    },
   ]
 })
 
