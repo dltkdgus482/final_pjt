@@ -16,13 +16,44 @@
         </svg>
         <p>비트코인</p>
         <p>KRW-BTC</p>
+        <p>{{ currentPrice.toLocaleString() }} 원</p>
       </Router-link>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 
+const reader = new FileReader()
+
+const currentPrice = ref(null)
+let ws = null
+
+onMounted(() => {
+  ws = new WebSocket('wss://api.upbit.com/websocket/v1')
+
+  ws.onopen = () => {
+    ws.send('[{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}, {"format":"SIMPLE"}]')
+  }
+
+  ws.onmessage = (msg) => {
+    reader.onload = function(event) {
+        console.log(event.target.result);
+        const data = JSON.parse(event.target.result);
+        if (data.tp) {
+          currentPrice.value = data.tp
+        }
+      }
+      reader.readAsText(msg.data)
+  }
+})
+
+onUnmounted(() => {
+  if (ws) {
+    ws.close()
+  }
+})
 </script>
 
 <style scoped>

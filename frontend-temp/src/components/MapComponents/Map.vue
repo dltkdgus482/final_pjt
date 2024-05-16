@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="clear()">초기화</button>
     <div id="map"></div>
   </div>
 </template>
@@ -8,6 +9,14 @@
 import { ref, onMounted } from 'vue'
 const api_key = import.meta.env.VITE_APP_KAKAO_MAP_API_KEY
 let map = null
+let markers = []
+
+const clear = function () {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].setMap(null)
+  }
+  markers = []
+}
 
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
@@ -60,9 +69,9 @@ const initMap = () => {
     })
   
     kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-        infowindow.open(map, marker)
+      // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+      infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+      infowindow.open(map, marker)
     })
   }
 
@@ -73,10 +82,6 @@ const initMap = () => {
   kakao.maps.event.addListener(map, 'dragend', function() {
     ps.categorySearch('BK9', placesSearchCB, searchOptions)
   })
-
-    // kakao.maps.event.addListener(map, 'bounds_changed', function() {
-    //   ps.categorySearch('BK9', placesSearchCB, searchOptions)
-    // })
 }
 
 
@@ -85,6 +90,6 @@ const initMap = () => {
 <style scoped>
 #map {
   width: 100%;
-  height: 500px;
+  height: 550px;
 }
 </style>
