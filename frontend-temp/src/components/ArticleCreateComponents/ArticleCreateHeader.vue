@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Create New Article</h1>
-    <p class="gray">Share your thoughts and ideas</p>
+    <h1>새 글 작성하기</h1>
+    <!-- <p class="gray">Share your thoughts and ideas</p> -->
   </div>
 </template>
 
@@ -10,7 +10,5 @@
 </script>
 
 <style scoped>
-.gray {
-  color: #6B7280;
-}
+
 </style>

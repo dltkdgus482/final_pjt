@@ -12,7 +12,7 @@ export const useCounterStore = defineStore('counter', () => {
 
   const dummyArticle = ref([
     { title: '테스트1', content: '테스트1입니다.', uploadDate: '2021-10-01', author: '홍길동'},
-    { title: '테스트2', content: '테스트2입니다.', uploadDate: '2021-10-02', author: '김철수'},
+    { title: '테스트2lorem ipsum dolor sit amet consectetur adipisicing elit. libero, veniam? sit ipsum distinctio quae eveniet reprehenderit. molestias commodi voluptas, possimus quasi omnis quibusdam ipsum ad tempora facilis aperiam. ratione, exercitationem.', content: '테스트2입니다.lorem ipsum dolor sit amet consectetur adipisicing elit. libero, veniam? sit ipsum distinctio quae eveniet reprehenderit. molestias commodi voluptas, possimus quasi omnis quibusdam ipsum ad tempora facilis aperiam. ratione, exercitationem.', uploadDate: '2021-10-02', author: '김철수'},
     { title: '테스트3', content: '테스트3입니다.', uploadDate: '2021-10-03', author: '이영희'},
     { title: '테스트4', content: '테스트4입니다.', uploadDate: '2021-10-04', author: '박철수'},
     { title: '테스트5', content: '테스트5입니다.', uploadDate: '2021-10-05', author: '김영희'},
@@ -113,7 +113,7 @@ export const useCounterStore = defineStore('counter', () => {
     { content: "댓글43입니다.", article: 37 },
     { content: "댓글44입니다.", article: 16 },
     { content: "댓글45입니다.", article: 16 },
-    { content: "댓글46입니다.", article: 1 },
+    { content: "댓글46입니다.lorem ipsum dolor sit amet consectetur adipisicing elit. libero, veniam? sit ipsum distinctio quae eveniet reprehenderit. molestias commodi voluptas, possimus quasi omnis quibusdam ipsum ad tempora facilis aperiam. ratione, exercitationem.", article: 1 },
     { content: "댓글47입니다.", article: 13 },
     { content: "댓글48입니다.", article: 18 },
     { content: "댓글49입니다.", article: 24 },

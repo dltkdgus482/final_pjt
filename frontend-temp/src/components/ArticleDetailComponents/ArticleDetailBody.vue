@@ -2,23 +2,20 @@
   <div>
     <div class="header">
       <div>
-        <p class="category">금융</p>
+        <p class="article-info">금융</p>
+        <p class="article-info">작성자: {{ article.author }}</p>
+        <p class="article-info">작성일: {{ article.uploadDate }}</p>
         <p class="title">{{ article.title }}</p>
       </div>
-      <div class="author">
-        <p >작성자: {{ article.author }}</p>
-        <p>작성일: {{ article.uploadDate }}</p>
-      </div>
+
     </div>
 
     <div class="article">
-      <p>lorem ipsum dolor sit amet consectetur adipisicing elit. libero, veniam? sit ipsum distinctio quae eveniet reprehenderit. molestias commodi voluptas, possimus quasi omnis quibusdam ipsum ad tempora facilis aperiam. ratione, exercitationem.
-        {{ article.content }}</p>
+      <p>{{ article.content }}</p>
     </div>
 
     <div class="comment">
       <CommentCreate />
-      <hr>
       <CommentList 
         v-for="(comment, index) in comments"
         :key="comment.id"
@@ -55,17 +52,16 @@ const comments = store.dummyComment.filter(comment => comment.article == article
   margin: 10px 5px;
 
 }
-.category{
+.article-info{
   font-size: 12px;
 }
 .title{
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
   margin: auto;
-}
-.author{
-  font-size: 12px;
-  padding-top: 20px;
+  /* width: 500px; */
+  /* overflow: hidden; */
+  word-wrap: break-word;
 }
 .article{
   border: none;
@@ -74,5 +70,6 @@ const comments = store.dummyComment.filter(comment => comment.article == article
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px 5px;
+  word-wrap: break-word;
 }
 </style>

@@ -2,9 +2,10 @@
   <div>
     <div class="circular-border">
       <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: index } }">
-        <p>번호: {{ index }}</p>
+        <p>번호 {{ index + 1 }}</p>
+        <p>분류 </p>
         <h3>{{ article.title }}</h3>
-        <p class="line-margin">작성자: {{ article.author }}</p>
+        <p class="line-margin">작성자 {{ article.author }}</p>
         <p>작성일 {{ article.uploadDate }}</p>
       </RouterLink>
     </div>
