@@ -5,8 +5,7 @@
     <div class="non-nav">
       <h1>ArticleDetailPage</h1>
       <hr>
-      <ArticleDetailHeader />
-      <hr>
+
       <ArticleDetailBody />
       <hr>
       <ArticleDetailFooter />
