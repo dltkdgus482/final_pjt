@@ -26,8 +26,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const reader = new FileReader()
-
-const currentPrice = ref(null)
+const currentPrice = ref(0)
 let ws = null
 
 onMounted(() => {
@@ -40,7 +39,7 @@ onMounted(() => {
   ws.onmessage = (msg) => {
     reader.onload = function(event) {
         console.log(event.target.result);
-        const data = JSON.parse(event.target.result);
+        const data = JSON.parse(event.target.result)
         if (data.tp) {
           currentPrice.value = data.tp
         }
@@ -53,6 +52,18 @@ onUnmounted(() => {
   if (ws) {
     ws.close()
   }
+})
+
+
+import axios from 'axios'
+axios.defaults.withCredentials = false
+
+axios({
+  method: 'GET',
+  url: 'https://api.upbit.com/v1/market/all'
+}).then((response) => {
+  const coin_list = response.data.filter(market => market.market.startsWith('KRW-'))
+  console.log(coin_list)
 })
 </script>
 
