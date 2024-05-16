@@ -1,15 +1,21 @@
 <template>
   <div>
-    <p>Title: {{ article.title }}</p>
-    <p>Category: 금융</p>
-    <p>Author: {{ article.author }}</p>
-    <p>Posted at {{ article.uploadDate }}</p>
-    <hr>
-    <h1>ArticleDetailBody</h1>
-    <div class="article">
-      <p>Content: {{ article.content }}</p>
+    <div class="header">
+      <div>
+        <p class="category">금융</p>
+        <p class="title">{{ article.title }}</p>
+      </div>
+      <div class="author">
+        <p >작성자: {{ article.author }}</p>
+        <p>작성일: {{ article.uploadDate }}</p>
+      </div>
     </div>
-    <hr>
+
+    <div class="article">
+      <p>lorem ipsum dolor sit amet consectetur adipisicing elit. libero, veniam? sit ipsum distinctio quae eveniet reprehenderit. molestias commodi voluptas, possimus quasi omnis quibusdam ipsum ad tempora facilis aperiam. ratione, exercitationem.
+        {{ article.content }}</p>
+    </div>
+
     <div class="comment">
       <CommentCreate />
       <hr>
@@ -38,5 +44,35 @@ const comments = store.dummyComment.filter(comment => comment.article == article
 </script>
 
 <style scoped>
+.header{
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 5px;
 
+}
+.category{
+  font-size: 12px;
+}
+.title{
+  font-weight: bold;
+  font-size: 30px;
+  margin: auto;
+}
+.author{
+  font-size: 12px;
+  padding-top: 20px;
+}
+.article{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 5px;
+}
 </style>
