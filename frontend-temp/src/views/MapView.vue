@@ -1,10 +1,7 @@
 <template>
   <div>
     <MapNav />
-    <hr>
     <div class="non-nav">
-      <h1>MapPage</h1>
-      <hr>
       <MapHeader />
       <hr>
       <MapBody />
@@ -26,5 +23,17 @@ import MapFooter from '@/components/MapComponents/MapFooter.vue'
   margin-left: auto;
   margin-right: auto;
   max-width: 568px;
+}
+
+@media (min-width: 569px) {
+  .non-nav {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 769px) {
+  .non-nav {
+    max-width: 992px;
+  }
 }
 </style>
