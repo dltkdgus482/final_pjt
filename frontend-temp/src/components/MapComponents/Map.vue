@@ -6,7 +6,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-const api_key = '1ea49f1aa17f10d56bae9ad831abfd60'
+const api_key = import.meta.env.VITE_APP_KAKAO_MAP_API_KEY
 let map = null
 
 onMounted(() => {
