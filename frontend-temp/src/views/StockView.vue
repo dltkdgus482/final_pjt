@@ -1,14 +1,9 @@
 <template>
   <div>
     <StockListNavVue />
-    <hr>
     <div class="non-nav">
-      <h1>StockListPage</h1>
-      <hr>
       <StockListHeader />
-      <hr>
       <StockListBody />
-      <hr>
       <StockListFooter />
     </div>
   </div>
