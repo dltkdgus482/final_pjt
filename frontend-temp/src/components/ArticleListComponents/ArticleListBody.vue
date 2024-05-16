@@ -30,7 +30,7 @@
       :index="index + (currentPage - 1) * itemsPerPage"
     />
     <div class="pagination">
-      <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10">
+      <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
         이전
       </button>
       <button
@@ -123,4 +123,25 @@ const setCurrentPage = (page) => {
 /* .dropdown > option{
   border-radius: 8px;
 } */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+  margin: 0 auto;
+  max-width: 1120px;
+  min-height: 56px;
+  box-sizing: border-box;
+}
+.pagination button {
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 0 3px;
+}
 </style>
