@@ -1,14 +1,9 @@
 <template>
   <div>
     <ArticleListNav />
-    <hr>
     <div class="non-nav">
-      <h1>ArticleListPage</h1>
-      <hr>
       <ArticleListHeader />
-      <hr>
       <ArticleListBody />
-      <hr>
       <ArticleListFooter />
     </div>
   </div>
