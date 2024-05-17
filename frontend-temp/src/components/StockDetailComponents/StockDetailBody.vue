@@ -9,7 +9,7 @@
       <button @click="getData('months', '', 12)">1달</button>
     </span>
     <hr>
-    <canvas id="bitcoinChart"></canvas>
+    <canvas id="Chart"></canvas>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ const getData = function (type, unit, count) {
     const dates = CryptoData.value.map(item => item.candle_date_time_kst).reverse()
     const prices = CryptoData.value.map(item => item.trade_price).reverse()
 
-    const ctx = document.getElementById('bitcoinChart').getContext('2d')
+    const ctx = document.getElementById('Chart').getContext('2d')
     chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -72,7 +72,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-#bitcoinChart {
+#Chart {
   width: 100%;
   height: 300px;
 }

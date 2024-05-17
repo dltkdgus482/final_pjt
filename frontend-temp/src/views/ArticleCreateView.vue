@@ -3,9 +3,8 @@
     <ArticleCreateNav />
     <div class="non-nav">
       <ArticleCreateHeader />
-
       <ArticleCreateBody />
-
+      <ArticleCreateFooter />
     </div>
   </div>
 </template>
