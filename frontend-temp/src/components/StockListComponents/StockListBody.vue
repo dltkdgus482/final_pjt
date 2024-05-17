@@ -1,14 +1,8 @@
 <template>
   <div>
-    <h1>StockListBody</h1>
-    <hr>
-    <h3>관심 종목</h3>
-    
-    <hr>
     <h3>TOP 종목</h3>
     <div>
-      <span>종목명 | 현재가 | 등락률 | 거래량 </span>
-      <hr>
+      <StockListHeader />
       <StockList 
         v-for="(coin, index) in paginatedData"
         :key="coin.market"
@@ -36,11 +30,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { watch, ref, computed, onMounted, onUnmounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import StockList from '@/components/StockListComponents/StockList.vue'
+import StockListHeader from '@/components/StockListComponents/StockListHeader.vue'
 
 const store = useCounterStore()
 const itemsPerPage = 5
@@ -108,28 +102,7 @@ onUnmounted(() => {
 })
 </script>
 
-
 <style scoped>
-* {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 568px;
-}
-
-.coin-temp {
-  border: 1px solid black;
-}
-
-.router {
-  text-decoration: none;
-  font-size: 17px;
-  line-height: 17px;
-  color: #404048;
-  /* font-weight: 500; */
-  display: flex;
-  align-items: center;
-}
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -150,5 +123,40 @@ onUnmounted(() => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 0 3px;
+}
+.pagination button:hover {
+  background-color: gray;
+  color: #fff;
+}
+
+.list{
+  border-radius: 8px;
+  /* border: 1px solid black; */
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: #fff; */
+  padding: 0px 20px;
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  flex-direction: column;
+}
+.coin-list {
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 0px 20px;
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+  align-items: center;
 }
 </style>

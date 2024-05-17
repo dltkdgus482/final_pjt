@@ -5,6 +5,7 @@
       <StockListLike />
       <hr>
       <StockListBody />
+      <hr>
       <StockListFooter />
     </div>
   </div>
