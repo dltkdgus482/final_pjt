@@ -2,7 +2,8 @@
   <div>
     <StockListNavVue />
     <div class="non-nav">
-      <StockListHeader />
+      <StockListLike />
+      <hr>
       <StockListBody />
       <StockListFooter />
     </div>
@@ -11,7 +12,7 @@
 
 <script setup>
 import StockListNavVue from "@/components/StockListComponents/StockListNav.vue"
-import StockListHeader from "@/components/StockListComponents/StockListHeader.vue"
+import StockListLike from "@/components/StockListComponents/StockListLike.vue"
 import StockListBody from "@/components/StockListComponents/StockListBody.vue"
 import StockListFooter from "@/components/StockListComponents/StockListFooter.vue"
 </script>

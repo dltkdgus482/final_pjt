@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>TOP 종목</h3>
+    <h3>관심 종목</h3>
     <div>
       <div class="header">
         <span></span>
