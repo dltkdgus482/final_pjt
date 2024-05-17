@@ -4,11 +4,8 @@
 
     <div class="non-nav">
       <DepositListFilter />
-
       <DepositListSort />
-
       <DepositListBody />
-
       <DepositListFooter />
     </div>
   </div>

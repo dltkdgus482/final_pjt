@@ -1,135 +1,154 @@
 <template>
   <div>
+    <h1>StockListBody</h1>
+    <hr>
+    <h3>관심 종목</h3>
+    
+    <hr>
     <h3>TOP 종목</h3>
     <div>
-      <div class="header">
-        <span></span>
-        <span>종목명</span>
-        <span>현재가</span>
-        <span>등락률</span>
-      </div>
-      <div class="list">
-        <Router-link class="coin-list" :to="{ name: 'StockDetailView', params: { stockId: 'KRW-BTC' } }">
-          <svg width="40" height="40" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M141.846 89.665C132.225 128.236 93.1561 151.711 54.5761 142.093C16.0121 132.476 -7.46593 93.408 2.15707 54.839C11.7711 16.264 50.8431 -7.21401 89.4101 2.40299C127.985 12.02 151.462 51.091 141.846 89.665Z" fill="#F7931A"/>
-            <path d="M103.736 61.991C105.169 52.409 97.873 47.26 87.898 43.824L91.133 30.846L83.234 28.877L80.083 41.513C78.004 40.995 75.873 40.507 73.752 40.024L76.923 27.304L69.029 25.335L65.79 38.311C64.071 37.919 62.384 37.533 60.745 37.125L60.753 37.085L49.859 34.365L47.757 42.802C47.757 42.802 53.618 44.145 53.494 44.229C56.694 45.028 57.271 47.145 57.175 48.823L53.49 63.608C53.71 63.665 53.995 63.744 54.311 63.872C54.047 63.806 53.766 63.735 53.477 63.665L48.311 84.375C47.919 85.347 46.926 86.806 44.69 86.252C44.769 86.366 38.945 84.819 38.945 84.819L35.025 93.86L45.305 96.423C47.216 96.902 49.093 97.402 50.937 97.876L47.67 111.003L55.561 112.972L58.798 99.985C60.956 100.569 63.048 101.11 65.096 101.619L61.87 114.545L69.77 116.514L73.04 103.412C86.513 105.96 96.644 104.932 100.906 92.749C104.343 82.939 100.736 77.28 93.648 73.589C98.809 72.399 102.699 69.003 103.736 61.991ZM85.687 87.302C83.243 97.113 66.727 91.809 61.369 90.478L65.707 73.089C71.062 74.424 88.237 77.07 85.687 87.302ZM88.127 61.85C85.901 70.774 72.152 66.239 67.692 65.127L71.624 49.355C76.083 50.467 90.448 52.542 88.127 61.85Z" fill="white"/>
-          </svg>
-          <p>비트코인</p>
-          <p>KRW-BTC</p>
-          <p>{{ currentPrice.toLocaleString() }} 원</p>
-        </Router-link>
-        <Router-link class="coin-list" :to="{ name: 'StockDetailView', params: { stockId: 'KRW-BTC' } }">
-          <svg width="40" height="40" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M141.846 89.665C132.225 128.236 93.1561 151.711 54.5761 142.093C16.0121 132.476 -7.46593 93.408 2.15707 54.839C11.7711 16.264 50.8431 -7.21401 89.4101 2.40299C127.985 12.02 151.462 51.091 141.846 89.665Z" fill="#F7931A"/>
-            <path d="M103.736 61.991C105.169 52.409 97.873 47.26 87.898 43.824L91.133 30.846L83.234 28.877L80.083 41.513C78.004 40.995 75.873 40.507 73.752 40.024L76.923 27.304L69.029 25.335L65.79 38.311C64.071 37.919 62.384 37.533 60.745 37.125L60.753 37.085L49.859 34.365L47.757 42.802C47.757 42.802 53.618 44.145 53.494 44.229C56.694 45.028 57.271 47.145 57.175 48.823L53.49 63.608C53.71 63.665 53.995 63.744 54.311 63.872C54.047 63.806 53.766 63.735 53.477 63.665L48.311 84.375C47.919 85.347 46.926 86.806 44.69 86.252C44.769 86.366 38.945 84.819 38.945 84.819L35.025 93.86L45.305 96.423C47.216 96.902 49.093 97.402 50.937 97.876L47.67 111.003L55.561 112.972L58.798 99.985C60.956 100.569 63.048 101.11 65.096 101.619L61.87 114.545L69.77 116.514L73.04 103.412C86.513 105.96 96.644 104.932 100.906 92.749C104.343 82.939 100.736 77.28 93.648 73.589C98.809 72.399 102.699 69.003 103.736 61.991ZM85.687 87.302C83.243 97.113 66.727 91.809 61.369 90.478L65.707 73.089C71.062 74.424 88.237 77.07 85.687 87.302ZM88.127 61.85C85.901 70.774 72.152 66.239 67.692 65.127L71.624 49.355C76.083 50.467 90.448 52.542 88.127 61.85Z" fill="white"/>
-          </svg>
-          <p>비트코인</p>
-          <p>KRW-BTC</p>
-          <p>{{ currentPrice.toLocaleString() }} 원</p>
-        </Router-link>
-        <Router-link class="coin-list" :to="{ name: 'StockDetailView', params: { stockId: 'KRW-BTC' } }">
-          <svg width="40" height="40" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M141.846 89.665C132.225 128.236 93.1561 151.711 54.5761 142.093C16.0121 132.476 -7.46593 93.408 2.15707 54.839C11.7711 16.264 50.8431 -7.21401 89.4101 2.40299C127.985 12.02 151.462 51.091 141.846 89.665Z" fill="#F7931A"/>
-            <path d="M103.736 61.991C105.169 52.409 97.873 47.26 87.898 43.824L91.133 30.846L83.234 28.877L80.083 41.513C78.004 40.995 75.873 40.507 73.752 40.024L76.923 27.304L69.029 25.335L65.79 38.311C64.071 37.919 62.384 37.533 60.745 37.125L60.753 37.085L49.859 34.365L47.757 42.802C47.757 42.802 53.618 44.145 53.494 44.229C56.694 45.028 57.271 47.145 57.175 48.823L53.49 63.608C53.71 63.665 53.995 63.744 54.311 63.872C54.047 63.806 53.766 63.735 53.477 63.665L48.311 84.375C47.919 85.347 46.926 86.806 44.69 86.252C44.769 86.366 38.945 84.819 38.945 84.819L35.025 93.86L45.305 96.423C47.216 96.902 49.093 97.402 50.937 97.876L47.67 111.003L55.561 112.972L58.798 99.985C60.956 100.569 63.048 101.11 65.096 101.619L61.87 114.545L69.77 116.514L73.04 103.412C86.513 105.96 96.644 104.932 100.906 92.749C104.343 82.939 100.736 77.28 93.648 73.589C98.809 72.399 102.699 69.003 103.736 61.991ZM85.687 87.302C83.243 97.113 66.727 91.809 61.369 90.478L65.707 73.089C71.062 74.424 88.237 77.07 85.687 87.302ZM88.127 61.85C85.901 70.774 72.152 66.239 67.692 65.127L71.624 49.355C76.083 50.467 90.448 52.542 88.127 61.85Z" fill="white"/>
-          </svg>
-          <p>비트코인</p>
-          <p>KRW-BTC</p>
-          <p>{{ currentPrice.toLocaleString() }} 원</p>
-        </Router-link>
-      </div>
+      <span>종목명 | 현재가 | 등락률 | 거래량 </span>
+      <hr>
+      <StockList 
+        v-for="(coin, index) in paginatedData"
+        :key="coin.market"
+        :coin="coin"
+        :currentPrice="currentPrice[coin.market]"
+        :index="index + (currentPage - 1) * itemsPerPage"
+      />
+    </div>
+
+    <div class="pagination">
+      <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
+        이전
+      </button>
+      <button
+        v-for="page in Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)"
+        :key="page"
+        @click="setCurrentPage(page)"
+      >
+        {{ page }}
+      </button>
+      <button @click="setCurrentPage(nextPages)" v-show="currentPage <= lastPaginatedPage">
+        다음
+      </button>
     </div>
   </div>
 </template>
 
+
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { watch, ref, computed, onMounted, onUnmounted } from 'vue'
+import { useCounterStore } from '@/stores/counter'
+import StockList from '@/components/StockListComponents/StockList.vue'
 
-const reader = new FileReader()
-const currentPrice = ref(0)
+const store = useCounterStore()
+const itemsPerPage = 5
+const currentPage = ref(1)
 let ws = null
+let currentCoinList = ref({})
 
-// onMounted(() => {
-//   ws = new WebSocket('wss://api.upbit.com/websocket/v1')
+const currentPrice = store.currentPrice
 
-//   ws.onopen = () => {
-//     ws.send('[{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}, {"format":"SIMPLE"}]')
-//   }
+const totalPages = computed(() => Math.ceil(store.coinData.length / itemsPerPage))
+const lastPaginatedPage = computed(() => Math.floor((totalPages.value - 1) / 10) * 10)
+const nextPages = computed(() => Math.ceil(currentPage.value / 10) * 10 + 1)
 
-//   ws.onmessage = (msg) => {
-//     reader.onload = function(event) {
-//         console.log(event.target.result);
-//         const data = JSON.parse(event.target.result)
-//         if (data.tp) {
-//           currentPrice.value = data.tp
-//         }
-//       }
-//       reader.readAsText(msg.data)
-//   }
-// })
+const startPage = computed(() => Math.floor((currentPage.value - 1) / 10) * 10 + 1)
+const endPage = computed(() => Math.min(startPage.value + 9, totalPages.value))
 
-// onUnmounted(() => {
-//   if (ws) {
-//     ws.close()
-//   }
-// })
+const setCurrentPage = (page) => {
+  currentPage.value = page
+}
 
+const paginatedData = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage
+  const endIndex = currentPage.value * itemsPerPage
+  currentCoinList.value = store.coinData.slice(startIndex, endIndex)
+  return store.coinData.slice(startIndex, endIndex)
+})
 
-// import axios from 'axios'
-// axios.defaults.withCredentials = false
+onMounted(() => {
+  ws = new WebSocket('wss://api.upbit.com/websocket/v1')
 
-// axios({
-//   method: 'GET',
-//   url: 'https://api.upbit.com/v1/market/all'
-// }).then((response) => {
-//   const coin_list = response.data.filter(market => market.market.startsWith('KRW-'))
-//   console.log(coin_list)
-// })
+  const sendWebSocketMessage = async () => {
+    for (const coin of currentCoinList.value) {
+      ws.send(JSON.stringify([
+        {"ticket":"test"},
+        {"type":"ticker","codes":[coin.market]},
+        {"format":"SIMPLE"}
+      ]))
+      await new Promise(resolve => setTimeout(resolve, 300)) // 1초 딜레이
+    }
+  }
+
+  ws.onopen = () => {
+    sendWebSocketMessage()
+  }
+
+  ws.onmessage = (msg) => {
+    const reader = new FileReader()
+    reader.onload = function(event) {
+      const data = JSON.parse(event.target.result)
+      if (data.tp) {
+        currentPrice[data.cd] = data.tp
+      }
+    }
+    reader.readAsText(msg.data)
+  }
+
+  // currentCoinList의 변경을 감지하고 웹소켓 메시지를 재생성합니다.
+  watch(currentCoinList, sendWebSocketMessage)
+})
+
+onUnmounted(() => {
+  if (ws) {
+    ws.close()
+  }
+})
 </script>
 
+
 <style scoped>
-.header{
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-  padding: 0px 20px;
+* {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 568px;
+}
+
+.coin-temp {
+  border: 1px solid black;
+}
+
+.router {
   text-decoration: none;
   font-size: 17px;
-  color: black;
+  line-height: 17px;
+  color: #404048;
+  /* font-weight: 500; */
   display: flex;
-  margin: 5px;
   align-items: center;
 }
-.list{
-  border-radius: 8px;
-  /* border: 1px solid black; */
-  align-items: center;
-  justify-content: space-between;
-  /* background-color: #fff; */
-  padding: 0px 20px;
-  text-decoration: none;
-  font-size: 17px;
-  color: black;
+
+.pagination {
   display: flex;
-  margin: 5px;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+  margin: 0 auto;
+  max-width: 1120px;
+  min-height: 56px;
+  box-sizing: border-box;
 }
-.coin-list {
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-  align-items: center;
-  justify-content: space-between;
+.pagination button {
+  border: none;
   background-color: #fff;
-  padding: 0px 20px;
-  text-decoration: none;
-  font-size: 17px;
-  color: black;
-  display: flex;
-  margin-bottom: 10px;
-  width: 100%;
-  align-items: center;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 0 3px;
 }
 </style>
-
