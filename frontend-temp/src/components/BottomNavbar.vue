@@ -131,5 +131,8 @@ li {
   text-align: center;
   color: #404048;
   font-weight: 500;
+  transition: background-color 0.3s ease;
 }
+.router:hover{
+  background-color: rgb(179, 179, 179)}
 </style>
