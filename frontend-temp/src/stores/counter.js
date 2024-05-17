@@ -1,5 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+
 
 export const useCounterStore = defineStore('counter', () => {
   const dummyData = ref([
@@ -277,5 +280,48 @@ export const useCounterStore = defineStore('counter', () => {
     return acc
   }, {}))
 
-  return { dummyData, dummyArticle, dummyComment, coinData, currentPrice }
+  // 회원가입 관련 데이터
+  const router = useRouter()
+  const API_URL = 'http://127.0.0.1:8000'
+  const token = ref(null)
+  const isLogin = computed(() => token.value !== null)
+
+  const logIn = function (payload) {
+    const { username, password } = payload
+
+    axios({
+      method: 'POST',
+      url: `${API_URL}/dj-rest-auth/login/`,
+      data: {
+        username,
+        password,
+      },
+    })
+    .then((response) => {
+      token.value = response.data.key
+      router.push({ name: 'MainView' })
+    })
+  }
+
+  const signUp = function (payload) {
+    const { username, password1, password2, nickname } = payload
+    console.log(username, password1, password2, nickname)
+    axios({
+      method: 'POST',
+      url: `${API_URL}/dj-rest-auth/registration/`,
+      data: {
+        username,
+        password1,
+        password2,
+        nickname,
+      },
+    })
+    .then((response) => {
+      const password = password1
+      logIn({ username, password })
+    })
+  }
+
+  return { dummyData, dummyArticle, dummyComment, coinData, currentPrice
+  , token, isLogin, signUp, logIn }
 }, { persist: true })

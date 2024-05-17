@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from allauth.account.adapter import DefaultAccountAdapter
 
 class User(AbstractUser):
-    password = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     nickname = models.CharField(max_length=50)
     age = models.IntegerField(blank=True, null=True)
