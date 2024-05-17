@@ -3,7 +3,7 @@
     <SignUpNav />
     <div class="non-nav">
       <SignUpHeader />
-      <hr>
+
       <SignUpBody />
       <hr>
       <SignUpFooter />
