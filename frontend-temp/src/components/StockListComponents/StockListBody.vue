@@ -8,6 +8,9 @@
         :key="coin.market"
         :coin="coin"
         :currentPrice="currentPrice[coin.market]"
+        :signedChangeRate="currentChangeRate[coin.market]"
+        :acc_trade_price_24h="currentTradePriceKRW[coin.market]"
+        :acc_trade_volume_24h="currentTradePriceBTC[coin.market]"
         :index="index + (currentPage - 1) * itemsPerPage"
       />
     </div>
@@ -40,9 +43,13 @@ const store = useCounterStore()
 const itemsPerPage = 5
 const currentPage = ref(1)
 let ws = null
+let isSending = false
 let currentCoinList = ref({})
 
 const currentPrice = store.currentPrice
+const currentChangeRate = store.currentChangeRate
+const currentTradePriceKRW = store.currentTradePriceKRW
+const currentTradePriceBTC = store.currentTradePriceBTC
 
 const totalPages = computed(() => Math.ceil(store.coinData.length / itemsPerPage))
 const lastPaginatedPage = computed(() => Math.floor((totalPages.value - 1) / 10) * 10)
@@ -66,14 +73,28 @@ onMounted(() => {
   ws = new WebSocket('wss://api.upbit.com/websocket/v1')
 
   const sendWebSocketMessage = async () => {
-    for (const coin of currentCoinList.value) {
-      ws.send(JSON.stringify([
-        {"ticket":"test"},
-        {"type":"ticker","codes":[coin.market]},
-        {"format":"SIMPLE"}
-      ]))
-      await new Promise(resolve => setTimeout(resolve, 300)) // 1초 딜레이
+    if (isSending) {
+      return
     }
+
+    isSending = true
+
+    for (const coin of currentCoinList.value) {
+      try {
+        ws.send(JSON.stringify([
+          {"ticket":"test"},
+          {"type":"ticker","codes":[coin.market]},
+          {"format":"SIMPLE"}
+        ]))
+        await new Promise(resolve => setTimeout(resolve, 500)) // 1초 딜레이
+      }
+      catch {
+        continue
+      }
+    }
+
+    isSending = false
+    setTimeout(sendWebSocketMessage, 3000)
   }
 
   ws.onopen = () => {
@@ -84,8 +105,24 @@ onMounted(() => {
     const reader = new FileReader()
     reader.onload = function(event) {
       const data = JSON.parse(event.target.result)
+
+      // console.log(data)
+
       if (data.tp) {
         currentPrice[data.cd] = data.tp
+      }
+
+      if (data.scr) {
+        currentChangeRate[data.cd] = data.scr
+      }
+
+      if (data.atp24h) {
+        currentTradePriceKRW[data.cd] = data.atp24h
+      }
+
+      if (data.atv24h) {
+        currentTradePriceBTC[data.cd] = data.atv24h
+        // console.log(data.atv24h)
       }
     }
     reader.readAsText(msg.data)
@@ -93,6 +130,9 @@ onMounted(() => {
 
   // currentCoinList의 변경을 감지하고 웹소켓 메시지를 재생성합니다.
   watch(currentCoinList, sendWebSocketMessage)
+
+  // 1초마다 sendWebSocketMessage 함수를 호출합니다.
+  // setInterval(sendWebSocketMessage, 3000)
 })
 
 onUnmounted(() => {

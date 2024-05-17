@@ -280,6 +280,21 @@ export const useCounterStore = defineStore('counter', () => {
     return acc
   }, {}))
 
+  const currentChangeRate = ref(coinData.reduce((acc, coin) => {
+    acc[coin.market] = 0
+    return acc
+  }, {}))
+
+  const currentTradePriceKRW = ref(coinData.reduce((acc, coin) => {
+    acc[coin.market] = 0
+    return acc
+  }, {}))
+
+  const currentTradePriceBTC = ref(coinData.reduce((acc, coin) => {
+    acc[coin.market] = 0
+    return acc
+  }, {}))
+
   // 회원가입 관련 데이터
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
@@ -323,5 +338,5 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   return { dummyData, dummyArticle, dummyComment, coinData, currentPrice
-  , token, isLogin, signUp, logIn }
+  , token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC }
 }, { persist: true })

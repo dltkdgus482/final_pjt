@@ -7,12 +7,12 @@
           <p class="coin-name">{{ coin.korean_name }}</p>
         </div>
         <div class="coin-price">
-          <p class="percent">-0.04%</p>
+          <p class="percent">{{ (signedChangeRate * 100).toFixed(2) }}%</p>
           <p class="current-price">{{ currentPrice.toLocaleString() }} 원</p>
         </div>
         <div class="tarde-amount">
-          <p class="amount-coin">412,412,412,412,412,412,341.123 BTC</p>
-          <p class="amount-won">1234억</p>
+          <p class="amount-coin">{{ acc_trade_volume_24h.toFixed(2) }} {{ coin.market.replace('KRW-', '') }}</p>
+          <p class="amount-won">{{ Math.floor(acc_trade_price_24h / 100000000) }} 억</p>
         </div>
       </Router-link>
   </div>
@@ -22,6 +22,9 @@
 defineProps({
   coin: Object,
   currentPrice: Number,
+  signedChangeRate: Number,
+  acc_trade_price_24h: Number,
+  acc_trade_volume_24h: Number,
   index: Number,
 })
 </script>
