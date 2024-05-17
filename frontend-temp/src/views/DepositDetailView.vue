@@ -1,10 +1,8 @@
 <template>
   <div>
     <DepositDetailNav />
-    <hr>
     <div class="non-nav">
-      <h1>DepositDetailPage</h1>
-      <hr>
+
       <DepositDetailHeader />
       <hr>
       <DepositDetailBody />
