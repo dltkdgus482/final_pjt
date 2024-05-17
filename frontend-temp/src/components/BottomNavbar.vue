@@ -131,8 +131,11 @@ li {
   text-align: center;
   color: #404048;
   font-weight: 500;
+  border-radius: 8px;
+  padding: 5px;
   transition: background-color 0.3s ease;
 }
 .router:hover{
-  background-color: rgb(179, 179, 179)}
+  background-color: #eee
+}
 </style>

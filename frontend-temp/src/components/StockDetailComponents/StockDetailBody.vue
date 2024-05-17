@@ -80,6 +80,7 @@ onMounted(() => {
 .type {
   align-items: center;
   width: 150px;
+  /* margin-top: 20px; */
 }
 button{
   border: none;
@@ -89,5 +90,8 @@ button{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-left: 10px;
   cursor: pointer;
+}
+button:hover{
+  background-color: #eee;
 }
 </style>

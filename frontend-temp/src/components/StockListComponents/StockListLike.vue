@@ -2,6 +2,7 @@
   <div>
     <h3>관심 종목</h3>
     <StockListHeader/>
+    
   </div>
 </template>
 

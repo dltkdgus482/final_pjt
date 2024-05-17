@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="filter">
     <!-- <button @click="clear()">새로고침</button> -->
     <button @click="clear('전체')">전체</button>
     <button @click="clear('은행')">은행</button>
@@ -133,6 +133,21 @@ const initMap = () => {
 </script>
 
 <style scoped>
+.filter button{
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-right: 10px;
+  line-height: normal;
+}
+.filter button:hover{
+  background-color: #eee;
+}
 #map {
   width: 100%;
   height: 550px;
