@@ -99,7 +99,9 @@ const setCurrentPage = (page) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-
+.in button:hover{
+  background-color: #eee;
+}
 .write-article {
   text-decoration: none;
   /* letter-spacing: -0.3px; */
@@ -112,6 +114,9 @@ const setCurrentPage = (page) => {
   border-radius: 8px;
   padding: 4px 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.write-article:hover{
+  background-color: #eee;
 }
 .dropdown{
   border: none;
@@ -143,5 +148,8 @@ const setCurrentPage = (page) => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 0 3px;
+}
+.pagination button:hover{
+  background-color: #b3b3b3;
 }
 </style>
