@@ -23,47 +23,69 @@
         </RouterLink>
       </div>
     </div>
-    <ArticleList 
-      v-for="(article, index) in paginatedData"
-      :key="article.id"
-      :article="article"
-      :index="index + (currentPage - 1) * itemsPerPage"
-    />
-    <div class="pagination">
-      <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
-        이전
-      </button>
-      <button
-        v-for="page in Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)"
-        :key="page"
-        @click="setCurrentPage(page)"
-      >
-        {{ page }}
-      </button>
-      <button @click="setCurrentPage(nextPages)" v-show="currentPage <= lastPaginatedPage">
-        다음
-      </button>
-    </div>
+    <template v-if="paginatedData && paginatedData.length">
+      <ArticleList 
+        v-for="(article, index) in paginatedData"
+        :key="article.id"
+        :article="article"
+        :index="index + (currentPage - 1) * itemsPerPage"
+      />
+      <div class="pagination">
+        <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
+          이전
+        </button>
+        <button
+          v-for="page in Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)"
+          :key="page"
+          @click="setCurrentPage(page)"
+        >
+          {{ page }}
+        </button>
+        <button @click="setCurrentPage(nextPages)" v-show="currentPage <= lastPaginatedPage">
+          다음
+        </button>
+      </div>
+    </template>
+    <template v-else>
+      <p>게시글이 없습니다.</p>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import axios from "axios"
+import { ref, computed, onMounted } from 'vue'
 import ArticleList from '@/components/ArticleListComponents/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
+
+const articles = ref([])
+
+onMounted(async () => {
+  axios.defaults.withCredentials = false
+  await axios({
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/articles/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    articles.value = response.data
+  })
+})
 
 const itemsPerPage = 5
 const currentPage = ref(1)
 const store = useCounterStore()
 
-const totalPages = computed(() => Math.ceil(store.dummyArticle.length / itemsPerPage))
+const totalPages = computed(() => Math.ceil(articles.value.length / itemsPerPage))
 const lastPaginatedPage = computed(() => Math.floor((totalPages.value - 1) / 10) * 10)
 const nextPages = computed(() => Math.ceil(currentPage.value / 10) * 10 + 1)
 
 const paginatedData = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage
   const endIndex = currentPage.value * itemsPerPage
-  return store.dummyArticle.slice(startIndex, endIndex)
+  return articles.value.slice(startIndex, endIndex)
 })
 
 const startPage = computed(() => Math.floor((currentPage.value - 1) / 10) * 10 + 1)

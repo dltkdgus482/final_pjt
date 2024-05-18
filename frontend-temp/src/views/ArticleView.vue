@@ -2,8 +2,8 @@
   <div>
     <ArticleListNav />
     <div class="non-nav">
-      <ArticleListHeader />
-      <ArticleListBody />
+      <ArticleListHeader/>
+      <ArticleListBody/>
       <ArticleListFooter />
     </div>
   </div>

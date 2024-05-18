@@ -1,16 +1,44 @@
 <template>
   <div>
     <h2>댓글</h2>
-    <div class="create-comment">
-      <textarea name="" id="" class="comment-content" placeholder="댓글을 입력하세요."></textarea>
+    <form @submit.prevent="createComment" class="create-comment">
+      <textarea v-model.trim="content" class="comment-content" placeholder="댓글을 입력하세요."></textarea>
       <!-- <input type="text" class="comment-content"> -->
       <button class="comment-button">댓글 작성</button>
-    </div>
+    </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
+import axios from 'axios'
 
+const store = useCounterStore()
+const route = useRoute()
+const articleId = +route.params.articleId + 1
+
+const content = ref('')
+
+const createComment = function () {
+  axios({
+    method: 'POST',
+    url: `${store.API_URL}/api/v1/articles/${articleId}/comments/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+    data: {
+      content: content.value,
+    },
+  })
+  .then((response) => {
+    location.reload()
+  })
+  .catch((error) => {
+    alert('댓글 작성에 실패했습니다.')
+  })
+}
 </script>
 
 <style scoped>

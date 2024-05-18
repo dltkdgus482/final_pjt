@@ -60,6 +60,8 @@ def article_detail(request, article_pk):
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def comment_list(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+
     if request.method == 'GET':
         comments = Comment.objects.filter(article_id=article_pk)
         serializer = CommentListSerializer(comments, many=True)
@@ -68,7 +70,7 @@ def comment_list(request, article_pk):
     elif request.method == 'POST':
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            serializer.save(user=request.user, article=article)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

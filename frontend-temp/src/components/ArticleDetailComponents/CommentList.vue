@@ -1,8 +1,8 @@
 <template>
   <div class="comment">
     <div>
-      <p class="author">작성자{{ comment.author }}</p>
-      <p class="date">작성일{{ comment.uploadDate }}(수정일{{ comment.updateDate }})</p>
+      <p class="author">작성자: {{ comment.user }}</p>
+      <p class="date">작성일: {{ comment.created_at }}</p>
       <p class="text">{{ comment.content }}</p>
     </div>
   </div>
