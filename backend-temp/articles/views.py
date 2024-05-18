@@ -11,8 +11,9 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 
 from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer, CommentListSerializer
 from .models import Article, Comment
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
@@ -29,6 +30,7 @@ def article_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
@@ -36,6 +38,8 @@ def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
     if request.method == 'GET':
+        article.views += 1
+        article.save()
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     
@@ -51,6 +55,7 @@ def article_detail(request, article_pk):
     
 #######################################################################
 
+@csrf_exempt
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
@@ -67,6 +72,7 @@ def comment_list(request, article_pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@csrf_exempt
 @api_view(['PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])

@@ -337,6 +337,6 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
-  return { dummyData, dummyArticle, dummyComment, coinData, currentPrice
-  , token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC }
+  return { dummyData, dummyArticle, dummyComment, coinData, currentPrice, API_URL,
+    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC }
 }, { persist: true })

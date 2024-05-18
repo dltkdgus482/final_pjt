@@ -1,29 +1,59 @@
 <template>
   <div>
-    <div>
-      <h3>제목</h3>
-      <input class="title-box" type="text" placeholder="제목을 입력하세요.">
-    </div>
-    <div>
-      <h3>내용</h3>
-      <textarea class="content-box" placeholder="내용을 입력하세요."></textarea>
-      <!-- <input class="content-box" type="text" placeholder="Write your article content here..."> -->
-    </div>
-    <div class="select">
-      <h3>분류</h3>
-      <select class="select-box" name="" id="">
-        <option value="">금융</option>
-        <option value="">증권</option>
-      </select>
-    </div>
-    <div class="submit">
-      <button class="button">제출</button>
-    </div>
+    <form @submit.prevent="createArticle">
+      <div>
+        <h3>제목</h3>
+        <input class="title-box" type="text" v-model.trim="title" placeholder="제목을 입력하세요.">
+      </div>
+      <div>
+        <h3>내용</h3>
+        <textarea class="content-box" v-model.trim="content" placeholder="내용을 입력하세요."></textarea>
+        <!-- <input class="content-box" type="text" placeholder="Write your article content here..."> -->
+      </div>
+      <div class="select">
+        <h3>분류</h3>
+        <select class="select-box" v-model="category">
+          <option value="fin">금융</option>
+          <option value="crypt">가상화폐</option>
+        </select>
+      </div>
+      <div class="submit">
+        <button class="button">제출</button>
+      </div>
+    </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
+import axios from 'axios'
 
+const store = useCounterStore()
+const router = useRouter()
+
+const title = ref('')
+const content = ref('')
+const category = ref('fin')
+
+const createArticle = function () {
+  axios({
+    method: 'POST',
+    url: `${store.API_URL}/api/v1/articles/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+    data: {
+      title: title.value,
+      content: content.value,
+      category: category.value,
+    },
+  })
+  .then((response) => {
+    router.push({ name: 'ArticleView' })
+  })
+}
 </script>
 
 <style scoped>
