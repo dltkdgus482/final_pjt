@@ -22,6 +22,8 @@ urlpatterns = [
     
     path('api/v1/articles/', include('articles.urls')),
     path('api/v1/chatbots/', include('chatbots.urls')),
+    path('api/v1/deposits/', include('deposits.urls')),
+    path('api/v1/savings/', include('savings.urls')),
     
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
