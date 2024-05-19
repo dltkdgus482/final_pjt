@@ -5,7 +5,7 @@
 
       <DepositDetailHeader />
       <hr>
-      <DepositDetailBody />
+      <DepositDetailBody/>
       <hr>
       <DepositDetailFooter />
     </div>

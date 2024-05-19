@@ -73,7 +73,7 @@ onMounted(() => {
   ws = new WebSocket('wss://api.upbit.com/websocket/v1')
 
   const sendWebSocketMessage = async () => {
-    if (isSending) {
+    if (isSending || ws.readyState != WebSocket.OPEN) {
       return
     }
 

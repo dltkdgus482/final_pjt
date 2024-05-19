@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import DepositProductListSerializer, DepositProductSerializer
 from .models import DepositProduct
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def deposit_list(request):
@@ -21,7 +21,7 @@ def deposit_list(request):
         serializer = DepositProductListSerializer(deposit_products, many=True)
         return Response(serializer.data)
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def deposit_detail(request, deposit_pk):
