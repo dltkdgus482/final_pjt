@@ -3,18 +3,15 @@
     <div class="deposit">
       <div class="simple-data">
         <div class="logo">
-          <img v-if="deposit && deposit.kor_co_nm" :src="'/assets/BankIcons/' + deposit.kor_co_nm + '.png'" alt="#" width="42" height="42">
-          <p>
-            은행명: 
-            <span>
-              {{ bankName }}
-            </span> 
-            <br>
-            상품명: 
-            <span>
+          <div>
+            <p>
               {{ depositProduct }}
-            </span>
-          </p>
+            </p> 
+            <p>
+              {{ bankName }}
+            </p>
+          </div>
+          <img v-if="deposit && deposit.kor_co_nm" :src="'/assets/BankIcons/' + deposit.kor_co_nm + '.png'" alt="#" width="42" height="42">
         </div>
         <div class="rate">
           <p class="best">
@@ -29,10 +26,11 @@
       </div>
       <div class="plus-data">
         <p>{{ deposit }}</p>
+        <br>
+        <p>{{ deposit.depositoption_set }}</p>
       </div>
     </div>
     <div class="detail">
-      <p>{{ deposit.depositoption_set }}</p>
     </div>
   </div>
 </template>
@@ -92,7 +90,9 @@ onMounted(async () => {
 
 .simple-data {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: stretch;
+  flex-direction: column;
 }
 
 .logo {
@@ -104,6 +104,7 @@ onMounted(async () => {
   width: 50px;
   height: 50px;
   margin-right: 10px;
+  margin-left: auto;
 }
 
 .logo p {
