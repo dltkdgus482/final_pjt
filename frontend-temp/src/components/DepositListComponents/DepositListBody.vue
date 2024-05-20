@@ -4,7 +4,7 @@
       <RouterLink class="router" :to="{ name: 'DepositDetailView', params: { 'depositId': index + (currentPage - 1) * itemsPerPage } }">
         <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
         <div class="bank">
-          <h3>{{ data.fin_prdt_nm }}</h3>
+          <h4>{{ data.fin_prdt_nm }}</h4>
           <p class="color">{{ data.kor_co_nm }}</p>
         </div>
         <div class="option">
@@ -31,7 +31,7 @@
         <button @click="setCurrentPage(nextPages)" v-show="currentPage <= lastPaginatedPage">
           다음
         </button>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -91,21 +91,25 @@ const setCurrentPage = (page) => {
 
 .router {
   text-decoration: none;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 17px;
   color: #404048;
   /* font-weight: 500; */
   display: flex;
   align-items: center;
+  width: 900px;
+  justify-content: space-between;
+  margin: 0px;
 }
 
-* {
+/* * {
   margin-left: auto;
   margin-right: auto;
   max-width: 568px;
-}
+} */
 .bank {
   margin-left: 10px;
+  margin-right: auto;
 }
 
 .bank .color {
@@ -119,12 +123,14 @@ const setCurrentPage = (page) => {
 
 .option .numcolor{
   color: green;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: bold;
 }
 .option {
-  margin-left: 150px;
+  /* margin-left: 150px; */
 }
+
+
 
 .pagination {
   display: flex;
