@@ -1,23 +1,28 @@
 <template>
   <div>
     <form class="signup-form" @submit.prevent="signUp">
-      <span>
-        <input class="uername" type="text" id="username" v-model.trim="username" placeholder="아이디" required>
+      <div>
+        <input class="username" type="text" id="username" v-model.trim="username" placeholder="아이디" required>
         <button>중복확인</button>        
-      </span>
+      </div>
       <input type="password" id="password1" v-model.trim="password1" placeholder="비밀번호" required>
       <input type="password" id="password2" v-model.trim="password2" placeholder="비밀번호 확인" required>
-      <span>
+      <div>
         <input type="text" id="email" placeholder="이메일" required>
         <button>인증하기</button>
-      </span>
-      <span>
-        <input type="text" id="" placeholder="인증코드">
+      </div>
+      <div>
+        <input type="text" id="auth-code" placeholder="인증코드">
         <button>제출</button>
-      </span>
-      <input class="nickname" type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임" required>
-      
-      
+      </div>
+      <input type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임" required>
+      <input type="text" name="" id="" placeholder="나이(숫자만 입력해주세요)">
+      <div>
+        <span class="gender">성별</span>
+        <button class="gender-button">남</button>
+        <button class="gender-button">여</button>
+      </div>
+      <input type="text" name="" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
       <input id="submit" type="submit">
     </form> 
   </div>
@@ -42,17 +47,16 @@ const signUp = function () {
   }
   store.signUp(payload)
 }
-
 </script>
 
 <style scoped>
-.signup-form{
+.signup-form {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   flex-direction: column;
 }
-.signup-form input{
+
+.signup-form input {
   border: none;
   background-color: #fff;
   border-radius: 8px;
@@ -61,14 +65,15 @@ const signUp = function () {
   margin-bottom: 20px;
   padding-left: 20px;
   font-size: 17px;
-
 }
-.signup-form span{
+
+.signup-form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-span button{
+
+div button {
   border: none;
   background-color: #fff;
   border-radius: 8px;
@@ -78,17 +83,41 @@ span button{
   width: 90px;
   height: 50px;
   font-size: 14px;
+  cursor: pointer;
 }
-/* .uername{
-  width: 300px;
-} */
-#submit{
+
+.username {
+  width: 400px;
+}
+
+#email {
+  width: 400px;
+}
+
+#submit {
   margin-left: auto;
   padding: 4px 10px;
   font-size: 14px;
 }
-#submit:hover{
+
+#submit:hover {
   background-color: #eee;
+}
+.gender{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 90px;
+  height: 50px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 50px;
+}
+.gender-button{
+  width: 200px;
 }
 
 </style>
