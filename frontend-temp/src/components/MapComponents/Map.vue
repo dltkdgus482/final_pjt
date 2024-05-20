@@ -5,8 +5,8 @@
     <button @click="clear('은행')">은행</button>
     <button @click="clear('ATM')">ATM</button>
     <span>
-      <input type="text">
-      <button @click="search">검색</button>
+      <input type="text" v-model="inputSearchKeyword">
+      <button @click.prevent="clear(inputSearchKeyword)">검색</button>
     </span>
     <div id="map"></div>
   </div>
@@ -17,6 +17,7 @@ import { ref, onMounted } from 'vue'
 
 const api_key = import.meta.env.VITE_APP_KAKAO_MAP_API_KEY
 const keyword = ref(null)
+const inputSearchKeyword = ref(null)
 
 let lat = 0
 let lng = 0
@@ -94,6 +95,8 @@ const initMap = () => {
       ps.keywordSearch('은행', placesSearchCB, searchOptions)
     } else if (keyword.value == 'ATM') {
       ps.keywordSearch('ATM', placesSearchCB, searchOptions)
+    } else {
+      ps.keywordSearch(keyword.value, placesSearchCB, searchOptions)
     }
   }
   
