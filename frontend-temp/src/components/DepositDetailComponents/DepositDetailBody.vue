@@ -19,11 +19,11 @@
         <div class="rate">
           <p class="best">
             최고금리
-            <span>{{ depositIntrRate.toFixed(2) }}%</span>
+            <span>{{ depositIntrRate2.toFixed(2) }}%</span>
           </p>
           <p>
             기본금리
-            <span>{{ depositIntrRate2.toFixed(2) }}%</span>
+            <span>{{ depositIntrRate.toFixed(2) }}%</span>
           </p>
         </div>
       </div>

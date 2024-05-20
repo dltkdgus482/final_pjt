@@ -1,13 +1,10 @@
 <template>
   <div>
     <ArticleDetailNav />
-    <hr>
     <div class="non-nav">
       <h1>ArticleDetailPage</h1>
-      <hr>
 
       <ArticleDetailBody />
-      <hr>
       <ArticleDetailFooter />
     </div>
   </div>
