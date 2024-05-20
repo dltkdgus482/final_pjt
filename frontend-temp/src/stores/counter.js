@@ -36,8 +36,7 @@ export const useCounterStore = defineStore('counter', () => {
   // 회원가입 관련 데이터
   const router = useRouter()
   const API_URL = 'http://127.0.0.1:8000'
-  // const token = ref(null)
-  const token = '5fa4c93823541963e2207f1e37d1863cde0f3bf7'
+  const token = ref(null)
   const isLogin = computed(() => token.value !== null)
 
   const logIn = function (payload) {
