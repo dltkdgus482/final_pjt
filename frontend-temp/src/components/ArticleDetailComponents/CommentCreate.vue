@@ -17,7 +17,7 @@ import axios from 'axios'
 
 const store = useCounterStore()
 const route = useRoute()
-const articleId = +route.params.articleId + 1
+const articleId = +route.params.articleId
 
 const content = ref('')
 

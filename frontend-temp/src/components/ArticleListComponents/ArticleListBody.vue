@@ -28,7 +28,7 @@
         v-for="(article, index) in paginatedData"
         :key="article.id"
         :article="article"
-        :index="articles.length - 1 - index + (currentPage - 1) * itemsPerPage"
+        :index="index + (currentPage - 1) * itemsPerPage"
       />
       <div class="pagination">
         <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
@@ -84,7 +84,7 @@ onMounted(async () => {
     },
   })
   .then((response) => {
-    articles.value = response.data.reverse()
+    articles.value = response.data
     // articles_copy.value = response.data.reverse()
   })
 })

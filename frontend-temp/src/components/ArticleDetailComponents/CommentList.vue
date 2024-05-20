@@ -6,16 +6,40 @@
       <p class="text">{{ comment.content }}</p>
     </div>
     <div class="edit">
-      <p>삭제</p>
+      <p @click.prevent="deleteComment">삭제</p>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   comment: Object,
   index: Number,
+  articleId: Number,
 })
+
+import axios from "axios"
+import { useRoute, useRouter } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
+const router = useRouter()
+
+const deleteComment = async function () {
+  axios.defaults.withCredentials = false
+
+  await axios({
+    method: 'DELETE',
+    url: `${store.API_URL}/api/v1/articles/${props.articleId}/comments/${props.comment.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    location.reload()
+  })
+}
+
 </script>
 
 <style scoped>
