@@ -6,8 +6,8 @@
       <p class="text">{{ comment.content }}</p>
     </div>
     <div class="edit">
-      <p>수정</p>
-      <p>삭제</p>
+      <p @click.prevent="udpateComment">수정</p>
+      <p @click.prevent="deleteComment">삭제</p>
     </div>
   </div>
 </template>
@@ -17,6 +17,15 @@ defineProps({
   comment: Object,
   index: Number,
 })
+
+const updateComment = function () {
+
+}
+
+const deleteComment = function () {
+  
+}
+
 </script>
 
 <style scoped>

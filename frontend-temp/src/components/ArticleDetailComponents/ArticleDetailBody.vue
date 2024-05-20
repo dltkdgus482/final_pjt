@@ -2,7 +2,6 @@
   <div>
     <div class="header">
       <div>
-        <!-- <p>{{ article }}</p> -->
         <p class="article-info">{{ article.category }}</p>
         <p class="article-info">작성자: {{ article.user }}</p>
         <p class="article-info">작성일: {{ article.created_at }}</p>
@@ -14,8 +13,8 @@
       <p>{{ article.content }}</p>
     </div>
     <div class="edit">
-      <RouterLink class="router" :to="{ name: 'ArticleUpdateView', params: { articleId: index } }">수정</RouterLink>
-      <p>삭제</p>
+      <RouterLink class="router" :to="{ name: 'ArticleUpdateView', params: { articleId: articleId - 1 } }">수정</RouterLink>
+      <p class="delete" @click.prevent="deleteArticle">삭제</p>
     </div>
     <div class="comment">
       <CommentCreate />
@@ -37,7 +36,7 @@
 <script setup>
 import axios from "axios"
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
 import CommentCreate from '@/components/ArticleDetailComponents/CommentCreate.vue'
 import CommentList from '@/components/ArticleDetailComponents/CommentList.vue'
@@ -46,8 +45,11 @@ const article = ref({})
 const comments = ref([])
 const store = useCounterStore()
 const route = useRoute()
+const router = useRouter()
 
-const articleId = (+route.params.articleId) + 1
+const articleId = (+route.params.articleId)
+
+// console.log(articleId)
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
@@ -79,6 +81,22 @@ defineProps({
   article: Object,
   index: Number,
 })
+
+const deleteArticle = function () {
+  axios.defaults.withCredentials = false
+
+  axios({
+    method: 'DELETE',
+    url: `${store.API_URL}/api/v1/articles/${articleId}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    router.push({ name: 'ArticleView' })
+  })
+
+}
 </script>
 
 <style scoped>
@@ -129,13 +147,14 @@ defineProps({
   display: flex;
   justify-content: right;
 }
-.edit p{
+.edit p {
   border: none;
   background-color: #fff;
   border-radius: 8px;
   padding: 8px 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-left: 6px;
+  cursor: pointer;
 }
 .router{
   border: none;
@@ -146,5 +165,6 @@ defineProps({
   margin: 16px 6px;
   text-decoration: none;
   font-style: black;
+  color: #404048;
 }
 </style>

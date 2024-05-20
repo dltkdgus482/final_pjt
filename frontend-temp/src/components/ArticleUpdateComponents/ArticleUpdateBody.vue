@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="createArticle">
+    <form @submit.prevent="updateArticle">
       <div>
         <h3>제목</h3>
         <input class="title-box" type="text" v-model.trim="title" placeholder="제목을 입력하세요.">
@@ -14,7 +14,7 @@
         <h3>분류</h3>
         <select class="select-box" v-model="category">
           <option value="fin">금융</option>
-          <option value="crypt">가상화폐</option>
+          <option value="crypto">가상화폐</option>
         </select>
       </div>
       <div class="submit">
@@ -25,22 +25,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
 import axios from 'axios'
 
 const store = useCounterStore()
+const route = useRoute()
 const router = useRouter()
 
 const title = ref('')
 const content = ref('')
-const category = ref('fin')
+const category = ref('')
+const articleId = (+route.params.articleId) + 1
 
-const createArticle = function () {
+onMounted(() => {
   axios({
-    method: 'POST',
-    url: `${store.API_URL}/api/v1/articles/`,
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/articles/${articleId}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    title.value = response.data.title
+    content.value = response.data.content
+    category.value = response.data.category
+  })
+
+})
+
+const updateArticle = function () {
+  axios({
+    method: 'PUT',
+    url: `${store.API_URL}/api/v1/articles/${articleId}/`,
     headers: {
       Authorization: `Token ${store.token}`,
     },
@@ -51,7 +69,7 @@ const createArticle = function () {
     },
   })
   .then((response) => {
-    router.push({ name: 'ArticleView' })
+    router.push({ name: 'ArticleDetailView', params: { 'articleId': articleId } })
   })
 }
 </script>

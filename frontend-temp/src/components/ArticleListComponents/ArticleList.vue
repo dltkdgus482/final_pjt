@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="circular-border">
-      <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: index } }">
+      <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: article.id } }">
         <!-- <p>번호 {{ index + 1 }}</p>
         <p>분류 </p> -->
         <!-- <p>{{ article }}</p> -->
