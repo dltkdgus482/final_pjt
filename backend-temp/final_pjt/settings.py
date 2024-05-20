@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'chatbots',
     'deposits',
     'savings',
+    'exchanges',
 
     'drf_yasg',
     'rest_framework',

@@ -68,6 +68,11 @@ const router = createRouter({
       name: 'StockDetailView',
       component: () => import('../views/StockDetailView.vue')
     },
+    {
+      path: '/exchangerate',
+      name: 'ExchangeRateView',
+      component: () => import('../views/ExchangeRateView.vue')
+    },
   ]
 })
 
