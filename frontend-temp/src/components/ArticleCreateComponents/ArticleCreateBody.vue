@@ -14,7 +14,7 @@
         <h3>분류</h3>
         <select class="select-box" v-model="category">
           <option value="fin">금융</option>
-          <option value="crypt">가상화폐</option>
+          <option value="crypto">가상화폐</option>
         </select>
       </div>
       <div class="submit">

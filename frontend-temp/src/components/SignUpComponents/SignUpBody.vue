@@ -19,8 +19,8 @@
       <input type="text" name="" id="" placeholder="나이(숫자만 입력해주세요)">
       <div>
         <span class="gender">성별</span>
-        <button class="gender-button">남</button>
-        <button class="gender-button">여</button>
+        <button class="gender-button" @click.prevent>남</button>
+        <button class="gender-button" @click.prevent>여</button>
       </div>
       <input type="text" name="" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
       <input id="submit" type="submit">

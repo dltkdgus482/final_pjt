@@ -2,9 +2,9 @@
   <div>
     <div class="in">
       <div class="category">
-        <button>전체</button>
-        <button>금융</button>
-        <button>증권</button>
+        <button @click.prevent="filterTotal">전체</button>
+        <button @click.prevent="filterFin">금융</button>
+        <button @click.prevent="filterCrypto">증권</button>
       </div>
       <div>
         <select name="" id="" class="dropdown">
@@ -28,7 +28,7 @@
         v-for="(article, index) in paginatedData"
         :key="article.id"
         :article="article"
-        :index="index + (currentPage - 1) * itemsPerPage"
+        :index="articles.length - 1 - index + (currentPage - 1) * itemsPerPage"
       />
       <div class="pagination">
         <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
@@ -58,7 +58,21 @@ import { ref, computed, onMounted } from 'vue'
 import ArticleList from '@/components/ArticleListComponents/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
 
+
 const articles = ref([])
+// const articles_copy = ref([])
+
+// const filterTotal = function () {
+//   articles_copy.value = articles.value
+// }
+
+// const filterFin = function () {
+//   articles_copy.value = articles.value.filter(article => article.category === 'fin').reverse()
+// }
+
+// const filterCrypto = function () {
+//   articles_copy.value = articles.value.filter(article => article.category === 'crypto').reverse()
+// }
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
@@ -70,7 +84,8 @@ onMounted(async () => {
     },
   })
   .then((response) => {
-    articles.value = response.data
+    articles.value = response.data.reverse()
+    // articles_copy.value = response.data.reverse()
   })
 })
 

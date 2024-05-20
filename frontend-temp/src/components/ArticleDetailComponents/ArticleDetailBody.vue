@@ -44,10 +44,12 @@ const article = ref({})
 const comments = ref([])
 const store = useCounterStore()
 const route = useRoute()
-const articleId = +route.params.articleId + 1
+
+const articleId = (+route.params.articleId) + 1
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
+
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/articles/${articleId}/`,
