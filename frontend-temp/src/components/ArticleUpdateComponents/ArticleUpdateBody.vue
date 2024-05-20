@@ -106,7 +106,7 @@ const updateArticle = function () {
 }
 
 .select-box {
-  width: 10%;
+  width: 20%;
   height: 40px;
   margin-bottom: 20px;
   border: none;

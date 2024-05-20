@@ -43,7 +43,7 @@
   border-radius: 8px;
   border: 0.5px solid gray;
   padding: 4px 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   cursor: pointer;
 }

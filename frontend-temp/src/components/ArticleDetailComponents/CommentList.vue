@@ -6,7 +6,6 @@
       <p class="text">{{ comment.content }}</p>
     </div>
     <div class="edit">
-      <!-- <p @click.prevent="udpateComment">수정</p> -->
       <p @click.prevent="deleteComment">삭제</p>
     </div>
   </div>
@@ -76,5 +75,7 @@ const deleteComment = async function () {
   padding: 4px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 35px;
+  text-align: center;
 }
 </style>
