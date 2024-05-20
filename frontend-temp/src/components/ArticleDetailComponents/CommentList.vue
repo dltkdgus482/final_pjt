@@ -5,6 +5,10 @@
       <p class="date">작성일: {{ comment.created_at }}</p>
       <p class="text">{{ comment.content }}</p>
     </div>
+    <div class="edit">
+      <p>수정</p>
+      <p>삭제</p>
+    </div>
   </div>
 </template>
 
@@ -40,5 +44,13 @@ defineProps({
 .date{
   font-size: 10px;
   color: #999;
+}
+.edit p{
+  border: none;
+  background-color: #f3f5f7;
+  border-radius: 8px;
+  padding: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

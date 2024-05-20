@@ -10,11 +10,13 @@
       </div>
 
     </div>
-
     <div class="article">
       <p>{{ article.content }}</p>
     </div>
-
+    <div class="edit">
+      <RouterLink class="router" :to="{ name: 'ArticleUpdateView', params: { articleId: index } }">수정</RouterLink>
+      <p>삭제</p>
+    </div>
     <div class="comment">
       <CommentCreate />
       <template v-if="comments && comments.length">
@@ -72,6 +74,11 @@ onMounted(async () => {
     comments.value = response.data
   })
 })
+
+defineProps({
+  article: Object,
+  index: Number,
+})
 </script>
 
 <style scoped>
@@ -117,5 +124,27 @@ onMounted(async () => {
   padding-top: 0px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px 5px;
+}
+.edit {
+  display: flex;
+  justify-content: right;
+}
+.edit p{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 8px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 6px;
+}
+.router{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 8px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 16px 6px;
+  text-decoration: none;
+  font-style: black;
 }
 </style>
