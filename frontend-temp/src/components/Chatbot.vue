@@ -20,9 +20,12 @@
 </template>
 
 <script setup>
-import { h, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
-axios.defaults.withCredentials = true
+import { useCounterStore } from '@/stores/counter'
+
+axios.defaults.withCredentials = false
+const store = useCounterStore()
 
 const isChatContainerVisible = ref(false)
 const userInput = ref('')
@@ -36,7 +39,7 @@ const toggleChatContainer = () => {
 // CSRF 토큰을 얻기 위한 뷰에 대한 URL
 // const csrfTokenUrl = 'http://127.0.0.1:8000/api/v1/get_csrf/'
 
-const url = 'http://127.0.0.1:8000/api/v1/chatbot/'
+const url = 'http://127.0.0.1:8000/api/v1/chatbots/'
 
 // let csrfToken
 
@@ -56,6 +59,9 @@ const sendMessage = function () {
       // },
       data: {
         message: userMessage,
+      },
+      headers: {
+        'Authorization': `Token ${store.token}`,
       },
       // withCredentials: true,
     })
