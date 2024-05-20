@@ -24,6 +24,7 @@
           :key="comment.id"
           :comment="comment"
           :index="index"
+          :articleId="articleId"
         />
       </template>
       <template v-else>
