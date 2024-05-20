@@ -21,13 +21,19 @@ import { ref, onMounted } from 'vue'
 const api_key = import.meta.env.VITE_APP_KAKAO_MAP_API_KEY
 const keyword = ref(null)
 const inputSearchKeyword = ref(null)
+const searchButtonClicked = ref(false)
 
 let lat = 0
 let lng = 0
 
 let map = null
 let clear = null
+let currentPos = null
 let markers = []
+
+const searchButtonClick = () => {
+  searchButtonClicked.value = true
+}
 
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
@@ -44,8 +50,12 @@ onMounted(() => {
 const initMap = () => {
   const infowindow = new kakao.maps.InfoWindow({zIndex:1})
   const container = document.getElementById('map')
+
+  lat = 35.0934
+  lng = 128.855691
+
   const options = {
-    center: new kakao.maps.LatLng(35.0934, 128.855691),
+    center: new kakao.maps.LatLng(lat, lng),
     level: 5,
   }
 
@@ -61,6 +71,13 @@ const initMap = () => {
 
   const placesSearchCB = function (data, status) {
     if (status === kakao.maps.services.Status.OK) {
+      if (data && data.length > 0 && searchButtonClicked.value === true) {
+        const position = new kakao.maps.LatLng(data[0].y, data[0].x)
+        map.setCenter(position)
+        searchButtonClicked.value = false
+      }
+
+
       for (let i = 0; i < data.length; i++) {
         // if (data[i].place_name.includes('ATM')) {
         //   continue
@@ -74,7 +91,6 @@ const initMap = () => {
   for (let page = 1; page < 3; page++) {
     searchOptions.page = page
     // ps.keywordSearch('은행', placesSearchCB, searchOptions)
-
     if (keyword.value == '전체') {
       ps.keywordSearch('은행', placesSearchCB, searchOptions)
       ps.keywordSearch('ATM', placesSearchCB, searchOptions)
@@ -84,6 +100,7 @@ const initMap = () => {
   }
 
   clear = function (searchKeyword) {
+    infowindow.close()
     keyword.value = searchKeyword
 
     for (let i = 0; i < markers.length; i++) {
@@ -113,7 +130,7 @@ const initMap = () => {
   
     kakao.maps.event.addListener(marker, 'click', function() {
       // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-      infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+      infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>')
       infowindow.open(map, marker)
     })
   }
@@ -137,6 +154,26 @@ const initMap = () => {
       ps.keywordSearch(keyword.value, placesSearchCB, searchOptions)
     }
   })
+
+  currentPos = function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        lat = position.coords.latitude
+        lng = position.coords.longitude
+        map.setCenter(new kakao.maps.LatLng(lat, lng))
+        if (keyword.value == '전체') {
+          ps.keywordSearch('은행', placesSearchCB, searchOptions)
+          ps.keywordSearch('ATM', placesSearchCB, searchOptions)
+        } else {
+          ps.keywordSearch(keyword.value, placesSearchCB, searchOptions)
+        }
+      })
+    }
+    
+    else {
+      alert('현재 위치를 찾을 수 없습니다.')
+    }
+  }
 }
 
 
