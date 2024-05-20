@@ -1,16 +1,19 @@
 <template>
-  <div class="filter">
-    <!-- <button @click="clear()">새로고침</button> -->
-    <button @click="clear('전체')">전체</button>
-    <button @click="clear('은행')">은행</button>
-    <button @click="clear('ATM')">ATM</button>
-    <span>
-      <input type="text" v-model="inputSearchKeyword">
-      <button @click.prevent="clear(inputSearchKeyword)">검색</button>
-    </span>
+  <div class="map-container">
     <div id="map"></div>
+    <div class="filter">
+      <!-- <button @click="clear()">새로고침</button> -->
+      <button @click="clear('전체')">전체</button>
+      <button @click="clear('은행')">은행</button>
+      <button @click="clear('ATM')">ATM</button>
+      <span>
+        <input type="text" v-model="inputSearchKeyword">
+        <button @click.prevent="clear(inputSearchKeyword)">검색</button>
+      </span>
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -140,10 +143,21 @@ const initMap = () => {
 </script>
 
 <style scoped>
-.filter button{
+.map-container {
+  position: relative;
+}
+
+.filter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.filter button {
   height: 30px;
   font-size: 14px;
-  border: none;
+  border: solid 1px #d3d3d3;
   background-color: #fff;
   border-radius: 8px;
   padding: 4px 10px;
@@ -152,11 +166,27 @@ const initMap = () => {
   margin-right: 10px;
   line-height: normal;
 }
-.filter button:hover{
+
+input {
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  line-height: normal;
+  border: solid 1px #d3d3d3;
+}
+
+.filter button:hover {
   background-color: #eee;
 }
+
 #map {
   width: 100%;
   height: 550px;
+  margin-top: 20px;
 }
 </style>
