@@ -111,8 +111,17 @@ const addMessage = function (sender, message) {
   border-top: 1px solid #ccc;
   padding: 10px;
   margin-top: 5px;
-  background-color: #e6e6e6;
+  background-color: #f3f5f7;
+  border-radius: 8px;
 }
+/* .user-message{
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #e6e6e6;
+  border-radius: 8px;
+  text-align: right;
+} */
 #chat-container {
   z-index: 1000;
   position: fixed;
@@ -124,6 +133,8 @@ const addMessage = function (sender, message) {
   flex-direction: column;
   border: 1px solid #ccc;
   background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 #chat-messages {
   flex: 1;
@@ -141,6 +152,9 @@ const addMessage = function (sender, message) {
   flex: 1;
   outline: none;
   width: 50%;
+  border-radius: 8px;
+  border: #e6e6e6 solid 1px;
+  margin-right: 10px;
 }
 #user-input button {
   border: none;
@@ -150,6 +164,6 @@ const addMessage = function (sender, message) {
   cursor: pointer;
   width: 20%;
   font-size: 9px;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 </style>
