@@ -8,9 +8,9 @@
         개
       </b>
     </div>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
       <button>정렬버튼</button>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -36,7 +36,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.dropdown{
+/* .dropdown{
   margin-right: 10px;
 }
 .dropdown button{
@@ -46,7 +46,7 @@
   font-size: 14px;
   border: none;
   cursor: pointer;
-}
+} */
 
 
 </style>
