@@ -19,9 +19,6 @@
 </script>
 
 
-
-
-
 <style scoped>
 .circular-border {
   border-radius: 8px;
