@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="header">
-      <div>
+      <div v-if="article && article.category && article.user && article.user.username && article.created_at">
+        <!-- <p>{{article}}</p> -->
         <p class="article-info">카테고리: {{ article.category }}</p>
         <p class="article-info">작성자: {{ article.user.username }}</p>
         <p class="article-info">작성일: {{ store.formatDate(article.created_at) }}</p>
+        <p class="article-info">조회수: {{ article.views }}</p>
         <p class="title">{{ article.title }}</p>
       </div>
+      <div v-else></div>
 
     </div>
     <div class="article">

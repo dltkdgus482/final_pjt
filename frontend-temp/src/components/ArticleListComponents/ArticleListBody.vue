@@ -7,9 +7,9 @@
         <button @click.prevent="filterCrypto">증권</button>
       </div>
       <div>
-        <select name="" id="" class="dropdown">
-          <option value="">최신 순</option>
-          <option value="">조회 순</option>
+        <select v-model="selectedOption" name="" id="" class="dropdown">
+          <option value="latest">최신 순</option>
+          <option value="views">조회 순</option>
         </select>
         <RouterLink :to="{ name: 'ArticleCreateView' }" class="write-article">
           <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 24 24;" xml:space="preserve">
@@ -52,12 +52,22 @@
 
 <script setup>
 import axios from "axios"
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import ArticleList from '@/components/ArticleListComponents/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
 
 const articles = ref([])
 const articles_copy = ref([])
+
+const selectedOption = ref('latest')
+
+watch(selectedOption, (value) => {
+  if (value === 'latest') {
+    articles_copy.value = articles_copy.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  } else if (value === 'views') {
+    articles_copy.value = articles_copy.value.sort((a, b) => b.views - a.views)
+  }
+})
 
 const filterTotal = function () {
   articles_copy.value = articles.value

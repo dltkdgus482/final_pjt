@@ -1,7 +1,7 @@
 <template>
   <div class="comment">
-    <div>
-      <p class="author">작성자: {{ comment.user }}</p>
+    <div v-if="comment && comment.user && comment.user.username && comment.created_at && comment.content">
+      <p class="author">작성자: {{ comment.user.username }}</p>
       <p class="date">작성일: {{ store.formatDate(comment.created_at) }}</p>
       <p class="text">{{ comment.content }}</p>
     </div>

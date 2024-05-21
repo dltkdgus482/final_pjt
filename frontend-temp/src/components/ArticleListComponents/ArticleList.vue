@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="circular-border">
+    <div class="circular-border" v-if="article && article.title && article.user && article.user.username && article.created_at && article.views">
       <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: article.id } }">
         <!-- <p>{{ article }}</p> -->
         <h3>제목: {{ article.title }}</h3>
         <p class="line-margin">작성자: {{ article.user.username }}</p>
         <p>작성일: {{ store.formatDate(article.created_at) }}</p>
+        <p>조회수: {{ article.views }}</p>
       </RouterLink>
     </div>
   </div>
