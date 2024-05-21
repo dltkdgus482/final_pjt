@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>ExchangeRateHeader</h1>
+    <StockListLike />
   </div>
 </template>
 
 <script setup>
-
+import StockListLike from '@/components/StockListComponents/StockListLike.vue'
 </script>
 
 <style scoped>
