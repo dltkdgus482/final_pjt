@@ -1,12 +1,12 @@
 <template>
   <div class="map-container">
     <div id="map"></div>
+    <button class="location" @click="currentPos()">현재 위치</button>
     <div class="filter">
       <!-- <button @click="clear()">새로고침</button> -->
       <button @click="clear('전체')">전체</button>
       <button @click="clear('은행')">은행</button>
       <button @click="clear('ATM')">ATM</button>
-      <button @click="currentPos()">현재 위치</button>
       <form @submit.prevent="clear(inputSearchKeyword); searchButtonClick()">
         <input type="text" v-model.trim="inputSearchKeyword">
         <button>검색</button>
@@ -190,6 +190,7 @@ const initMap = () => {
   top: 10px;
   right: 10px;
   z-index: 1;
+  /* width: 700px; */
 }
 
 .filter button {
@@ -204,6 +205,26 @@ const initMap = () => {
   margin-right: 10px;
   line-height: normal;
 }
+.location{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+
+  height: 30px;
+  font-size: 14px;
+  border: solid 1px #d3d3d3;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-right: 10px;
+  line-height: normal;
+}
+.filter button:hover {
+  background-color: #eee;
+}
 
 input {
   height: 30px;
@@ -217,14 +238,11 @@ input {
   line-height: normal;
   border: solid 1px #d3d3d3;
 }
-
-.filter button:hover {
-  background-color: #eee;
+form{
+  display: inline;
 }
-
 #map {
   width: 100%;
-  height: 600px;
-  margin-top: 20px;
+  height: 800px;
 }
 </style>
