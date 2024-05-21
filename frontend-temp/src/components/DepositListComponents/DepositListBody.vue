@@ -323,6 +323,8 @@ const filterBank = function (data) {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .save-type span{
+  text-align: center;
+  width: 40px;
   border-radius: 20px;
   background-color: #fff;
   padding: 4px;
@@ -371,9 +373,10 @@ const filterBank = function (data) {
 }
 .count {
   font-size: 20px;
-  color: blue;
-  font-weight: bold;
+  /* color: blue; */
+  font-weight: 600;
   margin-left: 10px;
+  margin-right: 4px;
 }
 .deposit-sort {
   border-radius: 8px;
