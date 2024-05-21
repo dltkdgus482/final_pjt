@@ -10,8 +10,11 @@ from rest_framework.authentication import TokenAuthentication, BasicAuthenticati
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 from .serializers import SavingProductListSerializer, SavingProductSerializer
-from .models import SavingProduct
+from .models import SavingProduct, SavingOption
 from django.contrib.auth import get_user_model
+
+import os
+import requests
 
 User = get_user_model()
 
@@ -58,6 +61,54 @@ def calculate_score(product, user, weights):
 @authentication_classes([TokenAuthentication])
 def saving_list(request):
     if request.method == 'GET':
+        API_KEY = os.environ.get("API_KEY")
+
+        url = f'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json?auth={API_KEY}&topFinGrpNo=020000&pageNo=1'
+        data = requests.get(url).json()['result']
+
+        for saving_product in data['baseList']:
+            if SavingProduct.objects.filter(fin_prdt_cd=saving_product['fin_prdt_cd']).exists():
+                continue
+            else:
+                min_rate = 100
+                max_rate = 0
+
+                for saving_option in data['optionList']:
+                    if saving_product['fin_prdt_cd'] == saving_option['fin_prdt_cd']:
+                        min_rate = min(min_rate, saving_option['intr_rate'])
+                        max_rate = max(max_rate, saving_option['intr_rate2'])
+                    else:
+                        continue
+
+                new_saving_product = SavingProduct.objects.create(
+                    fin_prdt_cd=saving_product['fin_prdt_cd'],
+                    fin_prdt_nm=saving_product['fin_prdt_nm'],
+                    kor_co_nm=saving_product['kor_co_nm'],
+                    join_way=saving_product['join_way'],
+                    mtrt_int=saving_product['mtrt_int'],
+                    spcl_cnd=saving_product['spcl_cnd'],
+                    join_deny=saving_product['join_deny'],
+                    join_member=saving_product['join_member'],
+                    etc_note=saving_product['etc_note'],
+                    max_limit=saving_product['max_limit'],
+                    intr_rate=min_rate,
+                    intr_rate2=max_rate,
+                )
+                
+                for saving_option in data['optionList']:
+                    SavingOption.objects.create(
+                        fin_prdt_cd=saving_option['fin_prdt_cd'],
+                        kor_co_nm=saving_option['kor_co_nm'],
+                        savingproduct=new_saving_product.pk,
+                        intr_rate_type=saving_option['intr_rate_type'],
+                        intr_rate_type_nm=saving_option['intr_rate_type_nm'],
+                        rsrv_type=saving_option['rsrv_type'],
+                        rsrv_type_nm=saving_option['rsrv_type_nm'],
+                        save_trm=saving_option['save_trm'],
+                        intr_rate=saving_option['intr_rate'],
+                        intr_rate2=saving_option['intr_rate2'],
+                    )
+
         saving_products = get_list_or_404(SavingProduct)
         serializer = SavingProductListSerializer(saving_products, many=True)
         return Response(serializer.data)
