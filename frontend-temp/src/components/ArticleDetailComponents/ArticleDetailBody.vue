@@ -16,8 +16,8 @@
       <p>{{ article.content }}</p>
     </div>
     <div class="edit">
-      <RouterLink class="router" :to="{ name: 'ArticleUpdateView', params: { articleId: articleId - 1 } }">수정</RouterLink>
-      <p class="delete" @click.prevent="deleteArticle">삭제</p>
+      <RouterLink v-if="articleUser === currentUser" class="router" :to="{ name: 'ArticleUpdateView', params: { articleId: articleId - 1 } }">수정</RouterLink>
+      <p v-if="articleUser === currentUser" class="delete" @click.prevent="deleteArticle">삭제</p>
     </div>
     <div class="comment">
       <CommentCreate />
@@ -28,6 +28,7 @@
           :comment="comment"
           :index="index"
           :articleId="articleId"
+          :currentUser="currentUser"
         />
       </template>
       <template v-else>
@@ -52,8 +53,22 @@ const route = useRoute()
 const router = useRouter()
 
 const articleId = (+route.params.articleId)
+const articleUser = computed(() => article.value?.user?.username)
 
 // console.log(articleId)
+
+const currentUser = ref('')
+
+axios({
+  method: 'GET',
+  url: `${store.API_URL}/dj-rest-auth/user/`,
+  headers: {
+    Authorization: `Token ${store.token}`,
+  },
+})
+.then((response) => {
+  currentUser.value = response.data.username
+})
 
 onMounted(async () => {
   axios.defaults.withCredentials = false

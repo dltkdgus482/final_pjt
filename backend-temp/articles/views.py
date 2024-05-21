@@ -44,12 +44,18 @@ def article_detail(request, article_pk):
         return Response(serializer.data)
     
     elif request.method == 'PUT':
+        if request.user != article.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
         serializer = ArticleSerializer(article, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
         
     elif request.method == 'DELETE':
+        if request.user != article.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
@@ -86,13 +92,16 @@ def comment_detail(request, article_pk, comment_pk):
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
     
-    elif request.method == 'PUT':
-        serializer = CommentSerializer(comment, data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+    # elif request.method == 'PUT':
+    #     serializer = CommentSerializer(comment, data=request.data, partial=True)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
         
     elif request.method == 'DELETE':
+        if request.user != comment.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     

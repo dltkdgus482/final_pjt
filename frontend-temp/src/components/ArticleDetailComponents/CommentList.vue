@@ -6,7 +6,7 @@
       <p class="text">{{ comment.content }}</p>
     </div>
     <div class="edit">
-      <p @click.prevent="deleteComment">삭제</p>
+      <p v-if="comment.user.username === currentUser" @click.prevent="deleteComment">삭제</p>
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@ const props = defineProps({
   comment: Object,
   index: Number,
   articleId: Number,
+  currentUser: String,
 })
 
 import axios from "axios"
