@@ -25,7 +25,7 @@
       </b>
       <select v-model="selectedOption" name="" id="" class="dropdown">
         <option value="최고 금리 순">최고 금리 순</option>
-        <option value="최저 금리 순">최저 금리 순</option>
+        <option value="최저 금리 순">기본 금리 순</option>
       </select>
     </div>
 
