@@ -97,8 +97,8 @@ def saving_list(request):
                 
                 for saving_option in data['optionList']:
                     SavingOption.objects.create(
-                        fin_prdt_cd=saving_option['fin_prdt_cd'],
-                        kor_co_nm=saving_option['kor_co_nm'],
+                        fin_prdt_cd=saving_product['fin_prdt_cd'],
+                        kor_co_nm=saving_product['kor_co_nm'],
                         savingproduct=new_saving_product.pk,
                         intr_rate_type=saving_option['intr_rate_type'],
                         intr_rate_type_nm=saving_option['intr_rate_type_nm'],
