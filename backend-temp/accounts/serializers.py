@@ -11,6 +11,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     age = serializers.IntegerField(required=False, allow_null=True)
     gender = serializers.CharField(max_length=10, required=False, allow_null=True)
     salary = serializers.IntegerField(required=False, allow_null=True)
+    financial_products = serializers.CharField(required=False, allow_blank=True)
 
     def get_cleaned_data(self):
         return {
@@ -21,7 +22,8 @@ class CustomRegisterSerializer(RegisterSerializer):
             'nickname': self.validated_data.get('nickname', ''),
             'age': self.validated_data.get('age', None),
             'gender': self.validated_data.get('gender', ''),
-            'salary': self.validated_data.get('salary', None)
+            'salary': self.validated_data.get('salary', None),
+            'financial_products': self.validated_data.get('financial_products', ''),
         }
 
     def save(self, request):
@@ -33,6 +35,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         return user
     
 class CustomUserDetailsSerializer(UserDetailsSerializer):
+    financial_products = serializers.StringRelatedField(many=True)
+
     class Meta:
         extra_fields = []
 
@@ -52,6 +56,8 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
             extra_fields.append('gender')
         if hasattr(User, 'salary'):
             extra_fields.append('salary')
+        if hasattr(User, 'financial_products'):
+            extra_fields.append('financial_products')
         model = User
         fields = ('pk', *extra_fields)
         read_only_fields = ('email',)

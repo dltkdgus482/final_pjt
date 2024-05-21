@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from allauth.account.adapter import DefaultAccountAdapter
-
+ 
 class User(AbstractUser):
     email = models.EmailField(max_length=100)
     nickname = models.CharField(max_length=50)
     age = models.IntegerField(blank=True, null=True)
     gender = models.CharField(max_length=10, blank=True, null=True)
-    salary = models.IntegerField(blank=True, null=True)
+    salary = models.IntegerField(blank=True, null=True, default=0)
     is_active = models.BooleanField(default=True)
+    financial_products = models.TextField(blank=True, null=True, default="")
 
 class CustomAccountAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=True):
