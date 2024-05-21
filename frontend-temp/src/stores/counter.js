@@ -79,6 +79,13 @@ export const useCounterStore = defineStore('counter', () => {
     return dateObj.toLocaleString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
   }
 
-  return { coinData, currentPrice, API_URL, deposits, savings,
+  const bankList = [
+    '경남은행', '광주은행', '국민은행', '농협은행주식회사', '대구은행', 
+    '부산은행', '수협은행', '신한은행', '우리은행', '전북은행', '제주은행',
+    '주식회사 카카오뱅크', '주식회사 케이뱅크', '중소기업은행', '토스뱅크 주식회사',
+    '하나은행', '한국산업은행', '한국스탠다드차타드은행',
+  ]
+
+  return { coinData, currentPrice, API_URL, deposits, savings, bankList,
     token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate }
 }, { persist: true })

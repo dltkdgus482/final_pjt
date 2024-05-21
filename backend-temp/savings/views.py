@@ -24,8 +24,8 @@ def saving_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
-def saving_detail(request, deposit_pk):
-    saving = get_object_or_404(SavingProduct, pk=deposit_pk)
+def saving_detail(request, saving_pk):
+    saving = get_object_or_404(SavingProduct, pk=saving_pk)
 
     if request.method == 'GET':
         serializer = SavingProductSerializer(saving)

@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../views/DepositView.vue')
     },
     {
+      path: '/saving/:savingId',
+      name: 'SavingDetailView',
+      component: () => import('../views/SavingDetailView.vue')
+    },
+    {
       path: '/stock',
       name: 'StockView',
       component: () => import('../views/StockView.vue')

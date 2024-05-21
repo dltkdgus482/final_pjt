@@ -1,33 +1,33 @@
 <template>
   <div>
-    <div class="deposit">
+    <div class="saving">
       <div class="simple-data">
         <div class="logo">
           <div>
             <p>
-              {{ depositProduct }}
+              {{ savingProduct }}
             </p> 
             <p>
               {{ bankName }}
             </p>
           </div>
-          <img v-if="deposit && deposit.kor_co_nm" :src="'/assets/BankIcons/' + deposit.kor_co_nm + '.png'" alt="#" width="42" height="42">
+          <img v-if="saving && saving.kor_co_nm" :src="'/assets/BankIcons/' + saving.kor_co_nm + '.png'" alt="#" width="42" height="42">
         </div>
         <div class="rate">
           <p class="best">
             최고금리
-            <span>{{ depositIntrRate2.toFixed(2) }}%</span>
+            <span>{{ savingIntrRate2.toFixed(2) }}%</span>
           </p>
           <p>
             기본금리
-            <span>{{ depositIntrRate.toFixed(2) }}%</span>
+            <span>{{ savingIntrRate.toFixed(2) }}%</span>
           </p>
         </div>
       </div>
       <div class="plus-data">
-        <p>{{ deposit }}</p>
+        <p>{{ saving }}</p>
         <br>
-        <p>{{ deposit.depositoption_set }}</p>
+        <p>{{ saving.savingoption_set }}</p>
       </div>
     </div>
   </div>
@@ -41,25 +41,25 @@ import { useRoute } from 'vue-router'
 
 const store = useCounterStore()
 const route = useRoute()
-const deposit = ref({})
+const saving = ref({})
 
-const bankName = computed(() => deposit.value?.kor_co_nm || '')
-const depositProduct = computed(() => deposit.value?.fin_prdt_nm || '')
-const depositIntrRate = computed(() => deposit.value?.intr_rate || 0)
-const depositIntrRate2 = computed(() => deposit.value?.intr_rate2 || 0)
+const bankName = computed(() => saving.value?.kor_co_nm || '')
+const savingProduct = computed(() => saving.value?.fin_prdt_nm || '')
+const savingIntrRate = computed(() => saving.value?.intr_rate || 0)
+const savingIntrRate2 = computed(() => saving.value?.intr_rate2 || 0)
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
   
   await axios({
     method: 'GET',
-    url: `${store.API_URL}/api/v1/deposits/${+route.params.depositId}/`,
+    url: `${store.API_URL}/api/v1/savings/${+route.params.savingId}/`,
     headers: {
       Authorization: `Token ${store.token}`,
     },
   })
   .then((response) => {
-    deposit.value = response.data
+    saving.value = response.data
   })
 })
 </script>
@@ -75,7 +75,7 @@ onMounted(async () => {
   justify-content: space-between;
 }
 
-.deposit {
+.saving {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
