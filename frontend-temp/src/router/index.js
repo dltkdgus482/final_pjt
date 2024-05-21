@@ -64,9 +64,9 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/myaccount',
-      name: 'MyAccountView',
-      component: () => import('../views/MyAccountView.vue')
+      path: '/profile',
+      name: 'ProfileView',
+      component: () => import('../views/ProfileView.vue')
     },
     {
       path: '/stock/:stockId',

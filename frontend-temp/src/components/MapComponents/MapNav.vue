@@ -23,8 +23,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3637 15.3635C15.7152 15.012 16.285 15.012 16.6365 15.3635L21.6365 20.3635C21.988 20.7149 21.988 21.2848 21.6365 21.6363C21.285 21.9877 20.7152 21.9877 20.3637 21.6362L15.3637 16.6362C15.0122 16.2848 15.0122 15.7149 15.3637 15.3635Z" fill="#1E1E23"></path>
           </svg>
         </button> -->
-
-        <Router-link v-if="store && store.token && store.token !== null && store.token !== ''" :to="{ name: 'SignUpView' }" class="aTag">
+        <Router-link v-if="isLogin === true" :to="{ name: 'ProfileView' }" class="aTag">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4.5C2 3.94772 2.44772 3.5 3 3.5H21C21.5523 3.5 22 3.94772 22 4.5C22 5.05228 21.5523 5.5 21 5.5H3C2.44772 5.5 2 5.05228 2 4.5Z" fill="#1E1E23"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.5C2 11.9477 2.44772 11.5 3 11.5H21C21.5523 11.5 22 11.9477 22 12.5C22 13.0523 21.5523 13.5 21 13.5H3C2.44772 13.5 2 13.0523 2 12.5Z" fill="#1E1E23"></path>
@@ -44,9 +43,23 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 
-const store = useCounterStore()
+export default {
+  setup() {
+    const isLogin = ref(false)
+
+    onMounted(() => {
+      const store = useCounterStore()
+      isLogin.value = store && store.token !== null && store.token !== ''
+    })
+
+    return {
+      isLogin
+    }
+  }
+}
 </script>
 
 <style scoped>
