@@ -83,7 +83,7 @@ def deposit_list(request):
                 
                 for deposit_option in data['optionList']:
                     DepositOption.objects.create(
-                        depositproduct=new_deposit_product.pk,
+                        depositproduct=new_deposit_product,
                         intr_rate_type=deposit_option['intr_rate_type'],
                         intr_rate_type_nm=deposit_option['intr_rate_type_nm'],
                         save_trm=deposit_option['save_trm'],

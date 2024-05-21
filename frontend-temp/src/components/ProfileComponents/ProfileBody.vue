@@ -7,11 +7,28 @@
     </p>
     <p>
       <div>
-        나의 금융상품
+        나의 예금상품
       </div>
       <hr class="hr">
-      <div v-if="userInfo && userInfo.financial_products && userInfo.financial_products.length">
-        <div>{{ userInfo.financial_products }}</div>
+      <div v-if="myDeposits && myDeposits.length">
+        <div v-for="(prdt, index) in myDeposits" :key="index">
+          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
+        </div>
+        <canvas id="Chart"></canvas>
+      </div>
+      <div v-else>
+        <div>아직 가입한 금융상품이 없습니다</div>
+      </div>
+    </p>
+    <p>
+      <div>
+        나의 예금상품
+      </div>
+      <hr class="hr">
+      <div v-if="mySavings && mySavings.length">
+        <div v-for="(prdt, index) in mySavings" :key="index">
+          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
+        </div>
       </div>
       <div v-else>
         <div>아직 가입한 금융상품이 없습니다</div>
@@ -39,10 +56,38 @@ import axios from "axios"
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
+import { Chart, registerables } from 'chart.js'
+
+Chart.register(...registerables)
+
+let chart = null
 
 const store = useCounterStore()
 const route = useRoute()
 const router = useRouter()
+
+const deposits = store.deposit_prdt_obj
+const savings = store.saving_prdt_obj
+
+const myDeposits = computed(() => {
+  if (Array.isArray(userInfo.value.financial_products)) {
+    return userInfo.value.financial_products.map((prdt) => {
+      return deposits[prdt.trim()]
+    })
+  } else {
+    return []
+  }
+})
+
+const mySavings = computed(() => {
+  if (Array.isArray(userInfo.value.financial_products)) {
+    return userInfo.value.financial_products.map((prdt) => {
+      return savings[prdt.trim()]
+    })
+  } else {
+    return []
+  }
+})
 
 const userInfo = ref({
   username: '',
@@ -67,9 +112,62 @@ onMounted(async () => {
   .then((response) => {
     userInfo.value = response.data
     userInfo.value.financial_products = userInfo.value.financial_products.split(',')
-    // console.log(userInfo.value.financial_products)
+  }).then(() => {
+    getData()
   })
 })
+
+const getData = function () {
+  const ctx = document.getElementById('Chart').getContext('2d')
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length > 0).map(prdt => prdt[0])
+  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length > 0).map(prdt => prdt[0])),
+      datasets: [{
+        label: '기본 금리',
+        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[1])
+  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[1])),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      },
+      {
+        label: '최고 금리',
+        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])
+  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])),
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      aspectRatio: 1.2,
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 5, // 원하는 폰트 크기로 변경
+            }
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 10, // 원하는 폰트 크기로 변경
+            }
+          }
+        },
+      },
+    }
+  })
+}
 </script>
 
 <style scoped>
