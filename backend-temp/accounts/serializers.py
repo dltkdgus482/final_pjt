@@ -35,8 +35,6 @@ class CustomRegisterSerializer(RegisterSerializer):
         return user
     
 class CustomUserDetailsSerializer(UserDetailsSerializer):
-    financial_products = serializers.StringRelatedField(many=True)
-
     class Meta:
         extra_fields = []
 

@@ -29,42 +29,46 @@
       </select>
     </div>
 
-    <div v-for="data in paginatedData" :key="data.id" class="circular-border">
-      <RouterLink v-if="data.fin_prdt_nm.includes('예금')" class="router" :to="{ name: 'DepositDetailView', params: { 'depositId': data.id } }">
-        <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
-        <div class="bank">
-          <!-- <p>{{data}}</p> -->
-          <!-- <p>{{ index + (currentPage - 1) * itemsPerPage }}</p> -->
-          <h4>{{ data.fin_prdt_nm }}</h4>
-          <p class="color">{{ data.kor_co_nm }}</p>
-        </div>
-        <div class="option">
-          <p class="color">최고 
-            <span class="numcolor">{{ data.intr_rate2.toFixed(2) }}%</span>  
-          </p>
-          <p>기본 
-            <span>{{ data.intr_rate.toFixed(2) }}%</span>
-          </p>
-        </div>
-      </RouterLink>
-      <RouterLink v-else class="router" :to="{ name: 'SavingDetailView', params: { 'savingId': data.id } }">
-        <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
-        <div class="bank">
-          <!-- <p>{{data}}</p> -->
-          <!-- <p>{{ index + (currentPage - 1) * itemsPerPage }}</p> -->
-          <h4>{{ data.fin_prdt_nm }}</h4>
-          <p class="color">{{ data.kor_co_nm }}</p>
-        </div>
-        <div class="option">
-          <p class="color">최고 
-            <span class="numcolor">{{ data.intr_rate2.toFixed(2) }}%</span>  
-          </p>
-          <p>기본 
-            <span>{{ data.intr_rate.toFixed(2) }}%</span>
-          </p>
-        </div>
-      </RouterLink>
+    <div v-if="paginatedData && paginatedData.length">
+      <div v-for="data in paginatedData" :key="data.id" class="circular-border">
+        <RouterLink v-if="data.fin_prdt_nm.includes('예금')" class="router" :to="{ name: 'DepositDetailView', params: { 'depositId': data.id } }">
+          <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
+          <div class="bank">
+            <!-- <p>{{data}}</p> -->
+            <!-- <p>{{ index + (currentPage - 1) * itemsPerPage }}</p> -->
+            <h4>{{ data.fin_prdt_nm }}</h4>
+            <p class="color">{{ data.kor_co_nm }}</p>
+          </div>
+          <div class="option">
+            <p class="color">최고 
+              <span class="numcolor">{{ data.intr_rate2.toFixed(2) }}%</span>  
+            </p>
+            <p>기본 
+              <span>{{ data.intr_rate.toFixed(2) }}%</span>
+            </p>
+          </div>
+        </RouterLink>
+        <RouterLink v-else class="router" :to="{ name: 'SavingDetailView', params: { 'savingId': data.id } }">
+          <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
+          <div class="bank">
+            <!-- <p>{{data}}</p> -->
+            <!-- <p>{{ index + (currentPage - 1) * itemsPerPage }}</p> -->
+            <h4>{{ data.fin_prdt_nm }}</h4>
+            <p class="color">{{ data.kor_co_nm }}</p>
+          </div>
+          <div class="option">
+            <p class="color">최고 
+              <span class="numcolor">{{ data.intr_rate2.toFixed(2) }}%</span>  
+            </p>
+            <p>기본 
+              <span>{{ data.intr_rate.toFixed(2) }}%</span>
+            </p>
+          </div>
+        </RouterLink>
+      </div>
     </div>
+    <div v-else>데이터를 불러오는 중입니다...</div>
+
     <div class="pagination">
         <button @click="setCurrentPage(currentPage - 10)" v-show="currentPage > 10" >
           이전
@@ -92,31 +96,6 @@ const store = useCounterStore()
 const selectedOption = ref('최고 금리 순')
 const finProducts_copy = ref([])
 let finProducts
-
-onMounted(async () => {
-  axios.defaults.withCredentials = false
-  await axios({
-    method: 'GET',
-    url: `${store.API_URL}/api/v1/deposits/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
-  })
-  .then((response) => {
-    store.deposits = response.data
-  })
-
-  await axios({
-    method: 'GET',
-    url: `${store.API_URL}/api/v1/savings/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
-  })
-  .then((response) => {
-    store.savings = response.data
-  })
-})
 
 finProducts = computed(() => [...store.deposits, ...store.savings])
 finProducts_copy.value = finProducts.value

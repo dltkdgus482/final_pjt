@@ -23,6 +23,28 @@ onMounted(async () => {
   const store = useCounterStore()
   axios.defaults.withCredentials = false
 
+  await axios({
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/deposits/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    store.deposits = response.data
+  })
+
+  await axios({
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/savings/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+  .then((response) => {
+    store.savings = response.data
+  })
+
   const getCurrentInfo = async (market) => {
     try {
       const response = await axios.get(`https://api.upbit.com/v1/ticker?markets=${market}`)

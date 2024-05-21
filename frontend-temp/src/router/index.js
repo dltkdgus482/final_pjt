@@ -78,6 +78,16 @@ const router = createRouter({
       name: 'ExchangeRateView',
       component: () => import('../views/ExchangeRateView.vue')
     },
+    {
+      path: '/updateuser/:username',
+      name: 'UpdateUserView',
+      component: () => import('../views/UpdateUserView.vue')
+    },
+    {
+      path: '/updatepassword/:username',
+      name: 'UpdatePasswordView',
+      component: () => import('../views/UpdatePasswordView.vue')
+    },
   ]
 })
 
