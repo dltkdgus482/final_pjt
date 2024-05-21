@@ -3,7 +3,6 @@
     <StockListNavVue />
     <div class="non-nav">
       <StockListLike />
-      <hr>
       <StockListBody />
       <hr>
       <StockListFooter />

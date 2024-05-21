@@ -30,8 +30,6 @@
         <p>{{ deposit.depositoption_set }}</p>
       </div>
     </div>
-    <div class="detail">
-    </div>
   </div>
 </template>
 

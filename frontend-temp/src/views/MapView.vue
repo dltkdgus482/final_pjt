@@ -2,11 +2,7 @@
   <div>
     <MapNav />
     <div class="non-nav">
-      <MapHeader />
-      <hr>
       <MapBody />
-      <hr>
-      <MapFooter />
     </div>
   </div>
 </template>
@@ -20,12 +16,10 @@ import MapFooter from '@/components/MapComponents/MapFooter.vue'
 
 <style scoped>
 .non-nav {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 568px;
+
 }
 
-@media (min-width: 569px) {
+/* @media (min-width: 569px) {
   .non-nav {
     margin-left: auto;
     margin-right: auto;
@@ -39,5 +33,5 @@ import MapFooter from '@/components/MapComponents/MapFooter.vue'
     margin-right: auto;
     max-width: 992px;
   }
-}
+} */
 </style>
