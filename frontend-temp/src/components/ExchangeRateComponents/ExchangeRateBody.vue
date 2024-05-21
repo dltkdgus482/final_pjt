@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>ExchangeRateBody</h1>
+    <div>
+
+    </div>
+    <img v-if="exchangeRate && exchangeRate.kor_co_nm" :src="'/assets/BankIcons/' + exchangeRate.kor_co_nm + '.png'" alt="#" width="42" height="42">
   </div>
 </template>
 
