@@ -48,6 +48,7 @@ function prevPage() {
 
 .nav-button {
   margin: 0 10px;
+  cursor: pointer;
 }
 
 .list-container {

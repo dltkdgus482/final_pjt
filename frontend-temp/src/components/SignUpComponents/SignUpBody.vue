@@ -23,7 +23,7 @@
         <button class="gender-button" @click.prevent>여</button>
       </div>
       <input type="text" name="" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
-      <input id="submit" type="submit">
+      <input id="submit" type="submit" value="회원가입">
     </form> 
   </div>
 </template>
@@ -98,6 +98,7 @@ div button {
   margin-left: auto;
   padding: 4px 10px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 #submit:hover {

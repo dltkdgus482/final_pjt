@@ -6,10 +6,11 @@
       <button @click="clear('전체')">전체</button>
       <button @click="clear('은행')">은행</button>
       <button @click="clear('ATM')">ATM</button>
-      <span>
-        <input type="text" v-model="inputSearchKeyword">
-        <button @click.prevent="clear(inputSearchKeyword)">검색</button>
-      </span>
+      <button @click="currentPos()">현재 위치</button>
+      <form @submit.prevent="clear(inputSearchKeyword); searchButtonClick()">
+        <input type="text" v-model.trim="inputSearchKeyword">
+        <button>검색</button>
+      </form>
     </div>
   </div>
 </template>
@@ -223,7 +224,7 @@ input {
 
 #map {
   width: 100%;
-  height: 550px;
+  height: 600px;
   margin-top: 20px;
 }
 </style>
