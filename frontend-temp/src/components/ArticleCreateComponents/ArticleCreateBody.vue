@@ -13,8 +13,8 @@
       <div class="select">
         <h3>분류</h3>
         <select class="select-box" v-model="category">
-          <option value="fin">금융</option>
-          <option value="crypto">가상화폐</option>
+          <option value="금융">금융</option>
+          <option value="가상화폐">가상화폐</option>
         </select>
       </div>
       <div class="submit">
@@ -36,7 +36,7 @@ const router = useRouter()
 
 const title = ref('')
 const content = ref('')
-const category = ref('fin')
+const category = ref('금융')
 
 const createArticle = function () {
   axios({

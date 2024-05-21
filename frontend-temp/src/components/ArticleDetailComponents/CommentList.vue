@@ -2,7 +2,7 @@
   <div class="comment">
     <div>
       <p class="author">작성자: {{ comment.user }}</p>
-      <p class="date">작성일: {{ comment.created_at }}</p>
+      <p class="date">작성일: {{ store.formatDate(comment.created_at) }}</p>
       <p class="text">{{ comment.content }}</p>
     </div>
     <div class="edit">

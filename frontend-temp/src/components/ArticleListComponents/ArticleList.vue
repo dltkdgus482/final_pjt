@@ -2,12 +2,10 @@
   <div>
     <div class="circular-border">
       <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: article.id } }">
-        <!-- <p>번호 {{ index + 1 }}</p>
-        <p>분류 </p> -->
         <!-- <p>{{ article }}</p> -->
         <h3>제목: {{ article.title }}</h3>
-        <p class="line-margin">작성자: {{ article.user }}</p>
-        <p>작성일: {{ article.created_at }}</p>
+        <p class="line-margin">작성자: {{ article.user.username }}</p>
+        <p>작성일: {{ store.formatDate(article.created_at) }}</p>
       </RouterLink>
     </div>
   </div>
@@ -18,6 +16,10 @@ defineProps({
   article: Object,
   index: Number,
 })
+
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
 </script>
 
 <style scoped>

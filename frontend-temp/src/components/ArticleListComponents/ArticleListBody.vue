@@ -8,10 +8,8 @@
       </div>
       <div>
         <select name="" id="" class="dropdown">
-          <option value="">views</option>
-          <option value="">views</option>
-          <option value="">views</option>
-          <option value="">views</option>
+          <option value="">최신 순</option>
+          <option value="">조회 순</option>
         </select>
         <RouterLink :to="{ name: 'ArticleCreateView' }" class="write-article">
           <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 24 24;" xml:space="preserve">
@@ -58,21 +56,23 @@ import { ref, computed, onMounted } from 'vue'
 import ArticleList from '@/components/ArticleListComponents/ArticleList.vue'
 import { useCounterStore } from '@/stores/counter'
 
-
 const articles = ref([])
-// const articles_copy = ref([])
+const articles_copy = ref([])
 
-// const filterTotal = function () {
-//   articles_copy.value = articles.value
-// }
+const filterTotal = function () {
+  articles_copy.value = articles.value
+  // console.log(articles_copy.value)
+}
 
-// const filterFin = function () {
-//   articles_copy.value = articles.value.filter(article => article.category === 'fin').reverse()
-// }
+const filterFin = function () {
+  articles_copy.value = articles.value.filter(article => article.category === '금융')
+  // console.log(articles_copy.value)
+}
 
-// const filterCrypto = function () {
-//   articles_copy.value = articles.value.filter(article => article.category === 'crypto').reverse()
-// }
+const filterCrypto = function () {
+  articles_copy.value = articles.value.filter(article => article.category === '가상화폐')
+  // console.log(articles_copy.value)
+}
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
@@ -84,8 +84,8 @@ onMounted(async () => {
     },
   })
   .then((response) => {
-    articles.value = response.data
-    // articles_copy.value = response.data.reverse()
+    articles.value = response.data.reverse()
+    articles_copy.value = response.data
   })
 })
 
@@ -93,14 +93,14 @@ const itemsPerPage = 5
 const currentPage = ref(1)
 const store = useCounterStore()
 
-const totalPages = computed(() => Math.ceil(articles.value.length / itemsPerPage))
+const totalPages = computed(() => Math.ceil(articles_copy.value.length / itemsPerPage))
 const lastPaginatedPage = computed(() => Math.floor((totalPages.value - 1) / 10) * 10)
 const nextPages = computed(() => Math.ceil(currentPage.value / 10) * 10 + 1)
 
 const paginatedData = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage
   const endIndex = currentPage.value * itemsPerPage
-  return articles.value.slice(startIndex, endIndex)
+  return articles_copy.value.slice(startIndex, endIndex)
 })
 
 const startPage = computed(() => Math.floor((currentPage.value - 1) / 10) * 10 + 1)

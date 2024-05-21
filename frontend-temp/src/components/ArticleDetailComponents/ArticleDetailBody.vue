@@ -2,9 +2,9 @@
   <div>
     <div class="header">
       <div>
-        <p class="article-info">{{ article.category }}</p>
-        <p class="article-info">작성자: {{ article.user }}</p>
-        <p class="article-info">작성일: {{ article.created_at }}</p>
+        <p class="article-info">카테고리: {{ article.category }}</p>
+        <p class="article-info">작성자: {{ article.user.username }}</p>
+        <p class="article-info">작성일: {{ store.formatDate(article.created_at) }}</p>
         <p class="title">{{ article.title }}</p>
       </div>
 

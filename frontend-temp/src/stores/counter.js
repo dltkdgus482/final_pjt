@@ -74,6 +74,11 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const formatDate = (dateStr) => {
+    let dateObj = new Date(dateStr)
+    return dateObj.toLocaleString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+  }
+
   return { coinData, currentPrice, API_URL, deposits, savings,
-    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC }
+    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate }
 }, { persist: true })
