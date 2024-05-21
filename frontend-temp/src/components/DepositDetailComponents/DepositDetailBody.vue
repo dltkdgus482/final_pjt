@@ -1,36 +1,45 @@
 <template>
-  <div>
     <div class="deposit">
-      <div class="simple-data">
-        <div class="logo">
-          <div>
-            <p>
-              {{ depositProduct }}
-            </p> 
-            <p>
-              {{ bankName }}
-            </p>
-          </div>
-          <img v-if="deposit && deposit.kor_co_nm" :src="'/assets/BankIcons/' + deposit.kor_co_nm + '.png'" alt="#" width="42" height="42">
-        </div>
-        <div class="rate">
-          <p class="best">
-            최고금리
-            <span>{{ depositIntrRate2.toFixed(2) }}%</span>
-          </p>
-          <p>
-            기본금리
-            <span>{{ depositIntrRate.toFixed(2) }}%</span>
+      <div class="logo">
+        <div>
+          <p class="deposit-product">
+            {{ depositProduct }}
+          </p> 
+          <p class="bank-name">
+            {{ bankName }}
           </p>
         </div>
+        <img v-if="deposit && deposit.kor_co_nm" :src="'/assets/BankIcons/' + deposit.kor_co_nm + '.png'" alt="#" width="42" height="42">
       </div>
-      <div class="plus-data">
-        <p>{{ deposit }}</p>
-        <br>
-        <p>{{ deposit.depositoption_set }}</p>
+      <div class="rate">
+        <p class="best">
+          최고금리
+          <p>{{ depositIntrRate2.toFixed(2) }}%</p>
+        </p>
+        <p class="base">
+          기본금리
+          <p>{{ depositIntrRate.toFixed(2) }}%</p>
+        </p>
       </div>
     </div>
-  </div>
+    <div class="plus-data">
+      <h3>상품 안내</h3>
+      <dt>가입방법</dt>
+      <dd>{{ deposit.join_way }}</dd>
+      <dt>만기이자</dt>
+      <dd>{{ deposit.mtrt_int }}</dd>
+      <dt>우대조건</dt>
+      <dd>{{ deposit.spcl_cnd }}</dd>
+      <dt>가입대상</dt>
+      <dd>{{ deposit.join_member }}</dd>
+      <dt>기타</dt>
+      <dd>{{ deposit.etc_note }}</dd>
+      <dt>최고한도</dt>
+      <dd>{{ deposit.max_limit }}</dd>
+      <dt>금리유형</dt>
+      <dd v-if="deposit && deposit.depositoption_set">{{ deposit.depositoption_set[0].intr_rate_type_nm }}</dd>
+      <!-- <p>{{ deposit }}</p> -->
+    </div>
 </template>
 
 <script setup>
@@ -65,16 +74,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.detail {
-  display: flex;
-  border-radius: 8px;
-  margin: 10px 4px;
-  background-color: #fff;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  justify-content: space-between;
-}
-
 .deposit {
   display: flex;
   flex-direction: column;
@@ -86,12 +85,16 @@ onMounted(async () => {
   /* align-items: center; */
   justify-content: space-between;
 }
-
-.simple-data {
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: stretch;
-  flex-direction: column;
+.deposit-product{
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+  margin-left: 6px;
+}
+.bank-name{
+  font-size: 15px;
+  margin: 0px;
+  margin-left: 6px;
 }
 
 .logo {
@@ -100,28 +103,62 @@ onMounted(async () => {
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
   margin-left: auto;
-}
-
-.logo p {
-  font-size: 16px;
-  line-height: 2;
+  margin-top: 10px;
 }
 .best {
   color: skyblue;
+  font-size: 15px;
+  margin-right: 40px;
 }
-.best span{
+.best p{
   font-weight: bold;
-  font-size: 18px;
+  font-size: 25px;
+  margin: 0px;
 }
-.plus-data {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #ccc;
-  text-align: left;
+.base {
+  font-size: 15px;
+}
+.base p{
+  font-weight: bold;
+  font-size: 25px;
+  margin: 0px;
+}
+.rate{
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 6px;
 }
 
+
+.plus-data {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  margin: 10px 4px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+.plus-data h3{
+  border-bottom: solid 1px #eee;
+  margin: 0px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.plus-data dt{
+  display: inline;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.plus-data dd{
+  display: inline;
+
+  /* margin-top: 10px; */
+}
 </style>
