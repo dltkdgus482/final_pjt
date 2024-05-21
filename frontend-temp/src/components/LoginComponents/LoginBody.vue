@@ -34,10 +34,10 @@ const logIn = function () {
 <style scoped>
 .login{
   display: flex;
-  border-radius: 2px;
+  border-radius: 16px;
   border: none;
   margin-top: 50px;
-  background-color: rgb(178, 233, 255);
+  background-color: #fff;
   justify-content: center;
   flex-direction: column;
   height: 500px;
@@ -48,7 +48,7 @@ const logIn = function () {
 }
 .login input{
   margin-top: 15px;
-  border: none;
+  border: solid 1px #e0e0e0;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px 10px;
@@ -61,7 +61,7 @@ const logIn = function () {
 }
 .login button{
   margin-top: 35px;
-  border: none;
+  border: solid 1px #e0e0e0;
   background-color: #fff;
   border-radius: 8px;
   padding: 8px 10px;
@@ -80,7 +80,7 @@ const logIn = function () {
 }
 .submit button{
   font-size: 14px;
-  border: none;
+  border: solid 1px #e0e0e0;
   background-color: #fff;
   border-radius: 8px;
   padding: 8px;
