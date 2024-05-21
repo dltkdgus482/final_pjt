@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
 </script>
 
 <style scoped>

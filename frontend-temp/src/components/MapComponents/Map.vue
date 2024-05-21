@@ -243,6 +243,6 @@ form{
 }
 #map {
   width: 100%;
-  height: 800px;
+  height: 850px;
 }
 </style>
