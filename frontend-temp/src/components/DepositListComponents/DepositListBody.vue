@@ -8,29 +8,25 @@
       </div>
       <div class="chioce">
         <img @click.prevent="setCurrentIconPage(currentIconPage - 1)" class="arrow" src="/assets/arrow-left.png" alt="arrow-left">
-        <div v-for="data in paginatedIconData" :key="data.id" class="bank-icon">
-          <div @click.prevent="filterBank(data)">
-            <img width="24px" height="24px" :src="'/assets/BankIcons/' + data + '.png'" :alt="data + 'icon'">
-            <p>{{ bankObj[data] }}</p>
-          </div>
+        <div @click.prevent="filterBank(data)" v-for="data in paginatedIconData" :key="data.id" class="bank-icon">
+          <img :src="'/assets/BankIcons/' + data + '.png'" :alt="data + 'icon'">
+          <p>{{ bankObj[data] }}</p>
         </div>
         <img @click.prevent="setCurrentIconPage(currentIconPage + 1)" class="arrow" src="/assets/arrow-right.png" alt="arrow-right">
       </div>
     </div>
 
     <div class="deposit-sort">
-      <div>
-        <span class="count" v-if="finProducts_copy && finProducts_copy.length">
-          {{ finProducts_copy.length }}
-        </span>
-        <b>
-          개
-        </b>
-        <select v-model="selectedOption" name="" id="" class="dropdown">
-          <option value="최고 금리 순">최고 금리 순</option>
-          <option value="최저 금리 순">최저 금리 순</option>
-        </select>
-      </div>
+      <span class="count" v-if="finProducts_copy && finProducts_copy.length">
+        {{ finProducts_copy.length }}
+      </span>
+      <b>
+        개
+      </b>
+      <select v-model="selectedOption" name="" id="" class="dropdown">
+        <option value="최고 금리 순">최고 금리 순</option>
+        <option value="최저 금리 순">최저 금리 순</option>
+      </select>
     </div>
 
     <div v-for="data in paginatedData" :key="data.id" class="circular-border">
@@ -317,24 +313,31 @@ const filterBank = function (data) {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 120px;
-  border-radius: 30px;
+  width: 180px;
+  border: solid 1px #eee;
+  border-radius: 20px;
   margin: auto;
   margin-top: -5px;
   background-color: #f3f5f7;
-  padding: 6px;
+  padding: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .save-type span{
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: #fff;
-  padding: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  border: solid 1px #ddd;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   cursor: pointer;
+  font-size: 14px;
+}
+.save-type span:hover{
+  background-color: #ddd;
+  font-weight: bold;
 }
 .chioce{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   margin-top: 10px;
 }
@@ -342,7 +345,7 @@ const filterBank = function (data) {
   border: solid 1px #d3d3d3;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 10%;
+  width: 12%;
   height: 10%;
   display: flex;
   justify-content: center;
@@ -350,10 +353,16 @@ const filterBank = function (data) {
   flex-direction: column;
   cursor: pointer;
 }
+.bank-icon img{
+  width: 24px;
+  height: 24px;
+  margin-top: 4px;
+}
 .bank-icon p{
-  font-size: 14px;
+  font-size: 12px;
   line-height: 2;
-  margin-bottom: 0px;
+  margin: 0px;
+  text-align: center;
 }
 .arrow {
   cursor: pointer;
@@ -383,5 +392,6 @@ const filterBank = function (data) {
   border-radius: 8px;
   padding: 4px 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
 }
 </style>
