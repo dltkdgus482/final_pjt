@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="circular-border" v-if="article && article.title && article.user && article.user.username && article.created_at && article.views">
+    <div class="circular-border" v-if="article && article.title && article.user && article.user.username && article.created_at && (article.views || article.views === 0)">
       <RouterLink class="router" :to="{ name: 'ArticleDetailView', params: { articleId: article.id } }">
         <!-- <p>{{ article }}</p> -->
         <h3>제목: {{ article.title }}</h3>
