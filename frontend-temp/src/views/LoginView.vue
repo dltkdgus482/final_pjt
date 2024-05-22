@@ -3,7 +3,7 @@
     <LoginNav />
     <div class="non-nav">
       <LoginBody />
-      <LoginFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -12,7 +12,7 @@
 import LoginNav from "@/components/LoginComponents/LoginNav.vue"
 
 import LoginBody from "@/components/LoginComponents/LoginBody.vue"
-import LoginFooter from "@/components/LoginComponents/LoginFooter.vue"
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

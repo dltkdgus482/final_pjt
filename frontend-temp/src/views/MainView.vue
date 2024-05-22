@@ -4,7 +4,7 @@
     <div class="non-nav">
       <MainPageHeader />
       <MainPageBody />
-      <MainPageFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import MainPageNav from '@/components/MainPageComponents/MainPageNav.vue'
 import MainPageHeader from '@/components/MainPageComponents/MainPageHeader.vue'
 import MainPageBody from '@/components/MainPageComponents/MainPageBody.vue'
-import MainPageFooter from '@/components/MainPageComponents/MainPageFooter.vue'
+import Footer from "@/components/Footer.vue"
 
 import axios from 'axios'
 import { onMounted } from 'vue'

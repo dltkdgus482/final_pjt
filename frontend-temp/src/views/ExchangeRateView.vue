@@ -5,7 +5,7 @@
     <div class="non-nav">
       <ExchangeRateHeader />
       <ExchangeRateBody />
-      <ExchangeRateFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import ExchangeRateNav from '@/components/ExchangeRateComponents/ExchangeRateNav.vue'
 import ExchangeRateHeader from '@/components/ExchangeRateComponents/ExchangeRateHeader.vue'
 import ExchangeRateBody from '@/components/ExchangeRateComponents/ExchangeRateBody.vue'
-import ExchangeRateFooter from '@/components/ExchangeRateComponents/ExchangeRateFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

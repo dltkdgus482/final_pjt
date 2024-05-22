@@ -4,7 +4,7 @@
     <div class="non-nav">
       <ArticleCreateHeader />
       <ArticleCreateBody />
-      <ArticleCreateFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import ArticleCreateNav from '@/components/ArticleCreateComponents/ArticleCreateNav.vue'
 import ArticleCreateHeader from '@/components/ArticleCreateComponents/ArticleCreateHeader.vue'
 import ArticleCreateBody from '@/components/ArticleCreateComponents/ArticleCreateBody.vue'
-import ArticleCreateFooter from '@/components/ArticleCreateComponents/ArticleCreateFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

@@ -5,8 +5,7 @@
       <UpdateUserHeader />
 
       <UpdateUserBody />
-      <hr>
-      <UpdateUserFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -15,7 +14,7 @@
 import UpdateUserNav from "@/components/UpdateUserComponents/UpdateUserNav.vue"
 import UpdateUserHeader from "@/components/UpdateUserComponents/UpdateUserHeader.vue"
 import UpdateUserBody from "@/components/UpdateUserComponents/UpdateUserBody.vue"
-import UpdateUserFooter from "@/components/UpdateUserComponents/UpdateUserFooter.vue"
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

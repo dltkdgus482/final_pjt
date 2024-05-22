@@ -5,16 +5,15 @@
       <h1>ArticleDetailPage</h1>
 
       <ArticleDetailBody />
-      <ArticleDetailFooter />
+      <Footer />
     </div>
   </div>
 </template>
 
 <script setup>
 import ArticleDetailNav from "@/components/ArticleDetailComponents/ArticleDetailNav.vue"
-import ArticleDetailHeader from "@/components/ArticleDetailComponents/ArticleDetailHeader.vue" 
 import ArticleDetailBody from "@/components/ArticleDetailComponents/ArticleDetailBody.vue"
-import ArticleDetailFooter from "@/components/ArticleDetailComponents/ArticleDetailFooter.vue"
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

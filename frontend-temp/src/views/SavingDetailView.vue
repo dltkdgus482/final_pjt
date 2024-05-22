@@ -5,7 +5,7 @@
     <div class="non-nav">
       <SavingDetailHeader />
       <SavingDetailBody />
-      <SavingDetailFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script setup>
 import SavingDetailNavVue from '@/components/SavingDetailComponents/SavingDetailNav.vue'
 import SavingDetailBody from '@/components/SavingDetailComponents/SavingDetailBody.vue'
-import SavingDetailFooter from '@/components/SavingDetailComponents/SavingDetailFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

@@ -5,8 +5,7 @@
       <UpdatePasswordHeader />
 
       <UpdatePasswordBody />
-      <hr>
-      <UpdatePasswordFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -15,7 +14,7 @@
 import UpdatePasswordNav from "@/components/UpdatePasswordComponents/UpdatePasswordNav.vue"
 import UpdatePasswordHeader from "@/components/UpdatePasswordComponents/UpdatePasswordHeader.vue"
 import UpdatePasswordBody from "@/components/UpdatePasswordComponents/UpdatePasswordBody.vue"
-import UpdatePasswordFooter from "@/components/UpdatePasswordComponents/UpdatePasswordFooter.vue"
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

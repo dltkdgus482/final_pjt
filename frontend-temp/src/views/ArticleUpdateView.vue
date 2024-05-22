@@ -4,7 +4,7 @@
     <div class="non-nav">
       <ArticleUpdateHeader />
       <ArticleUpdateBody />
-      <ArticleUpdateFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import ArticleUpdateNav from '@/components/ArticleUpdateComponents/ArticleUpdateNav.vue'
 import ArticleUpdateHeader from '@/components/ArticleUpdateComponents/ArticleUpdateHeader.vue'
 import ArticleUpdateBody from '@/components/ArticleUpdateComponents/ArticleUpdateBody.vue'
-import ArticleUpdateFooter from '@/components/ArticleUpdateComponents/ArticleUpdateFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

@@ -4,10 +4,8 @@
     <div class="non-nav">
 
       <DepositDetailHeader />
-      <hr>
       <DepositDetailBody/>
-      <hr>
-      <DepositDetailFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -16,7 +14,7 @@
 import DepositDetailNav from '@/components/DepositDetailComponents/DepositDetailNav.vue'
 import DepositDetailHeader from '@/components/DepositDetailComponents/DepositDetailHeader.vue'
 import DepositDetailBody from '@/components/DepositDetailComponents/DepositDetailBody.vue'
-import DepositDetailFooter from '@/components/DepositDetailComponents/DepositDetailFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

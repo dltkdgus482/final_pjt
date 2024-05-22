@@ -5,8 +5,7 @@
       <StockDetailHeader />
       <hr>
       <StockDetailBody />
-      <hr>
-      <StockDetailFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -15,7 +14,7 @@
 import StockDetailNav from '@/components/StockDetailComponents/StockDetailNav.vue'
 import StockDetailHeader from '@/components/StockDetailComponents/StockDetailHeader.vue'
 import StockDetailBody from '@/components/StockDetailComponents/StockDetailBody.vue'
-import StockDetailFooter from '@/components/StockDetailComponents/StockDetailFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

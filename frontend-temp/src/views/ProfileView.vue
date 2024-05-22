@@ -6,6 +6,7 @@
       <!-- <h1>ProfilePage</h1> -->
       <ProfileHeader />
       <ProfileBody />
+      <hr class="hr">
       <ProfileFooter />
     </div>
   </div>
@@ -24,5 +25,9 @@ import ProfileFooter from '@/components/ProfileComponents/ProfileFooter.vue'
   margin-left: auto;
   margin-right: auto;
   max-width: 1000px;
+}
+
+.hr {
+  border: 1px solid #e0e0e0;
 }
 </style>

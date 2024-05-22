@@ -4,7 +4,7 @@
     <div class="non-nav">
       <ArticleListHeader/>
       <ArticleListBody/>
-      <ArticleListFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 import ArticleListNav from "@/components/ArticleListComponents/ArticleListNav.vue"
 import ArticleListHeader from "@/components/ArticleListComponents/ArticleListHeader.vue"
 import ArticleListBody from "@/components/ArticleListComponents/ArticleListBody.vue"
-import ArticleListFooter from "@/components/ArticleListComponents/ArticleListFooter.vue"
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>

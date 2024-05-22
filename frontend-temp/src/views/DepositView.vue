@@ -4,7 +4,7 @@
 
     <div class="non-nav">
       <DepositListBody />
-      <DepositListFooter />
+      <Footer />
     </div>
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script setup>
 import DepositListNavVue from '../components/DepositListComponents/DepositListNav.vue'
 import DepositListBody from '@/components/DepositListComponents/DepositListBody.vue'
-import DepositListFooter from '@/components/DepositListComponents/DepositListFooter.vue'
+import Footer from "@/components/Footer.vue"
 </script>
 
 <style scoped>
