@@ -11,10 +11,12 @@
           </div>
           <div class="message">챗봇: 안녕하세요! 무엇을 도와드릴까요?</div>
         </div>
-        <div id="user-input">
-            <input @keydown.enter="sendMessage" type="text" v-model="userInput" placeholder="메시지를 입력하세요..." />
-            <button @click="sendMessage">전송</button>
-        </div>
+        <form @submit.prevent="sendMessage">
+          <div id="user-input">
+              <input type="text" v-model="userInput" placeholder="메시지를 입력하세요..." />
+              <button>전송</button>
+          </div>
+        </form>
     </div>
   </div>
 </template>
@@ -50,6 +52,9 @@ const sendMessage = function () {
 
   if (userMessage.length === 0) {
     return
+  } else if (!store.token) {
+
+    addMessage('챗봇', '로그인이 필요한 서비스입니다.')
   } else {
     axios({
       url: url,
