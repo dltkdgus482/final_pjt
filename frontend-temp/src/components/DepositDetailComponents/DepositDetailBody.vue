@@ -20,36 +20,39 @@
         기본금리
         <p>{{ depositIntrRate.toFixed(2) }}%</p>
       </p>
+      <button class="join">
+        가입하기
+      </button>
     </div>
   </div>
   <div class="plus-data">
     <h3>상품 안내</h3>
     <dl>
-        <dt>가입방법</dt>
-        <dd>{{ deposit.join_way }}</dd>
-        <dt>우대조건</dt>
-        <dd>{{ deposit.spcl_cnd }}</dd>      
-        <dt>가입대상</dt>
-        <dd>{{ deposit.join_member }}</dd>          
-        <dt>최고한도</dt>
-        <dd v-if="maxLimit">{{ maxLimit }}</dd>
-        <dd v-else>없음</dd>
-        <!-- <dt>금리유형</dt>
-        <dd v-if="deposit && deposit.depositoption_set">{{ deposit.depositoption_set[0].intr_rate_type_nm }}</dd> -->
-        <dt>만기이자</dt>
-        <dd>{{ deposit.mtrt_int }}</dd>
-        <dt>기타</dt>
-        <dd>{{ deposit.etc_note }}</dd>
+      <dt>가입방법</dt>
+      <dd>{{ deposit.join_way }}</dd>
+      <dt>우대조건</dt>
+      <dd v-html="specialCondition"></dd>    
+      <dt>가입대상</dt>
+      <dd>{{ deposit.join_member }}</dd>          
+      <dt>최고한도</dt>
+      <dd v-if="maxLimit">{{ maxLimit }}</dd>
+      <dd v-else>없음</dd>
+      <!-- <dt>금리유형</dt>
+      <dd v-if="deposit && deposit.depositoption_set">{{ deposit.depositoption_set[0].intr_rate_type_nm }}</dd> -->
+      <div class="box" v-if="deposit && deposit.depositoption_set">
+        <p class="rate-type">금리유형</p>
+        <div class="box2">
+          <p class="type" v-for="option in deposit.depositoption_set" :key="option.id">
+            {{ option.save_trm }}개월 - {{ option.intr_rate_type_nm }}: {{ option.intr_rate }}%
+          </p>
+        </div>
+      </div>
+      <!-- <p>{{ deposit }}</p> -->
+      <dt>만기이자</dt>
+      <dd v-html="maturityInterest"></dd>
+      <dt>기타</dt>
+      <dd v-html="otherNotes"></dd>
     </dl>
-    <!-- <p>{{ deposit }}</p> -->
-    <div v-if="deposit && deposit.depositoption_set">
-    <h3>금리유형별 금리</h3>
-    <ul>
-      <li v-for="option in deposit.depositoption_set" :key="option.id">
-        {{ option.save_trm }}개월 - {{ option.intr_rate_type_nm }}: {{ option.intr_rate }}%
-      </li>
-    </ul>
-  </div>
   </div>
 </template>
 
@@ -68,6 +71,26 @@ const depositProduct = computed(() => deposit.value?.fin_prdt_nm || '')
 const depositIntrRate = computed(() => deposit.value?.intr_rate || 0)
 const depositIntrRate2 = computed(() => deposit.value?.intr_rate2 || 0)
 const maxLimit = computed(() => deposit.value?.max_limit || '없음')
+const specialCondition = computed(() => {
+  if (deposit.value?.spcl_cnd) {
+    return deposit.value.spcl_cnd.replace(/\n/g, '<br>')
+  }
+  return ''
+})
+
+const maturityInterest = computed(() => {
+  if (deposit.value?.mtrt_int) {
+    return deposit.value.mtrt_int.replace(/\n/g, '<br>')
+  }
+  return ''
+})
+
+const otherNotes = computed(() => {
+  if (deposit.value?.etc_note) {
+    return deposit.value.etc_note.replace(/\n/g, '<br>')
+  }
+  return ''
+})
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
@@ -83,6 +106,8 @@ onMounted(async () => {
     deposit.value = response.data
   })
 })
+
+
 </script>
 
 <style scoped>
@@ -142,6 +167,19 @@ onMounted(async () => {
   margin-top: 5px;
   margin-left: 6px;
 }
+.join{
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: solid 1px #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  height: 35px;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 .plus-data {
   display: flex;
@@ -164,8 +202,33 @@ onMounted(async () => {
   display: flex;
   flex-wrap: wrap;
 }
+.box{
+  display: flex;
+  justify-content: start;
+}
+.box2{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-right: 0px;
+  margin-left: auto;
+}
+.type{
+  /* width: 100px; */
+  margin-left: 6px;
+  /* padding: 0 10px; */
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.rate-type{
+  color: #aaa;
+  width: 15%;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+}
 .plus-data dt{
-  font-weight: bold;
+  color: #aaa;
   width: 15%;
   margin: 0px;
   margin-top: 10px;

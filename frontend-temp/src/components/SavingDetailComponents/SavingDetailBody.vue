@@ -20,34 +20,28 @@
         기본금리
         <p>{{ savingIntrRate.toFixed(2) }}%</p>
       </p>
+      <button class="join">
+        가입하기
+      </button>
     </div>
   </div>
   <div class="plus-data">
     <h3>상품 안내</h3>
     <dl>
-        <dt>가입방법</dt>
-        <dd>{{ saving.join_way }}</dd>
-        <dt>우대조건</dt>
-        <dd>{{ saving.spcl_cnd }}</dd>      
-        <dt>가입대상</dt>
-        <dd>{{ saving.join_member }}</dd>          
-        <dt>최고한도</dt>
-        <dd v-if="maxLimit">{{ maxLimit }}</dd>
-        <dd v-else>없음</dd>
-        <dt>만기이자</dt>
-        <dd>{{ saving.mtrt_int }}</dd>
-        <dt>기타</dt>
-        <dd>{{ saving.etc_note }}</dd>
+      <dt>가입방법</dt>
+      <dd>{{ saving.join_way }}</dd>
+      <dt>우대조건</dt>
+      <dd v-html="specialCondition"></dd>    
+      <dt>가입대상</dt>
+      <dd>{{ saving.join_member }}</dd>          
+      <dt>최고한도</dt>
+      <dd v-if="maxLimit">{{ maxLimit }}</dd>
+      <dd v-else>없음</dd>
+      <dt>만기이자</dt>
+      <dd v-html="maturityInterest"></dd>
+      <dt>기타</dt>
+      <dd v-html="otherNotes"></dd>
     </dl>
-    <!-- <p>{{ saving }}</p>
-    <div v-if="saving && saving.savingoption_set">
-    <h3>금리유형별 금리</h3>
-    <ul>
-      <li v-for="option in saving.savingoption_set" :key="option.id">
-        {{ option.save_trm }}개월 - {{ option.intr_rate_type_nm }}: {{ option.intr_rate }}%
-      </li>
-    </ul>
-  </div> -->
   </div>
 </template>
 
@@ -66,6 +60,26 @@ const savingProduct = computed(() => saving.value?.fin_prdt_nm || '')
 const savingIntrRate = computed(() => saving.value?.intr_rate || 0)
 const savingIntrRate2 = computed(() => saving.value?.intr_rate2 || 0)
 const maxLimit = computed(() => saving.value?.max_limit || '없음')
+const specialCondition = computed(() => {
+  if (saving.value?.spcl_cnd) {
+    return saving.value.spcl_cnd.replace(/\n/g, '<br>')
+  }
+  return ''
+})
+
+const maturityInterest = computed(() => {
+  if (saving.value?.mtrt_int) {
+    return saving.value.mtrt_int.replace(/\n/g, '<br>')
+  }
+  return ''
+})
+
+const otherNotes = computed(() => {
+  if (saving.value?.etc_note) {
+    return saving.value.etc_note.replace(/\n/g, '<br>')
+  }
+  return ''
+})
 
 onMounted(async () => {
   axios.defaults.withCredentials = false
@@ -133,6 +147,19 @@ onMounted(async () => {
   font-weight: bold;
   font-size: 25px;
   margin: 0px;
+}
+.join{
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: solid 1px #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  height: 35px;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
 }
 .rate{
   display: flex;
