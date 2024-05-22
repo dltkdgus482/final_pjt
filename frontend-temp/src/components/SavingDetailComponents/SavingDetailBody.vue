@@ -9,18 +9,18 @@
           {{ bankName }}
         </p>
       </div>
-      <img v-if="saving && saving.kor_co_nm" :src="'/assets/BankIcons/' + saving.kor_co_nm + '.png'" alt="#" width="42" height="42">
+      <img class="logo-img" v-if="saving && saving.kor_co_nm" :src="'/assets/BankIcons/' + saving.kor_co_nm + '.png'" alt="#" width="42" height="42">
     </div>
     <div class="rate">
       <p class="best">
         최고금리
-        <p>{{ savingIntrRate2.toFixed(2) }}%</p>
+        <p class="best-rate">{{ savingIntrRate2.toFixed(2) }}%</p>
       </p>
       <p class="base">
         기본금리
-        <p>{{ savingIntrRate.toFixed(2) }}%</p>
+        <p class="base-rate">{{ savingIntrRate.toFixed(2) }}%</p>
       </p>
-      <button class="join">
+      <button v-if="store && store.token" @click="enrollFinPrdt" class="join">
         가입하기
       </button>
     </div>
@@ -95,6 +95,23 @@ onMounted(async () => {
     saving.value = response.data
   })
 })
+
+const enrollFinPrdt = function () {
+  // console.log(+route.params.depositId)
+  axios({
+    method: 'POST',
+    url: `${store.API_URL}/api/v1/savings/${+route.params.savingId}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  }).then((response) => {
+    // console.log(response)
+    alert(response.data.message)
+  }).catch((error) => {
+    // console.log(error)
+    alert(error.response.data.message)
+  })
+}
 </script>
 
 <style scoped>
@@ -109,7 +126,7 @@ onMounted(async () => {
   justify-content: space-between;
 }
 .saving-product{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   margin: 0px;
   margin-left: 6px;
@@ -131,7 +148,7 @@ onMounted(async () => {
   margin-top: 10px;
 }
 .best {
-  color: skyblue;
+  color: #AAAAAA;
   font-size: 15px;
   margin-right: 40px;
 }
@@ -142,6 +159,7 @@ onMounted(async () => {
 }
 .base {
   font-size: 15px;
+  color: #AAAAAA;
 }
 .base p{
   font-weight: bold;
@@ -201,5 +219,17 @@ onMounted(async () => {
   margin: 0px;
   /* padding: 0 10px; */
   margin-top: 10px;
+}
+
+.best-rate {
+  color: #3396F4;
+}
+
+.base-rate {
+  color: #3396F4;
+}
+
+.logo-img {
+  padding-right: 30px;
 }
 </style>

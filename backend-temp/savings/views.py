@@ -113,7 +113,7 @@ def saving_list(request):
         serializer = SavingProductListSerializer(saving_products, many=True)
         return Response(serializer.data)
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
 def saving_detail(request, saving_pk):
@@ -122,6 +122,15 @@ def saving_detail(request, saving_pk):
     if request.method == 'GET':
         serializer = SavingProductSerializer(saving)
         return Response(serializer.data)
+    
+    if request.method == 'POST':
+        user = request.user
+        if saving.fin_prdt_cd in user.financial_products:
+            return Response({'message': '이미 가입한 상품입니다.'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            user.financial_products += ', ' + saving.fin_prdt_cd
+            user.save()
+            return Response({'message': '가입이 완료되었습니다.'})
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
