@@ -22,7 +22,6 @@ from rest_framework.authentication import TokenAuthentication, BasicAuthenticati
 import os
 from openai import OpenAI
 
-model='gpt-3.5-turbo'
 client = OpenAI(
     # This is the default and can be omitted
     api_key=os.environ.get("OPEN_AI_API_KEY"),
@@ -37,7 +36,7 @@ def chatbot(request):
         data = json.loads(request.body)
         user_message = data['message']
         chat_completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="ft:gpt-3.5-turbo-1106:personal:final-pjt:9RYUl1i5",
             messages=[
                 {
                     "role": "user",
@@ -45,8 +44,8 @@ def chatbot(request):
                 },
             ],
             max_tokens=1024,
-            temperature=0.5,
-            # top_p=1,
+            temperature=0,
+            top_p=1,
             # frequency_penalty=0.5,
             # presence_penalty=0.5,
             # stop=["Human"],

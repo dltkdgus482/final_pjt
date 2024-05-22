@@ -2,7 +2,6 @@
   <div>
       <Router-link class="coin-list" :to="{ name: 'StockDetailView', params: { stockId: coin.market } }">
         <div class="coin">
-          <p class="like">{{ index }}</p>
           <img class="coin-icon" :src="`/assets/coinIcons/${coin.market.replace('KRW-', '')}.png`" alt="coinIcons">
           <p class="coin-name">{{ coin.korean_name }}</p>
         </div>
