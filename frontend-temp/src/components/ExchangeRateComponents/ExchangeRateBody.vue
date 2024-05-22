@@ -4,7 +4,9 @@
       <h3 class="exchange-title">환전고시환율</h3>
       <div class="box">
         <select v-model.trim="selectedCountry1" name="" id="" class="dropdown">
-          <!-- <img :src="`/assets/flagIcons/krw.svg`" alt="#"> -->
+          <!-- <div class="flag">
+            <img :src="`/assets/flagIcons/krw.svg`" alt="#" width="40px">
+          </div> -->
           <option v-for="(country, index) in country_arr" :key="country.id" :value=country>
             <span>
               {{ country }}
@@ -36,7 +38,11 @@
         </div>
       </div>
     </div>
-    <hr>
+
+    <div class="header">
+      <p>국가</p>
+      <p>거래기준환율</p>
+    </div>
 
     <div v-for="(country, index) in country_arr" :key="country.id">
       <div class="circular-border">
@@ -97,10 +103,14 @@ const calculatedMoney1 = ref(0)
 
 const calculateRate1 = function () {
   money2.value = (money1.value * data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r).toFixed(2)
+  // 형식 유지를 위해 toLocaleString 호출
+  money2.value = parseFloat(money2.value).toLocaleString()
 }
 
 const calculateRate2 = function () {
   money1.value = (money2.value * data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r).toFixed(2)
+  // 형식 유지를 위해 toLocaleString 호출
+  money1.value = parseFloat(money1.value).toLocaleString()
 }
 </script>
 
@@ -170,7 +180,7 @@ text-align: center;
   border-radius: 8px;
   margin: 10px 4px;
   background-color: #fff;
-  padding: 4px;
+  padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -194,7 +204,23 @@ text-align: center;
 }
 .time {
   /* margin-left: 8px; */
-  color: gray;
-  font-size: 12px;
+  /* color: gray; */
+  font-size: 17px;
+}
+.header{
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  /* border: solid 1px #e0e0e0; */
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 0px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  margin: 5px;
+  margin-top: 30px;
+  height: 30px;
+  justify-content: space-between;
 }
 </style>

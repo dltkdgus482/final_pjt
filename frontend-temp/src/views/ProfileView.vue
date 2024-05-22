@@ -23,6 +23,6 @@ import ProfileFooter from '@/components/ProfileComponents/ProfileFooter.vue'
 .non-nav {
   margin-left: auto;
   margin-right: auto;
-  max-width: 568px;
+  max-width: 1200px;
 }
 </style>
