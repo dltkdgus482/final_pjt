@@ -16,13 +16,9 @@
         </svg>
       </a>
 
-      <span class="">
-        <!-- <button type="button" class="button">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5001 3.89985C6.85502 3.89985 3.9001 6.85477 3.9001 10.4999C3.9001 14.1449 6.85502 17.0999 10.5001 17.0999C14.1452 17.0999 17.1001 14.1449 17.1001 10.4999C17.1001 6.85477 14.1452 3.89985 10.5001 3.89985ZM2.1001 10.4999C2.1001 5.86066 5.86091 2.09985 10.5001 2.09985C15.1393 2.09985 18.9001 5.86066 18.9001 10.4999C18.9001 15.139 15.1393 18.8999 10.5001 18.8999C5.86091 18.8999 2.1001 15.139 2.1001 10.4999Z" fill="#1E1E23"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3637 15.3635C15.7152 15.012 16.285 15.012 16.6365 15.3635L21.6365 20.3635C21.988 20.7149 21.988 21.2848 21.6365 21.6363C21.285 21.9877 20.7152 21.9877 20.3637 21.6362L15.3637 16.6362C15.0122 16.2848 15.0122 15.7149 15.3637 15.3635Z" fill="#1E1E23"></path>
-          </svg>
-        </button> -->
+      <span class="align-center">
+        <button v-if="isAuthenticated" @click="signout">회원탈퇴</button>
+        <button v-if="isAuthenticated" @click="logout">로그아웃</button>
         <Router-link v-if="isLogin === true" :to="{ name: 'ProfileView' }" class="aTag">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4.5C2 3.94772 2.44772 3.5 3 3.5H21C21.5523 3.5 22 3.94772 22 4.5C22 5.05228 21.5523 5.5 21 5.5H3C2.44772 5.5 2 5.05228 2 4.5Z" fill="#1E1E23"></path>
@@ -43,12 +39,21 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { ref, computed, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
+
+axios.defaults.withCredentials = false
+
+const store = useCounterStore()
 
 export default {
   setup() {
     const isLogin = ref(false)
+
+    const signout = store.signout
+    const logout = store.logout
+    const isAuthenticated = computed(() => store && store.token)
 
     onMounted(() => {
       const store = useCounterStore()
@@ -56,13 +61,20 @@ export default {
     })
 
     return {
-      isLogin
+      isLogin,
+      logout,
+      signout,
+      isAuthenticated,
     }
   }
 }
 </script>
 
 <style scoped>
+.align-center {
+  display: flex;
+  align-items: center;
+}
 .in{
   display: flex;
   justify-content: space-between;

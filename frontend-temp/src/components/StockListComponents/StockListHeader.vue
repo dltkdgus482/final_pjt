@@ -1,13 +1,17 @@
 <template>
-  <div class="header">
-    <p class="stock">종목</p>
-    <p class="percent">등락률(현재가)</p>
-    <p class="amount">거래량(코인/원)</p>
+  <div>
+    <div class="header">
+      <p class="stock">종목</p>
+      <p class="percent">등락률(현재가)</p>
+      <p class="amount">거래량(코인/원)</p>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { useCounterStore } from '@/stores/counter'
 
+const store = useCounterStore()
 </script>
 
 <style scoped>

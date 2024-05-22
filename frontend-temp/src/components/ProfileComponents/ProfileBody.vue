@@ -49,6 +49,9 @@
       <Router-link v-if="userInfo && userInfo.username" class="router" :to="{ name: 'UpdatePasswordView', params: { 'username': userInfo.username } }">
         <button>비밀번호 변경</button>
       </Router-link>
+      <Router-link v-if="userInfo && userInfo.username" class="router" :to="{ name: 'UpdateUserView', params: { 'username': userInfo.username } }">
+        <button>회원탈퇴</button>
+      </Router-link>
     </div>
   </div>
 </template>
@@ -217,6 +220,11 @@ const getData = function () {
 
 .router button {
   cursor: pointer;
+}
+
+.update {
+  display: flex;
+  justify-content: space-between;
 }
 
 .hr {

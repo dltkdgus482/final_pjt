@@ -71,6 +71,19 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const logout = function () {
+    axios({
+      method: 'POST',
+      url: `${API_URL}/dj-rest-auth/logout/`,
+      headers: {
+        'Authorization': `Token ${token.value}`
+      }
+    }).then((response) => {
+      token.value = null
+      location.reload()
+    })
+  }
+
   const signUp = function (payload) {
     const { username, password1, password2, nickname } = payload
     axios({
@@ -89,6 +102,20 @@ export const useCounterStore = defineStore('counter', () => {
     })
   }
 
+  const signout = function () {
+    axios({
+      method: 'POST',
+      url: `${API_URL}/api/v1/accounts/signout/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      },
+    })
+    .then((response) => {
+      token.value = null
+      location.reload()
+    })
+  }
+
   const formatDate = (dateStr) => {
     let dateObj = new Date(dateStr)
     return dateObj.toLocaleString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
@@ -103,6 +130,6 @@ export const useCounterStore = defineStore('counter', () => {
 
   const exchanges_arr = ref([])
 
-  return { coinData, currentPrice, API_URL, deposits, savings, bankList, deposit_prdt_obj, saving_prdt_obj, exchanges_arr,
-    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate }
+  return { coinData, currentPrice, API_URL, deposits, savings, bankList, deposit_prdt_obj, saving_prdt_obj, exchanges_arr, signout,
+    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate, logout }
 }, { persist: true })

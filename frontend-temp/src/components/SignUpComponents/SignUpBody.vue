@@ -19,8 +19,8 @@
       <input type="text" name="" id="" placeholder="나이(숫자만 입력해주세요)">
       <div>
         <span class="gender">성별</span>
-        <button class="gender-button" @click.prevent>남</button>
-        <button class="gender-button" @click.prevent>여</button>
+        <button class="gender-button" :class="{ 'selected': selectedGender == 'M' }" @click.prevent="selectGender('M')">남</button>
+        <button class="gender-button" :class="{ 'selected': selectedGender == 'F' }" @click.prevent="selectGender('F')">여</button>
       </div>
       <input type="text" name="" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
       <input id="submit" type="submit" value="회원가입">
@@ -46,6 +46,12 @@ const signUp = function () {
     nickname: nickname.value,
   }
   store.signUp(payload)
+}
+
+const selectedGender = ref(null)
+
+const selectGender = function (data) {
+  selectedGender.value = data
 }
 </script>
 
@@ -119,6 +125,10 @@ div button {
 }
 .gender-button{
   width: 200px;
+}
+
+.gender-button.selected {
+  background-color: #eee;
 }
 
 </style>

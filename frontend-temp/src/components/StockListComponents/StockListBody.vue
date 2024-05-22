@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>TOP 종목</h3>
     <div>
       <StockListHeader />
       <StockList 
@@ -80,21 +79,23 @@ onMounted(() => {
     isSending = true
 
     for (const coin of currentCoinList.value) {
+      // console.log(coin)
       try {
         ws.send(JSON.stringify([
           {"ticket":"test"},
           {"type":"ticker","codes":[coin.market]},
           {"format":"SIMPLE"}
         ]))
-        await new Promise(resolve => setTimeout(resolve, 500)) // 1초 딜레이
+        await new Promise(resolve => setTimeout(resolve, 300)) // 1초 딜레이
       }
-      catch {
+      catch (error) {
+        // console.log(error)
         continue
       }
     }
 
     isSending = false
-    setTimeout(sendWebSocketMessage, 3000)
+    setTimeout(sendWebSocketMessage, 5000)
   }
 
   ws.onopen = () => {
