@@ -101,6 +101,8 @@ export const useCounterStore = defineStore('counter', () => {
     '하나은행', '한국산업은행', '한국스탠다드차타드은행',
   ]
 
-  return { coinData, currentPrice, API_URL, deposits, savings, bankList, deposit_prdt_obj, saving_prdt_obj,
+  const exchanges_arr = ref([])
+
+  return { coinData, currentPrice, API_URL, deposits, savings, bankList, deposit_prdt_obj, saving_prdt_obj, exchanges_arr,
     token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate }
 }, { persist: true })

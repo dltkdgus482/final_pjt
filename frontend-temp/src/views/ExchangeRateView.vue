@@ -5,8 +5,6 @@
     <div class="non-nav">
       <ExchangeRateHeader />
       <ExchangeRateBody />
-      <hr>
-      <ExchangeRateList />
       <ExchangeRateFooter />
     </div>
   </div>
@@ -16,7 +14,6 @@
 import ExchangeRateNav from '@/components/ExchangeRateComponents/ExchangeRateNav.vue'
 import ExchangeRateHeader from '@/components/ExchangeRateComponents/ExchangeRateHeader.vue'
 import ExchangeRateBody from '@/components/ExchangeRateComponents/ExchangeRateBody.vue'
-import ExchangeRateList from '@/components/ExchangeRateComponents/ExchangeRateList.vue'
 import ExchangeRateFooter from '@/components/ExchangeRateComponents/ExchangeRateFooter.vue'
 </script>
 

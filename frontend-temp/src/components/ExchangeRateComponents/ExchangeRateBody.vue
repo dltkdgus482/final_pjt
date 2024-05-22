@@ -3,50 +3,74 @@
     <div class="exchange-rate">
       <h3 class="exchange-title">환전고시환율</h3>
       <div class="box">
-        <select name="" id="" class="dropdown">
-          <option value="">a</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
+        <select v-model.trim="selectedCountry1" name="" id="" class="dropdown">
+          <!-- <img :src="`/assets/flagIcons/krw.svg`" alt="#"> -->
+          <option v-for="(country, index) in country_arr" :key="country.id" :value=country>
+            <span>
+              {{ country }}
+              {{ unit_arr[index] }}
+            </span>
+          </option>
         </select>
         <div class="exchange">
-          <input type="text" id="" name="">
-          <label for="">원</label>
+          <input @input="calculateRate1" v-model.trim="money1" type="text" id="" name="">
+          <label for="">{{ money1.toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry1)] }}</label>
         </div>
       </div>
 
       <div class="equal">=</div>
 
       <div class="box">
-        <select name="" id="" class="dropdown">
-          <option value="">a</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
-          <option value="">b</option>
+        <select v-model.trim="selectedCountry2" name="" id="" class="dropdown">
+          <!-- <img :src="`/assets/flagIcons/krw.svg`" alt="#"> -->
+          <option v-for="(country, index) in country_arr" :key="country.id" :value=country>
+            <span>
+              {{ country }}
+              {{ unit_arr[index] }}
+            </span>
+          </option>
         </select>
         <div class="exchange">
-          <input type="text" id="" name="">
-          <label for="">원</label>
+          <input @input="calculateRate2" v-model.trim="money2" type="text" id="" name="">
+          <label for="">{{ money2.toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry2)] }}</label>
         </div>
       </div>
     </div>
+    <hr>
+
+    <div v-for="(country, index) in country_arr" :key="country.id">
+      <div class="circular-border">
+        <div class="country-box">
+          <div class="country">
+            <img :src="`/assets/flagIcons/${unit_arr[index].slice(0, 3).toLowerCase()}.svg`" alt="#" width="25" height="25">
+            <span class="country-name">{{ country }}</span>
+            <span class="country-name">{{ unit_arr[index] }}</span>
+          </div>
+        </div>
+        <span class="time">{{ data_arr[index].deal_bas_r }}</span>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script setup>
 import axios from "axios"
-import { onMounted } from "vue"
+import { nextTick, ref, watch, onMounted } from "vue"
 import { useCounterStore } from '@/stores/counter'
 
 axios.defaults.withCredentials = false
 
 const store = useCounterStore()
+const data_arr = ref([])
+const country_arr = ref([])
+const unit_arr = ref([])
+
+const selectedCountry1 = ref('한국')
+const money1 = ref(1355)
+
+const selectedCountry2 = ref('미국')
+const money2 = ref(1)
 
 onMounted(() => {
   axios({
@@ -57,13 +81,27 @@ onMounted(() => {
     },
   })
     .then((response) => {
-      console.log(response)
+      store.exchanges_arr = response.data
+      data_arr.value = response.data
+      country_arr.value = response.data.map(item => item.cur_nm.split(' ')[0])
+      unit_arr.value = response.data.map(item => item.cur_unit)
+      // console.log(data_arr.value)
     })
     .catch((error) => {
       console.log(error)
-    
   })
 })
+
+const calculatedMoney2 = ref(0)
+const calculatedMoney1 = ref(0)
+
+const calculateRate1 = function () {
+  money2.value = (money1.value * data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r).toFixed(2)
+}
+
+const calculateRate2 = function () {
+  money1.value = (money2.value * data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r).toFixed(2)
+}
 </script>
 
 <style scoped>
@@ -126,5 +164,37 @@ onMounted(() => {
 }
 .equal{
 text-align: center;
+}
+
+.circular-border {
+  border-radius: 8px;
+  margin: 10px 4px;
+  background-color: #fff;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* flex-direction: column; */
+}
+.country-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.country{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: auto;
+}
+.country-name{
+  margin-left: 8px;
+}
+.time {
+  /* margin-left: 8px; */
+  color: gray;
+  font-size: 12px;
 }
 </style>
