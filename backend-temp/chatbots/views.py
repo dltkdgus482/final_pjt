@@ -36,7 +36,7 @@ def chatbot(request):
         data = json.loads(request.body)
         user_message = data['message']
         chat_completion = client.chat.completions.create(
-            model="ft:gpt-3.5-turbo-1106:personal:final-pjt:9RYUl1i5",
+            model="ft:gpt-3.5-turbo-1106:personal:final-pjt-gpt:9RZiO6ap",
             messages=[
                 {
                     "role": "user",

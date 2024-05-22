@@ -8,12 +8,12 @@
       <input type="password" id="password1" v-model.trim="password1" placeholder="비밀번호" required>
       <input type="password" id="password2" v-model.trim="password2" placeholder="비밀번호 확인" required>
       <div>
-        <input type="text" id="email" placeholder="이메일" required>
-        <button>인증하기</button>
+        <input type="text" v-model.trim="email" id="email" placeholder="이메일" required>
+        <button @click.prevent="sendAuthKey">인증하기</button>
       </div>
       <div>
-        <input type="text" id="auth-code" placeholder="인증코드">
-        <button>제출</button>
+        <input v-model.trim="auth_key" type="text" id="auth-code" placeholder="인증코드">
+        <button @click.prevent="checkAuthKey">제출</button>
       </div>
       <input type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임" required>
       <input type="text" name="" id="" placeholder="나이(숫자만 입력해주세요)">
@@ -29,14 +29,20 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
+
+axios.defaults.withCredentials = false
 
 const username = ref(null)
 const password1 = ref(null)
 const password2 = ref(null)
 const nickname = ref(null)
+const email = ref(null)
+const auth_key = ref(null)
 const store = useCounterStore()
+const isAuthenticated = ref(false)
 
 const signUp = function () {
   const payload = {
@@ -45,13 +51,49 @@ const signUp = function () {
     password2: password2.value,
     nickname: nickname.value,
   }
-  store.signUp(payload)
+  
+  if (isAuthenticated.value) {
+    store.signUp(payload)
+  } else {
+    alert('이메일 인증이 필요합니다.')
+  }
 }
 
 const selectedGender = ref(null)
 
 const selectGender = function (data) {
   selectedGender.value = data
+}
+
+const sendAuthKey = function () {
+  axios({
+    method: 'POST',
+    url: `${store.API_URL}/api/v1/accounts/verify/`,
+    data: {
+      email: email.value,
+    },
+  })
+  .then((response) => {
+    alert('인증메일이 발송되었습니다.')
+  })
+}
+
+const checkAuthKey = function () {
+  axios({
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/accounts/verify/`,
+    params: {
+      auth_key: auth_key.value,
+    },
+  })
+  .then((response) => {
+    if (response.data.message) {
+      isAuthenticated.value = true
+      alert('인증되었습니다.')
+    } else {
+      alert('인증코드가 일치하지 않습니다.')
+    }
+  })
 }
 </script>
 
