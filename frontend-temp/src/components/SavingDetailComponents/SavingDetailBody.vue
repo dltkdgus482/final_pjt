@@ -87,9 +87,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/savings/${+route.params.savingId}/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     saving.value = response.data

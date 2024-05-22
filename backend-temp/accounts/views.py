@@ -10,6 +10,8 @@ from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import get_user_model
 
 import os
+import random
+import string
 import smtplib
 from email.mime.text import MIMEText
 
@@ -18,8 +20,11 @@ sender = 'dltkdgus482@naver.com'
 naver_id = 'dltkdgus482'
 naver_app_password = NAVER_MAIL_API_KEY
 
-
 User = get_user_model()
+
+def generate_auth_key():
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for i in range(6))
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -29,22 +34,23 @@ def signout(request):
     user.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+auth_key = ''
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def verify(request):
-    auth_key = 'ABCDE'
+    global auth_key
 
     if request.method == 'GET':
-        print(request)
-        print(request.GET)
         return Response({'message': auth_key == request.GET.get('auth_key')})
     elif request.method == 'POST':
+        auth_key = generate_auth_key()
+
         receiver = request.data.get('email')
         smtp = smtplib.SMTP('smtp.naver.com', 587)
         smtp.ehlo()
         smtp.starttls()
         smtp.login(naver_id, naver_app_password)
-        msg = MIMEText(auth_key)
+        msg = MIMEText(f'인증코드: {auth_key}')
         msg['From'] = sender
         msg['Subject'] = '인증메일'
         msg['To'] = receiver

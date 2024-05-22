@@ -6,7 +6,7 @@ import os
 
 # permission Decorators
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -17,34 +17,10 @@ from .models import DepositProduct, DepositOption
 from django.contrib.auth import get_user_model
 import requests
 
-import smtplib
-from email.mime.text import MIMEText
-
-# sender = 'dltkdgus482@naver.com'             # 보낼 이메일 주소
-# receiver = ''          # 받을 이메일 주소
-# naver_id = 'dltkdgus482'                  # 네이버 아이디
-# naver_app_password = os.environ.get("NAVER_MAIL_API_KEY")    # 네이버 앱 비밀번호
-
-# smtp = smtplib.SMTP('smtp.naver.com', 587)
-# smtp.ehlo()
-# smtp.starttls()
-# smtp.login(naver_id, naver_app_password)
-
-# msg = MIMEText('상품이 입고되었습니다')
-# msg['From'] = sender
-# msg['Subject'] = '상품이 입고되었습니다'
-# msg['To'] = receiver
-
-# print(msg)
-
-# smtp.sendmail(sender, receiver, msg.as_string())
-# smtp.quit()
-
 User = get_user_model()
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def deposit_list(request):
     if request.method == 'GET':
         API_KEY = os.environ.get("API_KEY")
@@ -96,8 +72,7 @@ def deposit_list(request):
         return Response(serializer.data)
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def deposit_detail(request, deposit_pk):
     deposit = get_object_or_404(DepositProduct, pk=deposit_pk)
 

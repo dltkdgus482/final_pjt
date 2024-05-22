@@ -4,7 +4,7 @@ from rest_framework import status
 
 # permission Decorators
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -24,41 +24,8 @@ financial_products = [
     '01211210121', '01211210122', '03101', '03700', '010200100051', '010200100084', '010200100092', '010200100104', '010200100109', '230-0118-14', '230-0119-85', '10-047-1360-0002', '10-047-1365-0001', '10-047-1381-0001', '10-047-1387-0001', '10-059-1264-0001', '52', '53', '01012000200000000003', '01012000210000000000', '10140110400011', '10140114300011', '10140114700031', '10141109800021', '10141114300011', '10141114700031', '10-01-30-355-0002', '10-01-30-355-0005', '10-01-30-355-0006', '1001303001001', '1001303001003', '1001303001004', '1001303001005'
 ]
 
-weights = {
-    "age": 0.2,
-    "subscribers": 0.15,
-    "interest_rate": 0.35,
-    "gender": 0.1,
-    "salary": 0.2
-}
-
-def calculate_score(product, user, weights):
-    score = 0
-    # 나이 점수: 차이가 적을수록 높은 점수
-    age_score = 1 - abs(product["age"] - user["age"]) / 100
-    score += age_score * weights["age"]
-    
-    # 가입한 사람 수 점수: 많을수록 높은 점수
-    subscriber_score = product["subscribers"] / 1000
-    score += subscriber_score * weights["subscribers"]
-    
-    # 금리 점수: 높을수록 높은 점수
-    interest_rate_score = product["interest_rate"] / 5
-    score += interest_rate_score * weights["interest_rate"]
-    
-    # 성별 점수: 일치하면 높은 점수
-    gender_score = 1 if product["gender"] == user["gender"] else 0
-    score += gender_score * weights["gender"]
-    
-    # 월급 점수: 비율로 점수 계산 (이 예제에서는 10,000,000이 최대 월급으로 가정)
-    salary_score = user["salary"] / 10000000
-    score += salary_score * weights["salary"]
-    
-    return score
-
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def saving_list(request):
     if request.method == 'GET':
         API_KEY = os.environ.get("API_KEY")
@@ -114,8 +81,7 @@ def saving_list(request):
         return Response(serializer.data)
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def saving_detail(request, saving_pk):
     saving = get_object_or_404(SavingProduct, pk=saving_pk)
 

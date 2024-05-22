@@ -74,6 +74,7 @@ const sendAuthKey = function () {
     },
   })
   .then((response) => {
+    isAuthenticated.value = false
     alert('인증메일이 발송되었습니다.')
   })
 }

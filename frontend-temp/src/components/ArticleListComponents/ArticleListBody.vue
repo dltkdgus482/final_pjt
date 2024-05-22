@@ -11,7 +11,7 @@
           <option value="latest">최신 순</option>
           <option value="views">조회 순</option>
         </select>
-        <RouterLink :to="{ name: 'ArticleCreateView' }" class="write-article">
+        <RouterLink v-if="store && store.token" :to="{ name: 'ArticleCreateView' }" class="write-article">
           <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 24 24;" xml:space="preserve">
             <g>
               <path d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"/>
@@ -89,9 +89,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/articles/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     articles.value = response.data.reverse()

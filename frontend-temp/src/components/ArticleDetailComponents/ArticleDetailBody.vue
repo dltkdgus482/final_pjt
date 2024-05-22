@@ -59,26 +59,28 @@ const articleUser = computed(() => article.value?.user?.username)
 
 const currentUser = ref('')
 
-axios({
-  method: 'GET',
-  url: `${store.API_URL}/dj-rest-auth/user/`,
-  headers: {
-    Authorization: `Token ${store.token}`,
-  },
-})
-.then((response) => {
-  currentUser.value = response.data.username
-})
+axios.defaults.withCredentials = false
 
-onMounted(async () => {
-  axios.defaults.withCredentials = false
-
-  await axios({
+if (store && store.token) {
+  axios({
     method: 'GET',
-    url: `${store.API_URL}/api/v1/articles/${articleId}/`,
+    url: `${store.API_URL}/dj-rest-auth/user/`,
     headers: {
       Authorization: `Token ${store.token}`,
     },
+  })
+  .then((response) => {
+    currentUser.value = response.data.username
+  })
+}
+
+onMounted(async () => {
+  await axios({
+    method: 'GET',
+    url: `${store.API_URL}/api/v1/articles/${articleId}/`,
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     article.value = response.data
@@ -87,9 +89,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/articles/${articleId}/comments/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     comments.value = response.data
@@ -102,8 +104,6 @@ defineProps({
 })
 
 const deleteArticle = function () {
-  axios.defaults.withCredentials = false
-
   axios({
     method: 'DELETE',
     url: `${store.API_URL}/api/v1/articles/${articleId}/`,

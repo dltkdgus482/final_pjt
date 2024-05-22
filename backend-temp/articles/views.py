@@ -4,7 +4,7 @@ from rest_framework import status
 
 # permission Decorators
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -15,8 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def article_list(request):
     if request.method == 'GET':
         articles = get_list_or_404(Article)
@@ -32,8 +31,7 @@ def article_list(request):
 
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
@@ -63,8 +61,7 @@ def article_detail(request, article_pk):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([TokenAuthentication])
+@permission_classes([AllowAny])
 def comment_list(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 

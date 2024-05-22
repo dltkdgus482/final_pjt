@@ -98,9 +98,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/deposits/${+route.params.depositId}/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     deposit.value = response.data

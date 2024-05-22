@@ -26,9 +26,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/deposits/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     store.deposits = response.data
@@ -37,9 +37,9 @@ onMounted(async () => {
   await axios({
     method: 'GET',
     url: `${store.API_URL}/api/v1/savings/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
+    // headers: {
+    //   Authorization: `Token ${store.token}`,
+    // },
   })
   .then((response) => {
     store.savings = response.data

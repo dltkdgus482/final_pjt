@@ -82,9 +82,9 @@ onMounted(() => {
   axios({
     method: 'get',
     url: 'http://127.0.0.1:8000/api/v1/exchanges',
-    headers: {
-      'Authorization': `Token ${store.token}`,
-    },
+    // headers: {
+    //   'Authorization': `Token ${store.token}`,
+    // },
   })
     .then((response) => {
       store.exchanges_arr = response.data

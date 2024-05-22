@@ -80,7 +80,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     }).then((response) => {
       token.value = null
-      location.reload()
+      router.push({ name: 'LoginView' })
     })
   }
 
@@ -112,7 +112,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
     .then((response) => {
       token.value = null
-      location.reload()
+      router.push({ name: 'MainView' })
     })
   }
 
