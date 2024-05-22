@@ -3,6 +3,7 @@
     <MainPageNav />
     <div class="non-nav">
       <MainPageHeader />
+      <MainPageChatbot />
       <MainPageBody />
       <Footer />
     </div>
@@ -12,6 +13,7 @@
 <script setup>
 import MainPageNav from '@/components/MainPageComponents/MainPageNav.vue'
 import MainPageHeader from '@/components/MainPageComponents/MainPageHeader.vue'
+import MainPageChatbot from '@/components/MainPageComponents/MainPageChatbot.vue'
 import MainPageBody from '@/components/MainPageComponents/MainPageBody.vue'
 import Footer from "@/components/Footer.vue"
 
@@ -96,6 +98,6 @@ onMounted(async () => {
 .non-nav {
   margin-left: auto;
   margin-right: auto;
-  max-width: 568px;
+  max-width: 1000px;
 }
 </style>
