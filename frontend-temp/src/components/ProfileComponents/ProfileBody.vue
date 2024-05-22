@@ -4,16 +4,18 @@
       {{ userInfo.username }} 님의 페이지
       <hr>
       <div>{{ userInfo }}</div>
+      <div>{{ userInfo.username }}</div>
     </p>
     <p>
-      <div>
+      <h3 class="my-deposit">
         나의 예금상품
-      </div>
+      </h3>
       <hr class="hr">
       <div v-if="myDeposits && myDeposits.length">
-        <div v-for="(prdt, index) in myDeposits" :key="index">
+        <div class="deposit-data" v-for="(prdt, index) in myDeposits" :key="index">
           <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
         </div>
+        <br>
         <canvas id="Chart"></canvas>
       </div>
       <div v-else>
@@ -22,7 +24,7 @@
     </p>
     <p>
       <div>
-        나의 예금상품
+        나의 적금상품
       </div>
       <hr class="hr">
       <div v-if="mySavings && mySavings.length">
@@ -148,7 +150,7 @@ const getData = function () {
         x: {
           ticks: {
             font: {
-              size: 5, // 원하는 폰트 크기로 변경
+              size: 10, // 원하는 폰트 크기로 변경
             }
           }
         },
@@ -160,7 +162,7 @@ const getData = function () {
         legend: {
           labels: {
             font: {
-              size: 10, // 원하는 폰트 크기로 변경
+              size: 14, // 범례 원하는 폰트 크기로 변경
             }
           }
         },
@@ -184,11 +186,24 @@ const getData = function () {
     border-radius: 8px;
     padding: 20px 18px;
     width: 80%;
-    text-align: center;
+    /* text-align: center; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .page-owner{
     margin-bottom: 40px;
+    text-align: center;
+  }
+  .my-deposit{
+    text-align: center;
+    margin-top: 0px;
+  }
+  .deposit-data{
+    margin-top: 8px;
+    padding: 6px;
+    border: none;
+    /* background-color: #fff; */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   .update button{
     border: none;

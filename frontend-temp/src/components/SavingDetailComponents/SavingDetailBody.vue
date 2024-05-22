@@ -190,7 +190,7 @@ onMounted(async () => {
   flex-wrap: wrap;
 }
 .plus-data dt{
-  font-weight: bold;
+  color: #aaa;
   width: 15%;
   margin: 0px;
   margin-top: 10px;

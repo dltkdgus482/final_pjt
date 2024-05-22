@@ -17,11 +17,12 @@
   display: flex;
   align-items: center;
   background-color: #fff;
-  padding: 0px 20px;
+  padding: 0px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
   color: black;
   margin: 5px;
+  height: 30px;
 }
 .stock {
   margin-left: 20px;

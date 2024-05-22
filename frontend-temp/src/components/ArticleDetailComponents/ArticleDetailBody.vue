@@ -21,7 +21,7 @@
     </div>
     <div class="comment">
       <CommentCreate />
-      <template v-if="comments && comments.length">
+      <div v-if="comments && comments.length">
         <CommentList 
           v-for="(comment, index) in comments"
           :key="comment.id"
@@ -30,10 +30,10 @@
           :articleId="articleId"
           :currentUser="currentUser"
         />
-      </template>
-      <template v-else>
+      </div>
+      <div v-else>
         <p class="empty-comment text">아직 댓글이 없습니다...</p>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -152,15 +152,13 @@ const deleteArticle = function () {
 }
 
 .empty-comment {
-  display: flex;
-  justify-content: space-between;
   border: none;
   background-color: #fff;
   border-radius: 8px;
   padding: 10px 20px;
-  padding-top: 0px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px 5px;
+
 }
 .edit {
   display: flex;
