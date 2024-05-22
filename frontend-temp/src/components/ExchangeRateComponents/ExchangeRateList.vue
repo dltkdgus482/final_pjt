@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div v-for="(data, index) in paginatedData" :key="data.id" class="circular-border">
+    <div class="circular-border">
       <div class="country-box">
         <div class="country">
           <img src="/assets/flagIcons/aed.svg" alt="#" width="25" height="25">
-          <span class="country-name">{{ data.fin_prdt_nm }}</span>
+          <span class="country-name">나라이름</span>
         </div>
-        <span class="time">{{ data.kor_co_nm }}</span>
+        <span class="time">시간</span>
       </div>
 
-      <span class="option">{{ data.intr_rate2.toFixed(2) }}%</span>  
+      <span class="option">%</span>  
 
     </div>
   </div>
