@@ -1,18 +1,25 @@
 <template>
+  <h2>{{ userInfo.nickname }} 님의 페이지</h2>
   <div class="account">
-    <p class="page-owner">
-      {{ userInfo.username }} 님의 페이지
+    <!-- <p class="page-owner">
+      {{ userInfo.nickname }} 님의 페이지
       <hr>
       <div>{{ userInfo }}</div>
-      <div>{{ userInfo.username }}</div>
-    </p>
+    </p> -->
     <p>
       <h3 class="my-deposit">
-        나의 예금상품
+        가입한 상품
       </h3>
-      <hr class="hr">
+      <hr>
       <div v-if="myDeposits && myDeposits.length">
         <div class="deposit-data" v-for="(prdt, index) in myDeposits" :key="index">
+          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
+        </div>
+        <br>
+        <canvas id="Chart"></canvas>
+      </div>
+      <div v-else-if="mySavings && mySavings.length">
+        <div class="deposit-data" v-for="(prdt, index) in mySavings" :key="index">
           <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
         </div>
         <br>
@@ -22,7 +29,7 @@
         <div>아직 가입한 금융상품이 없습니다</div>
       </div>
     </p>
-    <p>
+    <!-- <p>
       <div>
         나의 적금상품
       </div>
@@ -35,23 +42,23 @@
       <div v-else>
         <div>아직 가입한 금융상품이 없습니다</div>
       </div>
-    </p>
+    </p> -->
     <p>
-      <div>
+      <h3 class="my-article">
         나의 게시글
-      </div>
-      <hr class="hr">
+      </h3>
+      <hr>
     </p>
+
     <div class="update">
-      <Router-link v-if="userInfo && userInfo.username" class="router" :to="{ name: 'UpdateUserView', params: { 'username': userInfo.username } }">
+      <Router-link v-if="userInfo && userInfo.username" :to="{ name: 'UpdateUserView', params: { 'username': userInfo.username } }">
         <button>내 정보 변경</button>
       </Router-link>
-      <Router-link v-if="userInfo && userInfo.username" class="router" :to="{ name: 'UpdatePasswordView', params: { 'username': userInfo.username } }">
+      <Router-link v-if="userInfo && userInfo.username" :to="{ name: 'UpdatePasswordView', params: { 'username': userInfo.username } }">
         <button>비밀번호 변경</button>
       </Router-link>
-      <Router-link v-if="userInfo && userInfo.username" class="router" :to="{ name: 'UpdateUserView', params: { 'username': userInfo.username } }">
-        <button>회원탈퇴</button>
-      </Router-link>
+      <button v-if="isAuthenticated" @click="signout">회원탈퇴</button>
+      <button v-if="isAuthenticated" @click="logout">로그아웃</button>
     </div>
   </div>
 </template>
@@ -173,6 +180,22 @@ const getData = function () {
     }
   })
 }
+
+
+axios.defaults.withCredentials = false
+
+const isLogin = ref(false)
+
+const signout = () => {
+  store.signout()
+}
+const logout = () => {
+  store.logout()
+}
+const isAuthenticated = computed(() => store && store.token)
+onMounted(() => {
+  isLogin.value = store && store.token !== null && store.token !== ''
+})
 </script>
 
 <style scoped>
@@ -188,7 +211,7 @@ const getData = function () {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px 18px;
-    width: 80%;
+    width: 90%;
     /* text-align: center; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -197,7 +220,7 @@ const getData = function () {
     text-align: center;
   }
   .my-deposit{
-    text-align: center;
+    /* text-align: center; */
     margin-top: 0px;
   }
   .deposit-data{
@@ -208,27 +231,27 @@ const getData = function () {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  .update button{
-    border: none;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 30px;
-    font-size: 17px;
+  .my-article{
+    /* text-align: center; */
+    margin-top: 0px;
   }
+.update {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+}
 
-.router button {
+.update button {
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* margin: 10px; */
+  font-size: 14px;
+  /* flex-shrink: 0; 버튼들이 줄어들지 않도록 설정 */
   cursor: pointer;
 }
 
-.update {
-  display: flex;
-  justify-content: space-between;
-}
-
-.hr {
-  color: #f3f5f7;
-}
 </style>
 

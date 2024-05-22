@@ -3,7 +3,7 @@
     <ProfileNav />
 
     <div class="non-nav">
-      <h1>ProfilePage</h1>
+      <!-- <h1>ProfilePage</h1> -->
       <ProfileHeader />
       <ProfileBody />
       <ProfileFooter />
@@ -23,6 +23,6 @@ import ProfileFooter from '@/components/ProfileComponents/ProfileFooter.vue'
 .non-nav {
   margin-left: auto;
   margin-right: auto;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 </style>

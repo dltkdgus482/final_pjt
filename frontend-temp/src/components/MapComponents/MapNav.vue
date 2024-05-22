@@ -17,8 +17,6 @@
       </a>
 
       <span class="align-center">
-        <button v-if="isAuthenticated" @click="signout">회원탈퇴</button>
-        <button v-if="isAuthenticated" @click="logout">로그아웃</button>
         <Router-link v-if="isLogin === true" :to="{ name: 'ProfileView' }" class="aTag">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4.5C2 3.94772 2.44772 3.5 3 3.5H21C21.5523 3.5 22 3.94772 22 4.5C22 5.05228 21.5523 5.5 21 5.5H3C2.44772 5.5 2 5.05228 2 4.5Z" fill="#1E1E23"></path>
@@ -39,11 +37,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { ref, computed, onMounted } from 'vue'
 import { useCounterStore } from '@/stores/counter'
-
-axios.defaults.withCredentials = false
 
 const store = useCounterStore()
 
