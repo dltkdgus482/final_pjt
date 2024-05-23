@@ -6,7 +6,7 @@
     </div>
 
     <p class="ment">
-      무슨 상품을 찾으시나요?
+      무엇을 도와드릴까요?
     </p>
 
     <div id="chat-container">
@@ -17,15 +17,15 @@
           <!-- <div class="message">챗봇: 안녕하세요! 무엇을 도와드릴까요?</div> -->
         </div>
         <div id="user-input">
-            <input @keydown.enter="sendMessage" type="text" v-model="userInput" placeholder="메시지를 입력하세요..." />
+            <input @keydown.enter="sendMessage" type="text" v-model="userInput" placeholder="무엇이든지 질문해보세요!" />
             <button @click="sendMessage">검색</button>
         </div>
     </div>
 
     <div class="hashtag">
-      <button>해시태그1</button>
-      <button>해시태그2</button>
-      <button>해시태그3</button>
+      <button @click.prevent="recommendPrdt()"># 예금 상품 추천받기</button>
+      <button @click.prevent="describePrdt()"># 적금 상품 설명 받기</button>
+      <button @click.prevent="searchCrypto()"># 코인 종목 추천받기</button>
     </div>
 
   </div>
@@ -43,6 +43,18 @@ const userInput = ref('')
 const aiMessage = ref('')
 const messages = ref([])
 
+const recommendPrdt = function () {
+  userInput.value = '한도가 높은 예금 상품 하나만 추천해줘'
+}
+
+const describePrdt = function () {
+  userInput.value = '카카오뱅크 26주 적금 상품에 대해 설명해줘'
+}
+
+const searchCrypto = function () {
+  userInput.value = '코인 종목 추천해줘'
+}
+
 const url = 'http://127.0.0.1:8000/api/v1/chatbots/'
 
 const sendMessage = function () {
@@ -52,6 +64,8 @@ const sendMessage = function () {
 
   if (userMessage.length === 0) {
     return
+  } else if (!store.token) {
+    addMessage('챗봇', '로그인이 필요한 서비스입니다.')
   } else {
     axios({
       url: url,
@@ -87,8 +101,8 @@ const addMessage = function (sender, message) {
   width: 100px;
   height: 100px;
   /* background-color: #1e88e5; */
-  border-radius: 50%;
-  cursor: pointer;
+  /* border-radius: 50%;
+  cursor: pointer; */
 }
 
 .chatbot-icon-container {
@@ -167,6 +181,7 @@ const addMessage = function (sender, message) {
   padding: 6px;
   border-radius: 8px;
   border: 1px solid #eee;
+  color: #4e5968;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0px 10px;

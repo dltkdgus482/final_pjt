@@ -103,7 +103,7 @@ def chatbot(request):
                 messages=[
                     {
                         "role": "user",
-                        "content": f'"{user_message}" 라는 질문은 ["예적금 상품 추천", "예적금 상품 검색"] 2개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
+                        "content": f'"{user_message}" 라는 질문은 ["상품 추천 요구", "상품 설명 요구"] 2개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
                     },
                 ],
                 max_tokens=1024,
@@ -111,7 +111,7 @@ def chatbot(request):
                 top_p=1,
             )
 
-            if chat_completion.choices[0].message.content == "예적금 상품 추천":
+            if chat_completion.choices[0].message.content == "상품 추천 요구":
                 similarity_dict = {}
 
                 user_message_embedding = get_embedding(user_message)
@@ -136,7 +136,7 @@ def chatbot(request):
                     prdt_id = SavingProduct.objects.get(fin_prdt_nm=top_prdt).id
                     return JsonResponse({'response': f'{top_prdt} 상품을 추천드려요! 이 링크에 가시면 더 자세한 정보를 얻으실 수 있습니다. {API_URL}saving/{prdt_id}/'})
             
-            elif chat_completion.choices[0].message.content == "예적금 상품 검색":
+            elif chat_completion.choices[0].message.content == "상품 설명 요구":
                 similarity_dict = {}
 
                 user_message_embedding = get_embedding(user_message)
