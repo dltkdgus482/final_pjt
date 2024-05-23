@@ -11,8 +11,8 @@ class SavingProduct(models.Model):
     join_member = models.TextField()
     etc_note = models.TextField(null=True)
     max_limit = models.IntegerField(null=True)
-    intr_rate = models.FloatField()             # 기본금리
-    intr_rate2 = models.FloatField()            # 최고금리
+    intr_rate = models.FloatField(null=True)             # 기본금리
+    intr_rate2 = models.FloatField(null=True)            # 최고금리
 
 class SavingOption(models.Model):
     fin_prdt_cd = models.TextField()

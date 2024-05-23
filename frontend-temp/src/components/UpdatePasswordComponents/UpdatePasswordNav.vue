@@ -1,7 +1,8 @@
 <template>
   <div class="out">
     <div class="in">
-      <a href="#">
+      <Router-link :to="{ name: 'MainView' }">
+        <!-- 로고 -->
         <svg width="39" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
           <g>
             <g id="g2303_00000031922597863478397790000004595394903733610625_">
@@ -10,25 +11,22 @@
             </g>
           </g>
         </svg>
-      </a>
-      <span class="page-name">증권</span>
+        <!-- 페이지 이름 -->
+        <svg id="Layer_7" data-name="Layer 7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.42 22.49">
+          <text class="cls-1" transform="translate(.24 19.5)"><tspan x="0" y="0">계정</tspan></text>
+        </svg>
+      </Router-link>
 
-      <span class="">
-        <!-- <button type="button" class="button">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5001 3.89985C6.85502 3.89985 3.9001 6.85477 3.9001 10.4999C3.9001 14.1449 6.85502 17.0999 10.5001 17.0999C14.1452 17.0999 17.1001 14.1449 17.1001 10.4999C17.1001 6.85477 14.1452 3.89985 10.5001 3.89985ZM2.1001 10.4999C2.1001 5.86066 5.86091 2.09985 10.5001 2.09985C15.1393 2.09985 18.9001 5.86066 18.9001 10.4999C18.9001 15.139 15.1393 18.8999 10.5001 18.8999C5.86091 18.8999 2.1001 15.139 2.1001 10.4999Z" fill="#1E1E23"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.3637 15.3635C15.7152 15.012 16.285 15.012 16.6365 15.3635L21.6365 20.3635C21.988 20.7149 21.988 21.2848 21.6365 21.6363C21.285 21.9877 20.7152 21.9877 20.3637 21.6362L15.3637 16.6362C15.0122 16.2848 15.0122 15.7149 15.3637 15.3635Z" fill="#1E1E23"></path>
-          </svg>
-        </button> -->
-
-        <Router-link v-if="store && store.token && store.token !== null && store.token !== ''" :to="{ name: 'ProfileView' }" class="aTag">
+      <span>
+        <!-- 내 정보 버튼 -->
+        <Router-link v-if="isAuthenticated" :to="{ name: 'ProfileView' }">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4.5C2 3.94772 2.44772 3.5 3 3.5H21C21.5523 3.5 22 3.94772 22 4.5C22 5.05228 21.5523 5.5 21 5.5H3C2.44772 5.5 2 5.05228 2 4.5Z" fill="#1E1E23"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.5C2 11.9477 2.44772 11.5 3 11.5H21C21.5523 11.5 22 11.9477 22 12.5C22 13.0523 21.5523 13.5 21 13.5H3C2.44772 13.5 2 13.0523 2 12.5Z" fill="#1E1E23"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 20.5C2 19.9477 2.44772 19.5 3 19.5H21C21.5523 19.5 22 19.9477 22 20.5C22 21.0523 21.5523 21.5 21 21.5H3C2.44772 21.5 2 21.0523 2 20.5Z" fill="#1E1E23"></path>
           </svg>
         </Router-link>
-        <Router-link v-else :to="{ name: 'LoginView' }" class="aTag">
+        <Router-link v-else :to="{ name: 'LoginView' }">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 4.5C2 3.94772 2.44772 3.5 3 3.5H21C21.5523 3.5 22 3.94772 22 4.5C22 5.05228 21.5523 5.5 21 5.5H3C2.44772 5.5 2 5.05228 2 4.5Z" fill="#1E1E23"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12.5C2 11.9477 2.44772 11.5 3 11.5H21C21.5523 11.5 22 11.9477 22 12.5C22 13.0523 21.5523 13.5 21 13.5H3C2.44772 13.5 2 13.0523 2 12.5Z" fill="#1E1E23"></path>
@@ -41,9 +39,20 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 
-const store = useCounterStore()
+export default {
+  setup() {
+    const store = useCounterStore()
+
+    const isAuthenticated = computed(() => store && store.token)
+
+    return {
+      isAuthenticated
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -62,22 +71,10 @@ const store = useCounterStore()
 .out{
   background-color: white;
 }
-
-.button {
-  outline: none;
-  margin-right: 6px;
-  cursor: pointer;
-  border: 0;
-  background-color: transparent;
-}
-.aTag {
-  margin-left: 6px;
-}
-.page-name{
-  color: black;
-  margin-right: auto;
-  font-size: 22px;
-  font-weight: bold;
-
+.cls-1 {
+  fill: #231815;
+  font-family: AppleSDGothicNeo-Bold-KSCpc-EUC-H, 'Apple SD Gothic Neo';
+  font-size: 19px;
+  font-weight: 1000;
 }
 </style>
