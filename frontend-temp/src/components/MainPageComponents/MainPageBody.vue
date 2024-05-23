@@ -14,6 +14,8 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
+import banner1 from '/assets/banner1.png'
+
 
 export default {
   setup() {
@@ -35,9 +37,9 @@ export default {
     return {
       currentIndex: 0,
       slides: [].concat(...Array(100).fill([
-        { image: 'https://via.placeholder.com/1000x350?text=Slide+1', alt: 'Slide 1' },
-        { image: 'https://via.placeholder.com/1000x350?text=Slide+2', alt: 'Slide 2' },
-        { image: 'https://via.placeholder.com/1000x350?text=Slide+3', alt: 'Slide 3' },
+        { image: banner1, alt: 'Slide 1' },
+        { image: banner1, alt: 'Slide 2' },
+        { image: banner1, alt: 'Slide 3' },
       ])),
       intervalId: null,
     }
@@ -91,13 +93,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white; /* 흰색 배경 설정 */
 }
 
 .slide img {
-  width: 100%;
-  height: 350px; /* Maintain the height as specified */
-  object-fit: cover;
+  width: 1000px;
+  height: 400px;
+  object-fit: contain; /* 비율을 유지하면서 박스 안에 들어오도록 설정 */
   object-position: center;
+  background-color: #f3f5f7; /* 흰색 배경 설정 */
 }
 
 .navigation {
@@ -113,6 +117,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
+  border-radius: 8px;
   padding: 10px;
   cursor: pointer;
 }
