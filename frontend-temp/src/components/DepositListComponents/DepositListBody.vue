@@ -227,11 +227,6 @@ const filterBank = function (data) {
   margin: 0px;
 }
 
-/* * {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 568px;
-} */
 .bank {
   margin-left: 10px;
   margin-right: auto;

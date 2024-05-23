@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="slider-container" @mouseenter="pauseAutoSlide" @mouseleave="startAutoSlide">
     <div class="slides" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
       <div v-for="(slide, index) in slides" :key="index" class="slide">
@@ -80,4 +80,4 @@ export default {
   padding: 10px;
   cursor: pointer;
 }
-</style>
+</style> -->
