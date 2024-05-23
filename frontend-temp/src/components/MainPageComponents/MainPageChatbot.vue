@@ -22,6 +22,12 @@
         </div>
     </div>
 
+    <div class="hashtag">
+      <button>해시태그1</button>
+      <button>해시태그2</button>
+      <button>해시태그3</button>
+    </div>
+
   </div>
 </template>
 
@@ -75,7 +81,7 @@ const addMessage = function (sender, message) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin-top: 20px; */
+  margin-top: 20px;
 }
 .chatbot-icon {
   width: 100px;
@@ -146,5 +152,28 @@ const addMessage = function (sender, message) {
   width: 20%;
   /* font-size: 9px; */
   border-radius: 8px;
+}
+.hashtag{
+  display: flex;
+  /* justify-content: flex-start;
+  text-align: center; */
+  align-self: flex-start;
+  widows: 100%;
+  margin-top: 10px;
+  margin-left: 10%;
+  font-size: 16px;
+}
+.hashtag button{
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0px 10px;
+  cursor: pointer;
+}
+.hashtag button:hover{
+  background-color: #eee;
+  font-weight: bold;
 }
 </style>
