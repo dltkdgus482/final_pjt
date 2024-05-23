@@ -1,70 +1,82 @@
 <template>
-  <div class="main-page">
-    <div class="promotion">
-      <div>홍보</div>
+  <div class="slider-container" @mouseenter="pauseAutoSlide" @mouseleave="startAutoSlide">
+    <div class="slides" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <div v-for="(slide, index) in slides" :key="index" class="slide">
+        <img :src="slide.image" :alt="slide.alt">
+      </div>
     </div>
-    <div class="suggestion">
-      <div>추천</div>
-    </div>
-    <div class="hot-goods">
-      <div>홍보</div>
-    </div>
-    <div class="hot-article">
-      <div>조회수높은 게시글</div>
+    <div class="navigation">
+      <button @click="prevSlide">Previous</button>
+      <button @click="nextSlide">Next</button>
     </div>
   </div>
 </template>
 
-<script setup>
-
+<script>
+export default {
+  data() {
+    return {
+      currentIndex: 0,
+      slides: [
+        { image: 'https://via.placeholder.com/1000x300?text=Slide+1', alt: 'Slide 1' },
+        { image: 'https://via.placeholder.com/1000x300?text=Slide+2', alt: 'Slide 2' },
+        { image: 'https://via.placeholder.com/1000x300?text=Slide+3', alt: 'Slide 3' },
+      ],
+      intervalId: null,
+    };
+  },
+  mounted() {
+    this.startAutoSlide();
+  },
+  methods: {
+    nextSlide() {
+      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    },
+    prevSlide() {
+      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    },
+    startAutoSlide() {
+      setInterval(() => {
+        this.nextSlide();
+      }, 5000);
+    },
+  },
+};
 </script>
 
 <style scoped>
-.main-page{
-  /* border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-}
-.main-page > div{
-  border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-self: start;
+.slider-container {
+  position: relative;
   width: 100%;
-  flex-direction: column;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 30px;
 }
-/* .promotion{
-  border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
 }
-.suggestion{
-  border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
 }
-.hot-goods{
-  border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+.navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
 }
-.hot-article{
-  border-radius: 8px;
-  margin: 8px 4px;
-  background-color: #fff;
-  padding: 4px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
+
+.navigation button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
 </style>
