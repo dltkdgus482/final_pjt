@@ -2,8 +2,6 @@
   <div>
     <ArticleDetailNav />
     <div class="non-nav">
-      <h1>ArticleDetailPage</h1>
-
       <ArticleDetailBody />
       <Footer />
     </div>

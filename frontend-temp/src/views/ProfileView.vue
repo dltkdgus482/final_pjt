@@ -6,7 +6,6 @@
       <!-- <h1>ProfilePage</h1> -->
       <ProfileHeader />
       <ProfileBody />
-      <hr class="hr">
       <ProfileFooter />
     </div>
   </div>
