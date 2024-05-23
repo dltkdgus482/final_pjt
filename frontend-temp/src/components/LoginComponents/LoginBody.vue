@@ -1,6 +1,7 @@
 <template>
   <div class="login">
-    <img src="" alt="Logo">
+    <!-- <img src="/assets/logo.png" alt="Logo"> -->
+    <h1 class="login-header">로그인</h1>
     <input class="username" type="text" id="username" v-model.trim="username" placeholder="아이디" required>
     <input type="password" id="password" v-model.trim="password" placeholder="비밀번호" required>
     <button @click.prevent="logIn">로그인</button>
@@ -89,5 +90,11 @@ const logIn = function () {
   margin: 15px 10px;
   /* margin-right: 25px; */
   cursor: pointer;
+}
+
+.login-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

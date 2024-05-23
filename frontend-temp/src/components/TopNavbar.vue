@@ -3,7 +3,8 @@
     <div class="in">
       <Router-link :to="{ name: 'MainView' }">
         <!-- 로고 -->
-        <img width="24" height="24"  src="/assets/logo.png" alt="pjt-logo">
+        <img class="logo" width="39" height="34"  src="/assets/logo-b.png" alt="pjt-logo" >
+        <!-- <img width="24" height="24"  src="/assets/logo.png" alt="pjt-logo"> -->
         <!-- <svg width="39" height="24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
           <g>
             <g id="g2303_00000031922597863478397790000004595394903733610625_">
@@ -14,7 +15,7 @@
         </svg> -->
         <!-- 페이지 이름 -->
         <svg id="Layer_7" data-name="Layer 7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.42 22.49">
-          <text class="cls-1" transform="translate(.24 19.5)"><tspan x="0" y="0">금융</tspan></text>
+          <text class="cls-1" transform="translate(.24 19.5)"><tspan x="0" y="-3">금융</tspan></text>
         </svg>
       </Router-link>
 
