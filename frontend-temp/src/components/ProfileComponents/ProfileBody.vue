@@ -155,16 +155,16 @@ const getData = function () {
   .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length > 0).map(prdt => prdt[0])),
       datasets: [{
         label: '기본 금리',
-        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[1])
-  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[1])),
+        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])
+  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1
       },
       {
         label: '최고 금리',
-        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])
-  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[2])),
+        data: myDeposits.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[3])
+  .concat(mySavings.value.filter(prdt => Array.isArray(prdt) && prdt.length).map(prdt => prdt[3])),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1

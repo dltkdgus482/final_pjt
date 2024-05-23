@@ -18,10 +18,13 @@ import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Chart, registerables } from 'chart.js'
+import { useCounterStore } from '@/stores/counter'
+
 axios.defaults.withCredentials = false
 
 Chart.register(...registerables)
 
+const store = useCounterStore()
 const route = useRoute()
 const CryptoData = ref([])
 const currentDate = new Date().toISOString()
@@ -45,7 +48,7 @@ const getData = function (type, unit, count) {
     chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: dates,
+        labels: dates.map(date => shortenDate(date)),
         datasets: [{
           label: 'Bitcoin Price',
           data: prices,
@@ -69,6 +72,17 @@ const getData = function (type, unit, count) {
 onMounted(() => {
   getData('days', '', 30)
 })
+
+function shortenDate(dateString) {
+    const date = new Date(dateString)
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+
+    const formattedMonth = month < 10 ? '0' + month : month
+    const formattedDay = day < 10 ? '0' + day : day
+
+    return `${formattedMonth}-${formattedDay}`
+}
 </script>
 
 <style scoped>
