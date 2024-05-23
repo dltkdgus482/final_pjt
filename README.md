@@ -3,7 +3,7 @@
 ---
   
 ### ERD 1차 설계 (2024.05.13)
-![img](./ERD/ERD.png)
+![img](./ERD/ERD_final.png)
 
 
 ### 컴포넌트 구조
