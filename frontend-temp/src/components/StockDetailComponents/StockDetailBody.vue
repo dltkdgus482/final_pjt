@@ -50,7 +50,7 @@ const getData = function (type, unit, count) {
       data: {
         labels: dates.map(date => shortenDate(date)),
         datasets: [{
-          label: 'Bitcoin Price',
+          label: 'Price',
           data: prices,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgba(255, 99, 132, 1)',
