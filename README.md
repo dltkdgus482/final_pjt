@@ -12,4 +12,4 @@
 ### 레이아웃 디자인 초안
 https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61CAvUGQAz5qgq-1
 
-https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
+![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
