@@ -102,8 +102,8 @@ const addMessage = function (sender, message) {
 
 #chat-container {
   margin-top: 10px;
-  width: 100%;
-  max-height: 500px; /* 최대 높이 설정 */
+  width: 80%;
+  max-height: 300px; /* 최대 높이 설정 */
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
