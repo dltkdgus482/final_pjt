@@ -267,7 +267,6 @@ onMounted(() => {
   isLogin.value = store && store.token !== null && store.token !== ''
 })
 
-console.log(mySavings)
 </script>
 
 <style scoped>

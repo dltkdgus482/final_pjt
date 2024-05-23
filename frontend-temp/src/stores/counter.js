@@ -85,7 +85,8 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   const signUp = function (payload) {
-    const { username, password1, password2, nickname } = payload
+    const { username, password1, password2, nickname, email, age, gender, salary } = payload
+    console.log(payload)
     axios({
       method: 'POST',
       url: `${API_URL}/dj-rest-auth/registration/`,
@@ -94,6 +95,10 @@ export const useCounterStore = defineStore('counter', () => {
         password1,
         password2,
         nickname,
+        email,
+        age,
+        gender,
+        salary,
       },
     })
     .then((response) => {

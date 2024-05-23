@@ -30,6 +30,11 @@ class CustomRegisterSerializer(RegisterSerializer):
         adapter = get_adapter()
         user = adapter.new_user(request)
         self.cleaned_data = self.get_cleaned_data()
+        user.nickname = self.cleaned_data.get('nickname')
+        user.age = self.cleaned_data.get('age')
+        user.gender = self.cleaned_data.get('gender')
+        user.salary = self.cleaned_data.get('salary')
+        user.financial_products = self.cleaned_data.get('financial_products')
         adapter.save_user(request, user, self)
         self.custom_signup(request, user)
         return user

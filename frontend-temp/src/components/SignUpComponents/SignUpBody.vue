@@ -16,13 +16,13 @@
         <button @click.prevent="checkAuthKey">제출</button>
       </div>
       <input type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임" required>
-      <input type="text" name="" id="" placeholder="나이(숫자만 입력해주세요)">
+      <input type="number" name="" id="" v-model.trim="age" placeholder="나이(숫자만 입력해주세요)">
       <div>
         <span class="gender">성별</span>
         <button class="gender-button" :class="{ 'selected': selectedGender == 'M' }" @click.prevent="selectGender('M')">남</button>
         <button class="gender-button" :class="{ 'selected': selectedGender == 'F' }" @click.prevent="selectGender('F')">여</button>
       </div>
-      <input type="text" name="" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
+      <input type="number" name="" v-model.trim="salary" id="pay" placeholder="월수입(단위:원, 숫자만 입력해주세요)">
       <input id="submit" type="submit" value="회원가입">
     </form> 
   </div>
@@ -43,6 +43,9 @@ const email = ref(null)
 const auth_key = ref(null)
 const store = useCounterStore()
 const isAuthenticated = ref(false)
+const selectedGender = ref(null)
+const age = ref(null)
+const salary = ref(0)
 
 const signUp = function () {
   const payload = {
@@ -50,6 +53,10 @@ const signUp = function () {
     password1: password1.value,
     password2: password2.value,
     nickname: nickname.value,
+    email: email.value,
+    age: age.value,
+    gender: selectedGender.value,
+    salary: salary.value,
   }
   
   if (isAuthenticated.value) {
@@ -58,8 +65,6 @@ const signUp = function () {
     alert('이메일 인증이 필요합니다.')
   }
 }
-
-const selectedGender = ref(null)
 
 const selectGender = function (data) {
   selectedGender.value = data
