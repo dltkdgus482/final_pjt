@@ -28,17 +28,18 @@ export default {
   mounted() {
     this.startAutoSlide();
   },
+  beforeDestroy() {
+    clearInterval(this.intervalId);
+  },
   methods: {
-    nextSlide() {
-      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    },
-    prevSlide() {
-      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    },
+    // ...
     startAutoSlide() {
-      setInterval(() => {
+      this.intervalId = setInterval(() => {
         this.nextSlide();
       }, 5000);
+    },
+    pauseAutoSlide() {
+      clearInterval(this.intervalId);
     },
   },
 };

@@ -6,6 +6,7 @@ import json
 
 from deposits.models import DepositProduct
 from savings.models import SavingProduct
+from exchanges.models import ExchangeRate
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -34,13 +35,22 @@ model = BertModel.from_pretrained(model_name)
 tokenizer = BertTokenizer.from_pretrained(model_name)
 
 with open('chatbots/deposits_cache.pkl', 'rb') as f:
-    deposits_cache = pickle.load(f)   
+    deposits_cache = pickle.load(f)  
+
+with open('chatbots/deposits_cache_detail.pkl', 'rb') as f:
+    deposits_cache_detail = pickle.load(f)   
 
 with open('chatbots/savings_cache.pkl', 'rb') as f:
     savings_cache = pickle.load(f)   
 
+with open('chatbots/savings_cache_detail.pkl', 'rb') as f:
+    savings_cache_detail = pickle.load(f)   
+
 with open('chatbots/coins_cache.pkl', 'rb') as f:
-    coins_cache = pickle.load(f)    
+    coins_cache = pickle.load(f)
+
+with open('chatbots/exchanges_cache.pkl', 'rb') as f:
+    exchanges_cache = pickle.load(f)
 
 API_URL = 'http://localhost:5173/'
 
@@ -79,7 +89,7 @@ def chatbot(request):
             messages=[
                 {
                     "role": "user",
-                    "content": f'"{user_message}" 라는 질문은 ["예금 적금", "가상 화폐", "기타"] 3개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
+                    "content": f'"{user_message}" 라는 질문은 ["예금 적금", "가상 화폐", "환율", "기타"] 4개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
                 },
             ],
             max_tokens=1024,
@@ -102,7 +112,29 @@ def chatbot(request):
             )
 
             if chat_completion.choices[0].message.content == "예적금 상품 추천":
-                return JsonResponse({'response': '조금 더 자세히 질문해주시면 답변드리는데 도움이 될 것 같아요!'})
+                similarity_dict = {}
+
+                user_message_embedding = get_embedding(user_message)
+
+                for d_prdt in deposits_cache_detail:
+                    deposit_embedding = deposits_cache_detail[d_prdt]
+                    similarity = cosine_similarity(user_message_embedding.reshape(1, -1), deposit_embedding.reshape(1, -1))
+                    similarity_dict[d_prdt] = similarity
+
+                for s_prdt in savings_cache_detail:
+                    saving_embedding = savings_cache_detail[s_prdt]
+                    similarity = cosine_similarity(user_message_embedding.reshape(1, -1), saving_embedding.reshape(1, -1))
+                    similarity_dict[s_prdt] = similarity
+
+                sorted_similarity_dict = dict(sorted(similarity_dict.items(), key=lambda x: x[1], reverse=True))
+                top_prdt = list(sorted_similarity_dict.keys())[0]
+
+                if '예금' in top_prdt:
+                    prdt_id = DepositProduct.objects.get(fin_prdt_nm=top_prdt).id
+                    return JsonResponse({'response': f'{top_prdt} 상품을 추천드려요! 이 링크에 가시면 더 자세한 정보를 얻으실 수 있습니다. {API_URL}deposit/{prdt_id}/'})
+                else:
+                    prdt_id = SavingProduct.objects.get(fin_prdt_nm=top_prdt).id
+                    return JsonResponse({'response': f'{top_prdt} 상품을 추천드려요! 이 링크에 가시면 더 자세한 정보를 얻으실 수 있습니다. {API_URL}saving/{prdt_id}/'})
             
             elif chat_completion.choices[0].message.content == "예적금 상품 검색":
                 similarity_dict = {}
@@ -171,6 +203,54 @@ def chatbot(request):
 
             else:
                 return JsonResponse({'response': '조금 더 자세히 질문해주시면 답변드리는데 도움이 될 것 같아요!'})
+            
+        elif chat_completion.choices[0].message.content == "환율":
+            chat_completion = client.chat.completions.create(
+                model="ft:gpt-3.5-turbo-1106:personal:final-pjt-gpt:9RZiO6ap",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f'"{user_message}" 라는 질문은 ["환율 조회", "기타"] 2개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
+                    },
+                ],
+                max_tokens=1024,
+                temperature=0.2,
+                top_p=1,
+            )
+
+            if chat_completion.choices[0].message.content == "환율 조회":
+                similarity_dict = {}
+
+                user_message_embedding = get_embedding(user_message)
+
+                for exchange in exchanges_cache:
+                    exchange_embedding = exchanges_cache[exchange]
+                    similarity = cosine_similarity(user_message_embedding.reshape(1, -1), exchange_embedding.reshape(1, -1))
+                    similarity_dict[exchange] = similarity
+
+                sorted_similarity_dict = dict(sorted(similarity_dict.items(), key=lambda x: x[1], reverse=True))
+                top_exchange = list(sorted_similarity_dict.keys())[0]
+
+                top_exchange = ExchangeRate.objects.get(cur_unit=top_exchange)
+
+                return JsonResponse({'response': f'{top_exchange.cur_nm}의 현재 환율은 {top_exchange.deal_bas_r} 입니다. 이 링크에 가시면 환율 계산을 하실 수 있어요! {API_URL}exchangerate/'})
+
+            else:
+                chat_completion = client.chat.completions.create(
+                    model="ft:gpt-3.5-turbo-1106:personal:final-pjt-gpt:9RZiO6ap",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": user_message,
+                        },
+                    ],
+                    max_tokens=1024,
+                    temperature=0.2,
+                    top_p=1,
+                )
+                response_message = chat_completion.choices[0].message.content
+                return JsonResponse({'response': response_message})
+
         else:
             chat_completion = client.chat.completions.create(
                 model="ft:gpt-3.5-turbo-1106:personal:final-pjt-gpt:9RZiO6ap",
