@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 
 
 export const useCounterStore = defineStore('counter', () => {
+  const initLoaded = ref(false)
+
   // 예, 적금 관련 데이터
 
   const deposits = ref([])
@@ -136,5 +138,5 @@ export const useCounterStore = defineStore('counter', () => {
   const exchanges_arr = ref([])
 
   return { coinData, currentPrice, API_URL, deposits, savings, bankList, deposit_prdt_obj, saving_prdt_obj, exchanges_arr, signout,
-    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate, logout }
+    token, isLogin, signUp, logIn, currentChangeRate, currentTradePriceKRW, currentTradePriceBTC, formatDate, logout, initLoaded }
 }, { persist: true })
