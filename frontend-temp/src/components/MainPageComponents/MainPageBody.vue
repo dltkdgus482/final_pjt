@@ -18,9 +18,9 @@ export default {
     return {
       currentIndex: 0,
       slides: [
-        { image: 'https://via.placeholder.com/1000x300?text=Slide+1', alt: 'Slide 1' },
-        { image: 'https://via.placeholder.com/1000x300?text=Slide+2', alt: 'Slide 2' },
-        { image: 'https://via.placeholder.com/1000x300?text=Slide+3', alt: 'Slide 3' },
+        { image: 'https://via.placeholder.com/1000x350?text=Slide+1', alt: 'Slide 1' },
+        { image: 'https://via.placeholder.com/1000x350?text=Slide+2', alt: 'Slide 2' },
+        { image: 'https://via.placeholder.com/1000x350?text=Slide+3', alt: 'Slide 3' },
       ],
       intervalId: null,
     };

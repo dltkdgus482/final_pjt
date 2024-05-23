@@ -27,6 +27,7 @@ const store = useCounterStore()
   color: black;
   margin: 5px;
   height: 30px;
+  margin-top: 20px;
 }
 .stock {
   margin-left: 20px;

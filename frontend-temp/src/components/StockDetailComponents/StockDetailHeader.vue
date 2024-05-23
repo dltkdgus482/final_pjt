@@ -34,5 +34,6 @@ const stockId = route.params.stockId
   /* font-weight: 500; */
   display: flex;
   align-items: center;
+  margin-top: 40px;
 }
 </style>
