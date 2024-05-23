@@ -1,4 +1,4 @@
-#### 금융 프로젝트 - 프로젝트명
+#### 금융 프로젝트 - C&C Finance
   
 ## 목차
 
@@ -12,7 +12,8 @@
   - [ERD](#1-erd)
   - [컴포넌트 구조도](#2-컴포넌트-구조도)
   - [필수 기능](#3-필수-기능)
-  - [추가 기능](#4-추가-기능)
+  - [금융 상품 추천 알고리즘](#4-금융-상품-추천-알고리즘)
+  - [추가 기능](#5-추가-기능)
 - [프로젝트 규칙](#프로젝트-규칙)
 - [느낀 점](#느낀-점)
 
@@ -40,17 +41,21 @@
 
 ### 3. 팀원 구성 및 역할 분담
 
-- 팀장: [손원륜](https://github.com/Rootn61)
- - 레이아웃 디자인 초안 작성
- - 전반적인 페이지 구조 및 디자인 작성, 보완
- - Javascript를 이용하여 메인페이지, 예적금 상세페이지 구현
- - 로고 디자인, ppt 작성
- - [깃허브 주소]
+[깃허브 주소](https://github.com/Rootn61)
+
+- **팀장**: 손원륜
+    - 레이아웃 디자인 초안 작성
+    - 전반적인 페이지 구조 및 디자인 작성, 보완
+    - Javascript를 이용하여 메인페이지, 예적금 상세페이지 구현
+    - 로고 디자인, ppt 작성
+
+[깃허브 주소](https://github.com/dltkdgus482)
   
-- 팀원: [이상현](https://github.com/dltkdgus482)
+- **팀원**: 이상현
   - Django 및 백엔드 개발 담당
   - Vue.js와 Django 간의 통신 구현
   - 예, 적금 상품 추천 알고리즘 구현
+  - 가상화폐 실시간 시세 조회, 이메일 인증 추가 기능 구현
   - 데이터베이스 모델링
 
 ---
@@ -216,13 +221,69 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 4. 근처 은행 검색
 5. 게시판
 6. 프로필 페이지(예적금 금리 비교)
-7. 금융 상품 추천 알고리즘
-  - 
-  - 
 
 ---
 
-### 4. 추가 기능
+### 4. 금융 상품 추천 알고리즘
+1. 사용자가 어떠한 상품을 추천해달라고 요구(특정한 기준 없이 그냥 추천해달라고 하는 경우에도 추천해줌)
+2. 사용자가 입력한 메세지의 의도를 Openai API를 이용하여 구분 (ex. 금융, 가상화폐, 기타)
+```
+def chatbot(request):
+  if request.method == 'POST':
+    data = json.loads(request.body)
+    user_message = data['message']
+    chat_completion = client.chat.completions.create(
+      model="ft:gpt-3.5-turbo-1106:personal:final-pjt-gpt:9RZiO6ap",
+      messages=[
+        {
+          "role": "user",
+          "content": f'"{user_message}" 라는 질문은 ["예금 적금", "가상 화폐", "환율", "기타"] 4개의 카테고리 중 어디에 속하는 질문인가요? 단답형으로 대답해주세요.',
+        },
+      ],
+      max_tokens=1024,
+      temperature=0.2,
+      top_p=1,
+    )
+```
+3. 답변, 추천성의 정확성을 높이기 위해 2번의 과정을 반복하여 메세지의 의도를 좀 더 정확히 파악
+4. 예를 들어 사용자의 의도가 '금융' -> '상품 추천 요구' 일 경우 DB에 저장된 상품 중 사용자가 입력한 메시지와 가장
+유사도가 높은 상품을 추천해줌
+5. 메시지, 단어끼리의 유사도를 검증하는 것은 임베딩 값을 계산하여 코사인 유사도를 이용하여 비교
+6. GPT fine-tuning을 시도했으나 결과가 만족스럽지 않았음
+
+```
+from transformers import BertModel, BertTokenizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model_name = 'bert-base-uncased'
+model = BertModel.from_pretrained(model_name)
+tokenizer = BertTokenizer.from_pretrained(model_name)
+
+def get_embedding(text):
+    if text in coins_cache:
+        return coins_cache[text]
+
+    inputs = tokenizer(text, return_tensors='pt')
+    outputs = model(**inputs)
+    return outputs.last_hidden_state[0].mean(dim=0).detach().numpy()
+
+def calculate_cosine_similarity(word1, word2):
+    word1_embedding = get_embedding(word1)
+    word2_embedding = get_embedding(word2)
+
+    word1_embedding = word1_embedding.reshape(1, -1)
+    word2_embedding = word2_embedding.reshape(1, -1)
+
+    cosine_sim = cosine_similarity(word1_embedding, word2_embedding)
+
+    return cosine_sim[0][0]
+```
+
+6. DB에 저장된 상품들의 임베딩 값은 미리 계산하여 json 파일과 비슷하게 pkl 형식의 형태로 저장
+
+---
+
+### 5. 추가 기능
 1. 챗봇
 2. 가상화폐 시세 실시간 제공
 3. 이메일 인증
@@ -276,5 +337,6 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
   - 
 
 - 이상현
+  - 프로젝트를 진행하며
   - 
-  - 
+  - 실제로 AWS를 이용하여 배포를 하고 싶었으나 보안 관련 문제에 아쉽지만 지식을 습득한 다음 
