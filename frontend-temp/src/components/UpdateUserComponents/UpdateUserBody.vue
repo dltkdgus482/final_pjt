@@ -6,7 +6,7 @@
         <button>중복확인</button>        
       </div>
       <input type="text" id="nickname" v-model.trim="nickname" placeholder="닉네임" required>
-      <input type="text" name="" id="" v-model="age" placeholder="나이(숫자만 입력해주세요)">
+      <input type="number" name="" id="" v-model="age" placeholder="나이(숫자만 입력해주세요)">
       <div>
         <span class="gender">성별</span>
         <button class="gender-button" :class="{ selected: gender === 'M' }" @click.prevent="selectGender('M')">남</button>
@@ -63,8 +63,9 @@ onMounted(() => {
   })
 })
 
-const updateUserInfo = function () {
-  axios({
+const updateUserInfo = async function () {
+  
+  await axios({
     method: 'PUT',
     url: `http://127.0.0.1:8000/dj-rest-auth/user/?username=${username.value}`,
     headers: {

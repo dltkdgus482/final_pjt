@@ -96,21 +96,24 @@ onMounted(async () => {
   })
 })
 
-const enrollFinPrdt = function () {
-  // console.log(+route.params.depositId)
-  axios({
-    method: 'POST',
-    url: `${store.API_URL}/api/v1/savings/${+route.params.savingId}/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
-  }).then((response) => {
-    // console.log(response)
-    alert(response.data.message)
-  }).catch((error) => {
-    // console.log(error)
-    alert(error.response.data.message)
-  })
+const enrollFinPrdt = async function () {
+  const confirmed = confirm('해당 상품에 가입하시겠습니까?')
+
+  if (confirmed) {
+    await axios({
+      method: 'POST',
+      url: `${store.API_URL}/api/v1/savings/${+route.params.savingId}/`,
+      headers: {
+        Authorization: `Token ${store.token}`,
+      },
+    }).then((response) => {
+      // console.log(response)
+      alert(response.data.message)
+    }).catch((error) => {
+      // console.log(error)
+      alert(error.response.data.message)
+    })
+  }
 }
 </script>
 

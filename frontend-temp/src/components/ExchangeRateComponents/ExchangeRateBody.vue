@@ -15,7 +15,7 @@
           </option>
         </select>
         <div class="exchange">
-          <input @input="calculateRate1" v-model.trim="money1" type="text" id="" name="">
+          <input @input="calculateRate1" v-model.trim="money1" type="number" id="" name="">
           <label for="">{{ parseFloat(money1).toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry1)] }}</label>
         </div>
       </div>
@@ -33,7 +33,7 @@
           </option>
         </select>
         <div class="exchange">
-          <input @input="calculateRate2" v-model.trim="money2" type="text" id="" name="">
+          <input @input="calculateRate2" v-model.trim="money2" type="number" id="" name="">
           <label for="">{{ parseFloat(money2).toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry2)] }}</label>
         </div>
       </div>
@@ -41,8 +41,8 @@
   <div>
     <h3 class="exchange-title">환율</h3>
     <div class="header">
-      <p>국가</p>
-      <p>거래기준환율</p>
+      <p>국가 (통화명)</p>
+      <p>환율 (원)</p>
     </div>
     
     <div v-for="(country, index) in country_arr" :key="country.id">
@@ -54,7 +54,7 @@
             <span class="country-name">{{ unit_arr[index] }}</span>
           </div>
         </div>
-        <span class="time">{{ data_arr[index].deal_bas_r }}</span>
+        <span class="time">{{ data_arr[index].deal_bas_r }} (원)</span>
       </div>
     </div>
   </div> 
@@ -224,5 +224,6 @@ text-align: center;
   margin-top: 20px;
   height: 30px;
   justify-content: space-between;
+  height: 40px;
 }
 </style>

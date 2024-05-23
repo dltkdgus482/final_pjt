@@ -23,5 +23,5 @@ class SavingOption(models.Model):
     rsrv_type = models.CharField(max_length=50)
     rsrv_type_nm = models.CharField(max_length=50)
     save_trm = models.IntegerField()
-    intr_rate = models.FloatField()
-    intr_rate2 = models.FloatField()
+    intr_rate = models.FloatField(null=True)
+    intr_rate2 = models.FloatField(null=True)
