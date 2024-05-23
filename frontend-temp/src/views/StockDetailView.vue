@@ -21,6 +21,6 @@ import Footer from "@/components/Footer.vue"
 .non-nav {
   margin-left: auto;
   margin-right: auto;
-  max-width: 568px;
+  max-width: 1000px;
 }
 </style>
