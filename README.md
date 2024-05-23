@@ -40,17 +40,14 @@
 
 ### 3. 팀원 구성 및 역할 분담
 
-![손원륜](https://github.com/Rootn61)
-
+- 팀장: [손원륜](https://github.com/Rootn61)
  - 레이아웃 디자인 초안 작성
  - 전반적인 페이지 구조 및 디자인 작성, 보완
  - Javascript를 이용하여 메인페이지, 예적금 상세페이지 구현
  - 로고 디자인, ppt 작성
-
-![이상현](https://github.com/dltkdgus482)
-
-- **팀원**: 이상현
-
+ - [깃허브 주소]
+  
+- 팀원: [이상현](https://github.com/dltkdgus482)
   - Django 및 백엔드 개발 담당
   - Vue.js와 Django 간의 통신 구현
   - 예, 적금 상품 추천 알고리즘 구현
@@ -213,17 +210,22 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 ---
 
 ### 3. 필수 기능
-1. 메인 페이지(금융 상품 추천 알고리즘)
+1. 메인 페이지
 2. 회원 관리 기능
 3. 환율 계산기
 4. 근처 은행 검색
 5. 게시판
 6. 프로필 페이지(예적금 금리 비교)
+7. 금융 상품 추천 알고리즘
+  - 
+  - 
 
 ---
 
 ### 4. 추가 기능
-- 챗봇, 실시간 차트, 인증 메일
+1. 챗봇
+2. 가상화폐 시세 실시간 제공
+3. 이메일 인증
 
 ## 프로젝트 규칙
 
@@ -268,3 +270,11 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 ```
 
 ## 느낀 점
+
+- 손원륜
+  - 
+  - 
+
+- 이상현
+  - 
+  - 
