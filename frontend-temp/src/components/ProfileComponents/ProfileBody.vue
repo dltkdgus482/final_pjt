@@ -15,24 +15,8 @@
       <hr> 
       <div v-if="myDeposits && myDeposits.length">
         <div class="deposit-data" v-for="(prdt, index) in myDeposits" :key="index">
-          <span v-if="Array.isArray(prdt)">
-            <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
-            <div class="bank">
-              <h4>{{ prdt[0] }}</h4>
-              <p class="color">{{ prdt[1] }}</p>
-            </div>
-            <div class="option">
-              <p class="color">최고 
-                <span class="numcolor">{{ prdt[3] }}%</span>  
-              </p>
-              <p>기본 
-                <span>{{ prdt[2] }}%</span>
-              </p>
-            </div>
-          </span>
-          
+          {{ myDeposits }}
         </div>
-        <br>
       </div>
       <div v-if="mySavings && mySavings.length">
         <div class="deposit-data" v-for="(prdt, index) in mySavings" :key="index">
@@ -40,20 +24,16 @@
             <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
             <div class="bank">
               <h4>{{ prdt[0] }}</h4>
-              <p class="color">{{ prdt[1] }}</p>
+              <div class="color">{{ prdt[1] }}</div>
             </div>
             <div class="option">
-              <p class="color">최고 
+              <div class="color">최고 
                 <span class="numcolor">{{ prdt[3] }}%</span>  
-              </p>
-              <p>기본 
+              </div>
                 <span>{{ prdt[2] }}%</span>
-              </p>
             </div>
           </span>
-          
         </div>
-        <br>
       </div>
       <div v-else>
         <div>아직 가입한 금융상품이 없습니다</div>
@@ -100,21 +80,17 @@ const savings = store.saving_prdt_obj
 
 const myDeposits = computed(() => {
   if (Array.isArray(userInfo.value.financial_products)) {
-    return userInfo.value.financial_products.map((prdt) => {
-      return deposits[prdt.trim()]
-    })
-  } else {
-    return []
+    return userInfo.value.financial_products
+      .filter(prdt => prdt.trim() in deposits && Array.isArray(deposits[prdt.trim()]) && deposits[prdt.trim()][0].includes('예금'))
+      .map(prdt => deposits[prdt.trim()])
   }
 })
 
 const mySavings = computed(() => {
   if (Array.isArray(userInfo.value.financial_products)) {
-    return userInfo.value.financial_products.map((prdt) => {
-      return savings[prdt.trim()]
-    })
-  } else {
-    return []
+    return userInfo.value.financial_products
+      .filter(prdt => prdt.trim() in savings && Array.isArray(savings[prdt.trim()]) && savings[prdt.trim()][0].includes('적금'))
+      .map(prdt => savings[prdt.trim()])
   }
 })
 
