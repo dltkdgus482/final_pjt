@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="exchange-rate">
-      <h3 class="exchange-title">환전고시환율</h3>
+      <h3 class="exchange-title">환율계산기</h3>
       <div class="box">
         <select v-model.trim="selectedCountry1" name="" id="" class="dropdown">
           <!-- <div class="flag">
@@ -38,12 +38,13 @@
         </div>
       </div>
     </div>
-
+  <div>
+    <h3 class="exchange-title">환율</h3>
     <div class="header">
       <p>국가</p>
       <p>거래기준환율</p>
     </div>
-
+    
     <div v-for="(country, index) in country_arr" :key="country.id">
       <div class="circular-border">
         <div class="country-box">
@@ -56,6 +57,7 @@
         <span class="time">{{ data_arr[index].deal_bas_r }}</span>
       </div>
     </div>
+  </div> 
 
   </div>
 </template>
@@ -219,7 +221,7 @@ text-align: center;
   font-size: 15px;
   color: black;
   margin: 5px;
-  margin-top: 30px;
+  margin-top: 20px;
   height: 30px;
   justify-content: space-between;
 }
