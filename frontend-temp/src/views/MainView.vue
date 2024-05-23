@@ -63,6 +63,7 @@ onMounted(async () => {
       }
 
       catch (error) {
+        console.log(error.response.data)
         return { 
           price: null, 
           signed_change_rate: null,
@@ -92,7 +93,7 @@ onMounted(async () => {
       }
 
       // 딜레이 추가
-      await new Promise(resolve => setTimeout(resolve, 130)) // 1초 딜레이
+      await new Promise(resolve => setTimeout(resolve, 110)) // 1초 딜레이
     }
   }
 })

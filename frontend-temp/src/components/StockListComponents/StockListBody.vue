@@ -86,7 +86,7 @@ onMounted(() => {
           {"type":"ticker","codes":[coin.market]},
           {"format":"SIMPLE"}
         ]))
-        await new Promise(resolve => setTimeout(resolve, 300)) // 1초 딜레이
+        await new Promise(resolve => setTimeout(resolve, 250)) // 1초 딜레이
       }
       catch (error) {
         // console.log(error)
@@ -95,7 +95,7 @@ onMounted(() => {
     }
 
     isSending = false
-    setTimeout(sendWebSocketMessage, 5000)
+    setTimeout(sendWebSocketMessage, 1250)
   }
 
   ws.onopen = () => {
