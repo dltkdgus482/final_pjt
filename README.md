@@ -40,12 +40,12 @@
 
 ### 3. 팀원 구성 및 역할 분담
 
-![손원륜]()
+![손원륜](https://github.com/Rootn61)
 
- - 역할 1
- - 역할 2
- - 역할 3
- - 역할 4
+ - 레이아웃 디자인 초안 작성
+ - 전반적인 페이지 구조 및 디자인 작성, 보완
+ - Javascript를 이용하여 메인페이지, 예적금 상세페이지 구현
+ - 로고 디자인, ppt 작성
 
 ![이상현](https://github.com/dltkdgus482)
 
@@ -123,8 +123,6 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 │   │   ├── ArticleUpdateBody.vue
 │   │   ├── ArticleUpdateHeader.vue
 │   │   └── ArticleUpdateNav.vue
-│   ├── BottomNavbar.vue
-│   ├── Chatbot.vue
 │   ├── DepositDetailComponents
 │   │   ├── DepositDetailBody.vue
 │   │   ├── DepositDetailHeader.vue
@@ -136,7 +134,6 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 │   │   ├── ExchangeRateBody.vue
 │   │   ├── ExchangeRateHeader.vue
 │   │   └── ExchangeRateNav.vue
-│   ├── Footer.vue
 │   ├── LoginComponents
 │   │   ├── LoginBody.vue
 │   │   └── LoginNav.vue
@@ -175,16 +172,19 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 │   │   ├── StockListHeader.vue
 │   │   ├── StockListLike.vue
 │   │   └── StockListNav.vue
-│   ├── TopNavbar.vue
 │   ├── UpdatePasswordComponents
 │   │   ├── UpdatePasswordBody.vue
 │   │   ├── UpdatePasswordHeader.vue
 │   │   └── UpdatePasswordNav.vue
 │   └── UpdateUserComponents
-│       ├── UpdateUserBody.vue
-│       ├── UpdateUserFooter.vue
-│       ├── UpdateUserHeader.vue
-│       └── UpdateUserNav.vue
+│   │   ├── UpdateUserBody.vue
+│   │   ├── UpdateUserFooter.vue
+│   │   ├── UpdateUserHeader.vue
+│   │   └── UpdateUserNav.vue
+│   ├── TopNavbar.vue
+│   ├── Footer.vue
+│   ├── BottomNavbar.vue
+│   └── Chatbot.vue
 ├── main.js
 ├── router
 │   └── index.js
@@ -213,7 +213,12 @@ https://www.figma.com/board/NanCGXaL5DGpS5MlIT2rZp/Untitled?node-id=0%3A1&t=iV61
 ---
 
 ### 3. 필수 기능
-- 필수 기능
+1. 메인 페이지(금융 상품 추천 알고리즘)
+2. 회원 관리 기능
+3. 환율 계산기
+4. 근처 은행 검색
+5. 게시판
+6. 프로필 페이지(예적금 금리 비교)
 
 ---
 
