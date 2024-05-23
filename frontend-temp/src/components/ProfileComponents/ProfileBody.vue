@@ -1,26 +1,52 @@
 <template>
   <div class="account">
     <p class="page-owner">
-      <b>{{ userInfo.username }} 님의 페이지</b>
+      <h3>{{ userInfo.username }} 님의 페이지</h3>
       <hr>
-      <div>{{ userInfo }}</div>
+      <div>
+        아이디 {{ userInfo.username }}
+        이메일 {{ userInfo.email }}
+        닉네임 {{ userInfo.nickname }}
+        나이 {{ userInfo.age }}
+        성별 {{ userInfo.gender }}
+        연봉 {{ userInfo.salary }}
+      </div>
       <p></p>
       <p></p>
       <p></p>
     </p>
-    <p>
+
+    <p class="products">
       <h3 class="my-deposit">
         내가 가입한 상품 목록
       </h3>
       <hr> 
-      <div v-if="myDeposits && myDeposits.length">
+
+      <div class="box" v-if="myDeposits && myDeposits.length">
+        <b>예금</b>
         <div class="deposit-data" v-for="(prdt, index) in myDeposits" :key="index">
-          {{ myDeposits }}
+          <span class="router" v-if="Array.isArray(prdt)">
+            <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
+            <div class="bank">
+              <h4>{{ prdt[0] }}</h4>
+              <p class="color">{{ prdt[1] }}</p>
+            </div>
+            <div class="option">
+              <p class="color">최고 
+                <span class="numcolor">{{ prdt[3] }}%</span>  
+              </p>
+              <p>기본 
+                <span>{{ prdt[2] }}%</span>
+              </p>
+            </div>
+          </span>
         </div>
       </div>
-      <div v-if="mySavings && mySavings.length">
+
+      <div class="box" v-if="mySavings && mySavings.length">
+        <b>적금</b>
         <div class="deposit-data" v-for="(prdt, index) in mySavings" :key="index">
-          <span v-if="Array.isArray(prdt)">
+          <span class="router" v-if="Array.isArray(prdt)">
             <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
             <div class="bank">
               <h4>{{ prdt[0] }}</h4>
@@ -35,12 +61,14 @@
           </span>
         </div>
       </div>
+      
       <div v-else>
         <div>아직 가입한 금융상품이 없습니다</div>
       </div>
     </p>
-    <p>
-      <h3 class="my-article">
+
+    <p class="rate-chart">
+      <h3>
         상품 금리 비교
         <hr>
       </h3>
@@ -56,7 +84,8 @@
       </Router-link>
       <button v-if="isAuthenticated" @click="signout">회원탈퇴</button>
       <button v-if="isAuthenticated" @click="logout">로그아웃</button>
-    </div>
+    </div> 
+
   </div>
 </template>
 
@@ -93,6 +122,25 @@ const mySavings = computed(() => {
       .map(prdt => savings[prdt.trim()])
   }
 })
+// const myDeposits = computed(() => {
+//   if (Array.isArray(userInfo.value.financial_products)) {
+//     return userInfo.value.financial_products.map((prdt) => {
+//       return deposits[prdt.trim()]
+//     })
+//   } else {
+//     return []
+//   }
+// })
+
+// const mySavings = computed(() => {
+//   if (Array.isArray(userInfo.value.financial_products)) {
+//     return userInfo.value.financial_products.map((prdt) => {
+//       return savings[prdt.trim()]
+//     })
+//   } else {
+//     return []
+//   }
+// })
 
 const userInfo = ref({
   username: '',
@@ -189,44 +237,119 @@ const isAuthenticated = computed(() => store && store.token)
 onMounted(() => {
   isLogin.value = store && store.token !== null && store.token !== ''
 })
+
+console.log(mySavings)
 </script>
 
 <style scoped>
-  .account{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 17px;
-  }
-  .account p{
-    border: none;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px 18px;
-    width: 90%;
-    /* text-align: center; */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .page-owner{
-    margin-bottom: 40px;
-  }
-  .my-deposit{
-    /* text-align: center; */
-    margin-top: 0px;
-  }
-  .deposit-data{
-    margin-top: 8px;
-    padding: 6px;
-    border: none;
-    /* background-color: #fff; */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .my-article{
-    /* text-align: center; */
-    margin-top: 0px;
-  }
+.account{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 17px;
+}
+/* .account p{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 18px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+.page-owner{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 18px;
+  width: 568px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.products{
+  /* display: flex; */
+  /* align-items: center; */
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 18px;
+  width: 568px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+}
+.my-deposit{
+  /* text-align: center; */
+  margin-top: 0px;
+}
+.box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.deposit-data{
+  display: flex;
+  justify-content: center;
+  border: solid 2px #eee;
+  background-color: #fff;
+  border-radius: 8px;
+  /* padding: 20px 18px; */
+  width: 90%;
+  /* text-align: center; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+.rate-chart{
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px 18px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.router {
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 17px;
+  color: #404048;
+  /* font-weight: 500; */
+  display: flex;
+  align-items: center;
+  width: 90%;
+  justify-content: space-between;
+  margin: 0px;
+  /* padding-left: 10px; */
+  /* background-color: #eee; */
+}
+
+.bank {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: auto;
+  width: 300px;
+}
+
+.bank .color {
+  margin-top: -10px;
+  margin-left: 0px;
+  color: gray;
+}
+.option{
+  /* margin-right: 10px; */
+}
+
+.option .color{
+  color: green;
+}
+
+.option .numcolor{
+  color: green;
+  font-size: 18px;
+  font-weight: bold;
+}
 .update {
   width: 90%;
   display: flex;
@@ -243,6 +366,9 @@ onMounted(() => {
   font-size: 14px;
   /* flex-shrink: 0; 버튼들이 줄어들지 않도록 설정 */
   cursor: pointer;
+}
+hr{
+  border: solid 0.1px #eee;
 }
 
 </style>
