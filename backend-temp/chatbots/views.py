@@ -199,7 +199,7 @@ def chatbot(request):
                     if coin['korean_name'] == top_coin:
                         top_coin = coin['market']
 
-                return JsonResponse({'response': f'이 링크에 가시면 원하시는 정보를 얻으실 수 있을 것 같아요! {API_URL}stocks/{top_coin}/'})
+                return JsonResponse({'response': f'이 링크에 가시면 원하시는 정보를 얻으실 수 있을 것 같아요! {API_URL}stock/{top_coin}/'})
 
             else:
                 return JsonResponse({'response': '조금 더 자세히 질문해주시면 답변드리는데 도움이 될 것 같아요!'})

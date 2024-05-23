@@ -34,8 +34,6 @@
         <RouterLink v-if="data.fin_prdt_nm.includes('예금')" class="router" :to="{ name: 'DepositDetailView', params: { 'depositId': data.id } }">
           <img :src="'/assets/BankIcons/' + data.kor_co_nm + '.png'" alt="#" width="42" height="42">
           <div class="bank">
-            <!-- <p>{{data}}</p> -->
-            <!-- <p>{{ index + (currentPage - 1) * itemsPerPage }}</p> -->
             <h4>{{ data.fin_prdt_nm }}</h4>
             <p class="color">{{ data.kor_co_nm }}</p>
           </div>

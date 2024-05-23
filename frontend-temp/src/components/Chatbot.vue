@@ -59,20 +59,15 @@ const sendMessage = function () {
     axios({
       url: url,
       method: 'POST',
-      // headers: {
-      //   'X-CSRFToken': csrfToken,
-      // },
       data: {
         message: userMessage,
       },
       headers: {
         'Authorization': `Token ${store.token}`,
       },
-      // withCredentials: true,
     })
     .then((response) => {
       aiMessage.value = response.data.response
-      // console.log(aiMessage.value)
       addMessage('챗봇', aiMessage.value)
     })
   }
@@ -81,27 +76,6 @@ const sendMessage = function () {
 const addMessage = function (sender, message) {
   messages.value.unshift({ sender, message })
 }
-
-  // axios({
-  //   url: csrfTokenUrl,
-  //   withCredentials: true,
-  // }).then((response) => {
-  //   csrfToken = response.data.csrfToken
-  // }).then((response) => {
-  //   axios({
-  //     url: url,
-  //     method: 'POST',
-  //     headers: {
-  //       'X-CSRFToken': csrfToken,
-  //     },
-  //     data: {
-  //       message: userMessage.value,
-  //     },
-  //     withCredentials: true,
-  //   }).then((response) => {
-  //     console.log(response)
-  //   })
-  // })
 </script>
 
 <style scoped>

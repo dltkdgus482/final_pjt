@@ -13,7 +13,7 @@ export const useCounterStore = defineStore('counter', () => {
   const deposit_prdt_obj = computed(() => {
     const obj = {}
     deposits.value.map((deposit) => {
-      obj[deposit.fin_prdt_cd] = [deposit.fin_prdt_nm, deposit.intr_rate, deposit.intr_rate2]
+      obj[deposit.fin_prdt_cd] = [deposit.fin_prdt_nm, deposit.kor_co_nm , deposit.intr_rate, deposit.intr_rate2]
     })
     return obj
   })
@@ -21,7 +21,7 @@ export const useCounterStore = defineStore('counter', () => {
   const saving_prdt_obj = computed(() => {
     const obj = {}
     savings.value.map((saving) => {
-      obj[saving.fin_prdt_cd] = [saving.fin_prdt_nm, saving.intr_rate, saving.intr_rate2]
+      obj[saving.fin_prdt_cd] = [saving.fin_prdt_nm, saving.kor_co_nm, saving.intr_rate, saving.intr_rate2]
     })
     return obj
   })

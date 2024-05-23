@@ -1,53 +1,70 @@
 <template>
-  <h2>{{ userInfo.nickname }} 님의 페이지</h2>
   <div class="account">
-    <!-- <p class="page-owner">
-      {{ userInfo.nickname }} 님의 페이지
+    <p class="page-owner">
+      <b>{{ userInfo.username }} 님의 페이지</b>
       <hr>
       <div>{{ userInfo }}</div>
-    </p> -->
+      <p></p>
+      <p></p>
+      <p></p>
+    </p>
     <p>
       <h3 class="my-deposit">
-        가입한 상품
+        내가 가입한 상품 목록
       </h3>
-      <hr>
+      <hr> 
       <div v-if="myDeposits && myDeposits.length">
         <div class="deposit-data" v-for="(prdt, index) in myDeposits" :key="index">
-          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
+          <span v-if="Array.isArray(prdt)">
+            <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
+            <div class="bank">
+              <h4>{{ prdt[0] }}</h4>
+              <p class="color">{{ prdt[1] }}</p>
+            </div>
+            <div class="option">
+              <p class="color">최고 
+                <span class="numcolor">{{ prdt[3] }}%</span>  
+              </p>
+              <p>기본 
+                <span>{{ prdt[2] }}%</span>
+              </p>
+            </div>
+          </span>
+          
         </div>
         <br>
-        <canvas id="Chart"></canvas>
       </div>
-      <div v-else-if="mySavings && mySavings.length">
+      <div v-if="mySavings && mySavings.length">
         <div class="deposit-data" v-for="(prdt, index) in mySavings" :key="index">
-          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
+          <span v-if="Array.isArray(prdt)">
+            <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
+            <div class="bank">
+              <h4>{{ prdt[0] }}</h4>
+              <p class="color">{{ prdt[1] }}</p>
+            </div>
+            <div class="option">
+              <p class="color">최고 
+                <span class="numcolor">{{ prdt[3] }}%</span>  
+              </p>
+              <p>기본 
+                <span>{{ prdt[2] }}%</span>
+              </p>
+            </div>
+          </span>
+          
         </div>
         <br>
-        <canvas id="Chart"></canvas>
       </div>
       <div v-else>
         <div>아직 가입한 금융상품이 없습니다</div>
       </div>
     </p>
-    <!-- <p>
-      <div>
-        나의 적금상품
-      </div>
-      <hr class="hr">
-      <div v-if="mySavings && mySavings.length">
-        <div v-for="(prdt, index) in mySavings" :key="index">
-          <span v-if="prdt && prdt.length">상품명: {{ prdt[0] }}, 기본 금리: {{ prdt[1] }}, 최고 금리: {{ prdt[2] }}</span>
-        </div>
-      </div>
-      <div v-else>
-        <div>아직 가입한 금융상품이 없습니다</div>
-      </div>
-    </p> -->
     <p>
       <h3 class="my-article">
-        나의 게시글
+        상품 금리 비교
+        <hr>
       </h3>
-      <hr>
+      <canvas id="Chart"></canvas>
     </p>
 
     <div class="update">
@@ -217,7 +234,6 @@ onMounted(() => {
   }
   .page-owner{
     margin-bottom: 40px;
-    text-align: center;
   }
   .my-deposit{
     /* text-align: center; */
