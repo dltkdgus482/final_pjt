@@ -16,7 +16,7 @@
         </select>
         <div class="exchange">
           <input @input="calculateRate1" v-model.trim="money1" type="text" id="" name="">
-          <label for="">{{ money1.toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry1)] }}</label>
+          <label for="">{{ parseFloat(money1).toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry1)] }}</label>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
         </select>
         <div class="exchange">
           <input @input="calculateRate2" v-model.trim="money2" type="text" id="" name="">
-          <label for="">{{ money2.toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry2)] }}</label>
+          <label for="">{{ parseFloat(money2).toLocaleString() }} {{ unit_arr[country_arr.indexOf(selectedCountry2)] }}</label>
         </div>
       </div>
     </div>
@@ -106,13 +106,13 @@ const calculatedMoney1 = ref(0)
 const calculateRate1 = function () {
   money2.value = (money1.value * data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r).toFixed(2)
   // 형식 유지를 위해 toLocaleString 호출
-  money2.value = parseFloat(money2.value).toLocaleString()
+  money2.value = parseFloat(money2.value)
 }
 
 const calculateRate2 = function () {
   money1.value = (money2.value * data_arr.value[country_arr.value.indexOf(selectedCountry2.value)].deal_bas_r / data_arr.value[country_arr.value.indexOf(selectedCountry1.value)].deal_bas_r).toFixed(2)
   // 형식 유지를 위해 toLocaleString 호출
-  money1.value = parseFloat(money1.value).toLocaleString()
+  money1.value = parseFloat(money1.value)
 }
 </script>
 

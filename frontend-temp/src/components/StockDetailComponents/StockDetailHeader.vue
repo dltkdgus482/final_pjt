@@ -6,8 +6,9 @@
         <path d="M103.736 61.991C105.169 52.409 97.873 47.26 87.898 43.824L91.133 30.846L83.234 28.877L80.083 41.513C78.004 40.995 75.873 40.507 73.752 40.024L76.923 27.304L69.029 25.335L65.79 38.311C64.071 37.919 62.384 37.533 60.745 37.125L60.753 37.085L49.859 34.365L47.757 42.802C47.757 42.802 53.618 44.145 53.494 44.229C56.694 45.028 57.271 47.145 57.175 48.823L53.49 63.608C53.71 63.665 53.995 63.744 54.311 63.872C54.047 63.806 53.766 63.735 53.477 63.665L48.311 84.375C47.919 85.347 46.926 86.806 44.69 86.252C44.769 86.366 38.945 84.819 38.945 84.819L35.025 93.86L45.305 96.423C47.216 96.902 49.093 97.402 50.937 97.876L47.67 111.003L55.561 112.972L58.798 99.985C60.956 100.569 63.048 101.11 65.096 101.619L61.87 114.545L69.77 116.514L73.04 103.412C86.513 105.96 96.644 104.932 100.906 92.749C104.343 82.939 100.736 77.28 93.648 73.589C98.809 72.399 102.699 69.003 103.736 61.991ZM85.687 87.302C83.243 97.113 66.727 91.809 61.369 90.478L65.707 73.089C71.062 74.424 88.237 77.07 85.687 87.302ZM88.127 61.85C85.901 70.774 72.152 66.239 67.692 65.127L71.624 49.355C76.083 50.467 90.448 52.542 88.127 61.85Z" fill="white"/>
       </svg> -->
       <span class="router">
-        <img class="coin-icon" :src="`/assets/coinIcons/${stockId.replace('KRW-', '')}.png`" alt="#">{{ stockId }}
-        <p class="name">비트코인</p>
+        <img class="coin-icon" :src="`/assets/coinIcons/${stockId.replace('KRW-', '')}.png`" alt="#">
+        <p v-if="coinData && coinData.korean_name">{{ coinData.korean_name }}</p>
+        <p class="name">{{ coinData.market }}</p>
       </span>
     </div>
   </div>
@@ -15,11 +16,14 @@
 
 <script setup>
 
-
+import { useCounterStore } from '@/stores/counter'
 import { useRoute } from 'vue-router'
 
+const store = useCounterStore()
 const route = useRoute()
 const stockId = route.params.stockId
+
+const coinData = store.coinData.filter(item => item.market === stockId)[0]
 </script>
 
 <style scoped>
@@ -42,6 +46,9 @@ const stockId = route.params.stockId
   margin: 0px 10px;
 }
 .name{
+  margin-bottom: 10px;
   margin-left: 10px;
+  font-size: 20px;
+  color: #AAAAAA;
 }
 </style>

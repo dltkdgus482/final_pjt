@@ -41,7 +41,6 @@
             </div>
           </span>
         </div>
-        <br>
       </div>
 
       <div class="box" v-if="mySavings && mySavings.length">
@@ -51,19 +50,16 @@
             <img :src="'/assets/BankIcons/' + prdt[1] + '.png'" alt="#" width="42" height="42">
             <div class="bank">
               <h4>{{ prdt[0] }}</h4>
-              <p class="color">{{ prdt[1] }}</p>
+              <div class="color">{{ prdt[1] }}</div>
             </div>
             <div class="option">
-              <p class="color">최고 
+              <div class="color">최고 
                 <span class="numcolor">{{ prdt[3] }}%</span>  
-              </p>
-              <p>기본 
+              </div>
                 <span>{{ prdt[2] }}%</span>
-              </p>
             </div>
           </span>
         </div>
-        <br>
       </div>
       
       <div v-else>
