@@ -88,6 +88,16 @@ export default {
 .slide {
   min-width: 100%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  width: 100%;
+  height: 350px; /* Maintain the height as specified */
+  object-fit: cover;
+  object-position: center;
 }
 
 .navigation {
@@ -106,4 +116,5 @@ export default {
   padding: 10px;
   cursor: pointer;
 }
-</style> -->
+
+</style>
