@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'deposits',
     'savings',
     'exchanges',
+    'django_extensions',
 
     'drf_yasg',
     'rest_framework',
@@ -187,3 +188,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 APPEND_SLASH = False
+
+GRAPH_MODELS = {
+    'all_applications': True,
+    'group_models': True,
+}
