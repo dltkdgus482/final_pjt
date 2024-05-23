@@ -3,17 +3,44 @@
     <p class="page-owner">
       <h3>{{ userInfo.username }} 님의 페이지</h3>
       <hr>
-      <div>
-        아이디 {{ userInfo.username }}
-        이메일 {{ userInfo.email }}
-        닉네임 {{ userInfo.nickname }}
-        나이 {{ userInfo.age }}
-        성별 {{ userInfo.gender }}
-        연봉 {{ userInfo.salary }}
+      <div class="detail">
+        <p class="dt">
+          아이디
+        </p>
+        <p class="dd">
+          {{ userInfo.username }}
+        </p> 
+        <p class="dt">
+          이메일
+        </p>
+        <p class="dd">
+          {{ userInfo.email }}
+        </p> 
+        <p class="dt">
+          닉네임
+        </p>
+        <p class="dd">
+          {{ userInfo.nickname }}
+        </p> 
+        <p class="dt">
+          나이
+        </p>
+        <p class="dd">
+          {{ userInfo.age }}
+        </p> 
+        <p class="dt">
+          성별
+        </p>
+        <p class="dd">
+          {{ userInfo.gender }}
+        </p> 
+        <p class="dt">
+          연봉
+        </p>
+        <p class="dd">
+          {{ userInfo.salary }}
+        </p> 
       </div>
-      <p></p>
-      <p></p>
-      <p></p>
     </p>
 
     <p class="products">
@@ -53,10 +80,12 @@
               <div class="color">{{ prdt[1] }}</div>
             </div>
             <div class="option">
-              <div class="color">최고 
+              <p class="color">최고 
                 <span class="numcolor">{{ prdt[3] }}%</span>  
-              </div>
+              </p>
+              <p>기본
                 <span>{{ prdt[2] }}%</span>
+              </p>
             </div>
           </span>
         </div>
@@ -267,6 +296,33 @@ console.log(mySavings)
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.detail {
+  display: flex;
+  /* width: 80%; */
+  /* flex-direction: column; */
+  /* min-width: 500px; */
+  margin: 0 ;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dt, .dd {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.dt {
+  width: 10%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  align-self: center;
+}
+.dd {
+  width: 75%;
+  background-color: #fff;
+  text-align: left;
+  padding-left: 20px;
+}
 .products{
   /* display: flex; */
   /* align-items: center; */
@@ -313,7 +369,7 @@ console.log(mySavings)
 .router {
   text-decoration: none;
   font-size: 14px;
-  line-height: 17px;
+  /* line-height: 17px; */
   color: #404048;
   /* font-weight: 500; */
   display: flex;
@@ -330,8 +386,9 @@ console.log(mySavings)
   margin-left: 10px;
   margin-right: auto;
   width: 300px;
+  height: 95%;
+  /* line-height: ; */
 }
-
 .bank .color {
   margin-top: -10px;
   margin-left: 0px;
