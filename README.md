@@ -290,7 +290,7 @@ def calculate_cosine_similarity(word1, word2):
 2. 가상화폐 시세 실시간 제공
 3. 이메일 인증
 
-## 프로젝트 규칙
+## Git commit template
 
 ```
 # 제목은 대문자로 시작합니다.
